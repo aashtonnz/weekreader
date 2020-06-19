@@ -100,7 +100,7 @@ const updateArticles = async () => {
         }
         const titles = sub.articles.map((article) => article.title);
         const addArticles = channel.articles.filter(
-          (article) => !titles.include(article.title)
+          (article) => !titles.includes(article.title)
         );
         sub.articles = [...addArticles, ...sub.articles]
           .filter(
