@@ -1,0 +1,52 @@
+{
+  "jwtTimeoutMs": 99999999999999999,
+  "articleDurationDays": 7,
+  "seeds": {
+    "users": [
+      {
+        "username": "aashtonnz",
+        "email": "aashtonnz@gmail.com",
+        "password": "123123"
+      },
+      {
+        "username": "postman",
+        "password": "123123"
+      }
+    ],
+    "channels": [
+      {
+        "rssUrl": "https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/section/world/rss.xml",
+        "title": "The New York Times"
+      },
+      {
+        "rssUrl": "https://www.reddit.com/r/todayilearned/top/.rss?limit=3",
+        "title": "Reddit - Today I Learned"
+      },
+      {
+        "rssUrl": "https://xkcd.com/rss.xml",
+        "title": "Xkcd"
+      },
+      {
+        "rssUrl": "https://hnrss.org/newest?points=500",
+        "title": "Hacker News"
+      },
+      {
+        "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCwmZiChSryoWQCZMIQezgTg"
+      },
+      {
+        "rssUrl": "http://feeds.feedburner.com/marginalrevolution/feed",
+        "title": "Marginal Revolution"
+      },
+      {
+        "rssUrl": "https://feeds.megaphone.fm/stuffyoushouldknow"
+      },
+      {
+        "rssUrl": "https://seekingalpha.com/listing/most-popular-articles.xml",
+        "title": "Seeking Alpha"
+      },
+      {
+        "rssUrl": "https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss"
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-family: inherit;
+}
+
+body {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  background: #fff;
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "Courier New", Courier, monospace;
+}

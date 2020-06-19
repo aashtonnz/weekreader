@@ -1,0 +1,37 @@
+{
+  "name": "weekreader",
+  "version": "0.1.0",
+  "description": "Weekreader is an RSS reader which updates on a weekly basis",
+  "main": "server.js",
+  "scripts": {
+    "ui": "npm start --prefix ui",
+    "server": "nodemon server",
+    "dev": "concurrently \"npm run server\" \"npm run ui\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ui && npm run build --prefix ui && npm install",
+    "rss-update": "node rssUpdater"
+  },
+  "dependencies": {
+    "array-move": "^2.2.1",
+    "aws-sdk": "^2.658.0",
+    "axios": "^0.19.2",
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.3",
+    "heroku-ssl-redirect": "0.0.4",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mailgun-js": "^0.22.0",
+    "moment": "^2.26.0",
+    "mongoose": "^5.9.7",
+    "rss-parser": "^3.7.6",
+    "validator": "^13.0.0"
+  },
+  "author": "Andrew Ashton",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4"
+  }
+}
