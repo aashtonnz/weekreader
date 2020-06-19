@@ -97,6 +97,12 @@ const Landing = () => {
             @weekreader
           </A>
         </li>
+        <li>
+          This project is{" "}
+          <A href="https://github.com/aashtonnz/weekreader" target="_blank">
+            open source
+          </A>
+        </li>
       </Ul>
     </Page>
   );
