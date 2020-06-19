@@ -19,8 +19,8 @@
         "title": "The New York Times"
       },
       {
-        "rssUrl": "https://www.reddit.com/r/todayilearned/top/.rss?limit=3",
-        "title": "Reddit - Today I Learned"
+        "rssUrl": "https://www.reddit.com/r/worldnews/top/.rss?limit=3",
+        "title": "Reddit - World News"
       },
       {
         "rssUrl": "https://xkcd.com/rss.xml",
