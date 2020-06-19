@@ -93,7 +93,7 @@ const Landing = () => {
         </li>
         <li>
           Twitter -{" "}
-          <A href="mailto:contact@weekreader.com" target="_blank">
+          <A href="https://twitter.com/weekreader" target="_blank">
             @weekreader
           </A>
         </li>
