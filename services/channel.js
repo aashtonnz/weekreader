@@ -66,7 +66,7 @@ const fetchArticles = async (channel) => {
         title &&
         isoDate &&
         moment().add(1, "day").isAfter(isoDate) &&
-        moment().subtract(articleDurationDays, "day").isBefore(isoDate)
+        moment().subtract(1, "day").isAfter(isoDate)
     )
     .map(({ title, link, contentSnippet, enclosure, isoDate }) => ({
       title: title.trim(),
