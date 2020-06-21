@@ -39,11 +39,12 @@
         "title": "Xkcd"
       },
       {
-        "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCrM7B7SL_g1edFOnmj-SDKg"
+        "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCUMZ7gohGI9HcU9VNsr2FJQ",
+        "title": "Bloomberg"
       },
       {
         "rssUrl": "https://www.wired.com/feed/rss",
-        "title": "Wired - Science"
+        "title": "Wired"
       },
       {
         "rssUrl": "https://feeds.npr.org/510289/podcast.xml"
