@@ -15,20 +15,28 @@
     ],
     "channels": [
       {
-        "rssUrl": "https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/section/world/rss.xml",
-        "title": "The New York Times"
-      },
-      {
         "rssUrl": "https://www.reddit.com/r/worldnews/top/.rss?limit=3",
         "title": "Reddit - World News"
       },
       {
-        "rssUrl": "https://xkcd.com/rss.xml",
-        "title": "Xkcd"
+        "rssUrl": "https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/section/world/rss.xml",
+        "title": "The New York Times"
+      },
+      {
+        "rssUrl": "https://rss.app/feeds/ghqBcuW0idjhEf0h.xml",
+        "title": "Naval"
       },
       {
         "rssUrl": "https://hnrss.org/newest?points=500",
         "title": "Hacker News"
+      },
+      {
+        "rssUrl": "https://seekingalpha.com/listing/most-popular-articles.xml",
+        "title": "Seeking Alpha"
+      },
+      {
+        "rssUrl": "https://xkcd.com/rss.xml",
+        "title": "Xkcd"
       },
       {
         "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCrM7B7SL_g1edFOnmj-SDKg"
@@ -39,10 +47,6 @@
       },
       {
         "rssUrl": "https://feeds.npr.org/510289/podcast.xml"
-      },
-      {
-        "rssUrl": "https://seekingalpha.com/listing/most-popular-articles.xml",
-        "title": "Seeking Alpha"
       },
       {
         "rssUrl": "https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss"
