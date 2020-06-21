@@ -31,16 +31,16 @@
         "title": "Hacker News"
       },
       {
-        "rssUrl": "https://seekingalpha.com/listing/most-popular-articles.xml",
-        "title": "Seeking Alpha"
+        "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCUMZ7gohGI9HcU9VNsr2FJQ",
+        "title": "Bloomberg"
       },
       {
         "rssUrl": "https://xkcd.com/rss.xml",
         "title": "Xkcd"
       },
       {
-        "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCUMZ7gohGI9HcU9VNsr2FJQ",
-        "title": "Bloomberg"
+        "rssUrl": "https://seekingalpha.com/listing/most-popular-articles.xml",
+        "title": "Seeking Alpha"
       },
       {
         "rssUrl": "https://feeds.npr.org/510289/podcast.xml"
