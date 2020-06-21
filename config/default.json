@@ -34,8 +34,8 @@
         "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCwmZiChSryoWQCZMIQezgTg"
       },
       {
-        "rssUrl": "http://feeds.feedburner.com/marginalrevolution/feed",
-        "title": "Marginal Revolution"
+        "rssUrl": "https://www.wired.com/feed/rss",
+        "title": "Wired - Science"
       },
       {
         "rssUrl": "https://feeds.megaphone.fm/stuffyoushouldknow"
