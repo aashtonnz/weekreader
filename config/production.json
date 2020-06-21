@@ -50,7 +50,8 @@
         "rssUrl": "https://feeds.npr.org/510289/podcast.xml"
       },
       {
-        "rssUrl": "https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss"
+        "rssUrl": "https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss",
+        "title": "NASA"
       }
     ]
   }
