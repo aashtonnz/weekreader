@@ -16,7 +16,7 @@
     "channels": [
       {
         "rssUrl": "https://www.reddit.com/r/worldnews/top/.rss?limit=3",
-        "title": "Reddit - World News"
+        "title": "Reddit"
       },
       {
         "rssUrl": "https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/section/world/rss.xml",
