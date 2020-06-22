@@ -42,9 +42,8 @@ const subsToHtml = (subs) => `
         <div>
           <img src="${hostName}/logo128.png" style="${styles.appImg}">
         </div>
-        <div style="${styles.appTitle}">${moment().utc().format("MMMM D")}</div>
+        <div style="${styles.appTitle}">Open inbox</div>
       </a>
-      <a style="${styles.openInbox}" href="${hostName}">Open inbox</a>
       ${filterSubs(subs)
         .map(
           (sub) => `

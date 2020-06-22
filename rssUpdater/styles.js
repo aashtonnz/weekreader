@@ -130,14 +130,6 @@ const viewAll = `
   float: left;
 `;
 
-const openInbox = `
-  text-decoration: none;
-  display: block;
-  margin: 0 auto;
-  margin-top: 1rem;
-  color: #0d60D1;
-`;
-
 module.exports = {
   subWrapper,
   subTitleWrapper,
@@ -157,5 +149,4 @@ module.exports = {
   unsub,
   viewAll,
   appImg,
-  openInbox,
 };
