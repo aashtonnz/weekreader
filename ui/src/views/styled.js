@@ -91,7 +91,6 @@ export const Form = styled.form`
 export const A = styled.a`
   text-decoration: none;
   text-overflow: ellipsis;
-  width: 100%;
   overflow-x: hidden;
   text-align: center;
   color: ${(props) => props.theme.color.primary};
