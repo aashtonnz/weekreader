@@ -15,35 +15,35 @@
     ],
     "channels": [
       {
-        "rssUrl": "https://www.reddit.com/r/worldnews/top/.rss?limit=3",
+        "rssUrl": "https://api.axios.com/feed/top"
+      },
+      {
+        "rssUrl": "https://www.reddit.com/r/worldnews/top/.rss?limit=5",
         "title": "Reddit"
-      },
-      {
-        "rssUrl": "https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/section/world/rss.xml",
-        "title": "The New York Times"
-      },
-      {
-        "rssUrl": "https://rss.app/feeds/ghqBcuW0idjhEf0h.xml",
-        "title": "Naval"
       },
       {
         "rssUrl": "https://hnrss.org/newest?points=500",
         "title": "Hacker News"
       },
       {
-        "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCUMZ7gohGI9HcU9VNsr2FJQ",
-        "title": "Bloomberg"
+        "rssUrl": "https://rss.app/feeds/byNJFvIvqQkRHCW2.xml",
+        "title": "Elon Musk"
       },
       {
-        "rssUrl": "https://xkcd.com/rss.xml",
-        "title": "Xkcd"
+        "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCzWQYUVCpZqtN93H8RR44Qw",
+        "title": "Seeker"
+      },
+      {
+        "rssUrl": "http://rss.art19.com/the-daily",
+        "title": "The Daily"
+      },
+      {
+        "rssUrl": "http://feed.dilbert.com/dilbert/daily_strip",
+        "title": "Dilbert"
       },
       {
         "rssUrl": "https://seekingalpha.com/listing/most-popular-articles.xml",
         "title": "Seeking Alpha"
-      },
-      {
-        "rssUrl": "https://feeds.npr.org/510289/podcast.xml"
       },
       {
         "rssUrl": "https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss",
