@@ -92,7 +92,8 @@ const create = async (rssUrl) => {
     description,
     imgKey,
   });
-  channel.articles = await fetchArticles(channel);
+  const newArticles = await fetchArticles(channel);
+  channel.articles = newArticles.slice(0, addMaxArticles);
   await channel.save();
   return channel;
 };
