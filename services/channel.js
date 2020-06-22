@@ -10,6 +10,7 @@ const { name, version } = require("../package.json");
 
 const seeds = config.get("seeds");
 const articleDurationDays = config.get("articleDurationDays");
+const addMaxArticles = config.get("addMaxArticles");
 
 const rssParser = new RssParser({
   headers: { "User-Agent": `${name} v${version}` },
@@ -117,9 +118,9 @@ const updateArticles = async () => {
   channels.forEach((channel, index) => {
     const titles = channel.articles.map((article) => article.title);
     const newArticles = fetchResults[index];
-    const addArticles = newArticles.filter(
-      (article) => !titles.includes(article.title)
-    );
+    const addArticles = newArticles
+      .filter((article) => !titles.includes(article.title))
+      .slice(0, addMaxArticles);
     channel.articles = [...addArticles, ...channel.articles].filter((article) =>
       moment(article.publishedAt).isAfter(
         moment().subtract(articleDurationDays, "days")
