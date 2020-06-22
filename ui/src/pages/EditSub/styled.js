@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Button } from "../../views/styled";
 
 export const FileWrapper = styled.div`
-  margin: 0 0 0.8rem 0;
+  margin: 0 0 0.2rem 0;
   width: 100%;
   max-width: 335px;
   display: flex;
@@ -40,4 +40,17 @@ export const Header = styled.a`
   margin-right: 1rem;
   font-weight: 700;
   margin-top: 2.2rem;
+`;
+
+export const CheckboxWrapper = styled.div`
+  margin: 0.2rem 0 0.8rem 0;
+  width: 100%;
+  max-width: 335px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > div {
+    text-align: center;
+  }
 `;

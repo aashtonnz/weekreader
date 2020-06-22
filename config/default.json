@@ -20,7 +20,8 @@
       },
       {
         "rssUrl": "https://www.reddit.com/r/worldnews/top/.rss?limit=5",
-        "title": "Reddit"
+        "title": "Reddit",
+        "descriptionsHidden": true
       },
       {
         "rssUrl": "https://hnrss.org/newest?points=500",
@@ -28,7 +29,8 @@
       },
       {
         "rssUrl": "https://rss.app/feeds/byNJFvIvqQkRHCW2.xml",
-        "title": "Elon Musk"
+        "title": "Elon Musk",
+        "descriptionsHidden": true
       },
       {
         "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCzWQYUVCpZqtN93H8RR44Qw",
@@ -41,7 +43,8 @@
       {
         "rssUrl": "http://feed.dilbert.com/dilbert/daily_strip",
         "title": "Dilbert",
-        "imgKey": "public/dilbert.ico"
+        "imgKey": "public/dilbert.ico",
+        "descriptionsHidden": true
       },
       {
         "rssUrl": "https://seekingalpha.com/listing/most-popular-articles.xml",

@@ -4,8 +4,16 @@ import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert, editSub, unsubscribe } from "../../state/actions";
 import { checkEditSub } from "../../utils/validation";
+import Checkbox from "../../views/Checkbox";
 import { Page, Input, Button, Div, A } from "../../views/styled";
-import { FileInput, FileWrapper, UnsubButton, Img, Header } from "./styled";
+import {
+  FileInput,
+  FileWrapper,
+  UnsubButton,
+  Img,
+  Header,
+  CheckboxWrapper,
+} from "./styled";
 
 const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
   const { id } = useParams();
@@ -14,11 +22,13 @@ const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
   const [title, setTitle] = useState("");
   const [img, setImg] = useState("");
   const [inputKey, setInputKey] = useState("");
+  const [descriptionsHidden, setDescHidden] = useState(false);
 
   useEffect(() => {
     const sub = user && user.subscriptions.find((sub) => sub._id === id);
     if (sub) {
       setTitle(sub.title);
+      setDescHidden(sub.descriptionsHidden);
       setSub(sub);
     }
     if (user && !sub) {
@@ -34,12 +44,16 @@ const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
     setImg(event.target.files[0]);
   };
 
+  const onDescriptionsHidden = () => {
+    setDescHidden(!descriptionsHidden);
+  };
+
   const onSubmit = () => {
     const invalidMsg = checkEditSub(title, img);
     if (invalidMsg) {
       setAlert(invalidMsg, "danger");
     } else {
-      editSub(id, title, img, () => history.push("/"));
+      editSub(id, title, img, descriptionsHidden, () => history.push("/"));
       setInputKey(Date.now());
     }
   };
@@ -77,6 +91,13 @@ const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
             <div>Replace image</div>
             <FileInput key={inputKey} type="file" onChange={onChangeImg} />
           </FileWrapper>
+          <CheckboxWrapper>
+            <div>Hide descriptions</div>
+            <Checkbox
+              checked={descriptionsHidden}
+              onChange={onDescriptionsHidden}
+            />
+          </CheckboxWrapper>
           <Button onClick={onSubmit}>Save Changes</Button>
         </>
       )}

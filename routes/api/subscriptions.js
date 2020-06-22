@@ -122,18 +122,23 @@ router.put("/:id/img", auth, async (req, res) => {
   }
 });
 
-// @route  PUT api/subscriptions/:id/title
+// @route  PUT api/subscriptions/:id
 // @desc   Edit title
 // @access Private
-router.put("/:id/title", auth, async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   const { id: subId } = req.params;
-  const { title } = req.body;
+  const { title, descriptionsHidden } = req.body;
   const invalidMsg = checkTitle(title);
   if (invalidMsg) {
     return res.status(400).json(errorMsg(invalidMsg));
   }
   try {
-    const user = await subscriptionService.editTitle(req.user.id, subId, title);
+    const user = await subscriptionService.edit(
+      req.user.id,
+      subId,
+      title,
+      descriptionsHidden
+    );
     res.json(user);
   } catch (error) {
     console.error(error);

@@ -28,6 +28,7 @@ const subscription = {
   imgKey: { type: String },
   articles: [article],
   description: { type: String },
+  descriptionsHidden: { type: Boolean },
 };
 
 const UserSchema = new mongoose.Schema({

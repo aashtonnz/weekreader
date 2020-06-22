@@ -42,6 +42,7 @@ const Article = ({
   bookmarked,
   hidden,
   isAuthenticated,
+  descriptionHidden,
 }) => {
   const history = useHistory();
 
@@ -95,7 +96,7 @@ const Article = ({
           />
         </IconWrapper>
       </TitleWrapper>
-      {description && (
+      {description && !descriptionHidden && (
         <Description onClick={onClick} visited={visited}>
           {truncateDesc(description)}
         </Description>
@@ -119,6 +120,7 @@ Article.propTypes = {
   bookmarked: PropTypes.bool,
   hidden: PropTypes.bool,
   isAuthenticated: PropTypes.bool,
+  descriptionHidden: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({

@@ -73,7 +73,7 @@ const subsToHtml = (subs) => `
                       </span>
                     </div>
                     ${
-                      !article.description
+                      sub.descriptionsHidden || !article.description
                         ? ""
                         : `
                       <div style="${styles.description}">

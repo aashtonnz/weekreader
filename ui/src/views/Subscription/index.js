@@ -21,7 +21,11 @@ const Subscription = SortableElement(
             ) : (
               <Articles>
                 {articles.slice(0, sub.showArticles).map((article) => (
-                  <Article key={article._id} {...article} />
+                  <Article
+                    key={article._id}
+                    {...article}
+                    descriptionHidden={sub.descriptionsHidden}
+                  />
                 ))}
               </Articles>
             )}

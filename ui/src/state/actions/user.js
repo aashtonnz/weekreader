@@ -157,7 +157,9 @@ export const articleUnbookmarked = (id) => async (dispatch) => {
   }
 };
 
-export const editSub = (id, title, img, callback) => async (dispatch) => {
+export const editSub = (id, title, img, descriptionsHidden, callback) => async (
+  dispatch
+) => {
   const loadId = dispatch(setLoading());
   try {
     if (img) {
@@ -167,8 +169,8 @@ export const editSub = (id, title, img, callback) => async (dispatch) => {
         headers: { "Content-Type": "multipart/form-data" },
       });
     }
-    const body = JSON.stringify({ title });
-    const res = await axios.put(`/subscriptions/${id}/title`, body);
+    const body = JSON.stringify({ title, descriptionsHidden });
+    const res = await axios.put(`/subscriptions/${id}`, body);
     // Ensure image cache is refreshed
     if (img) {
       const sub = res.data.subscriptions.find((sub) => sub._id === id);

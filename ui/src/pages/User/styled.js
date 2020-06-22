@@ -20,6 +20,7 @@ export const HourWrapper = styled.div`
 
 export const Day = styled.div`
   font-weight: 700;
+  margin-left: 0.2rem;
   color: ${(props) => props.theme.color.primary};
 `;
 

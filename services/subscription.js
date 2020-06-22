@@ -49,6 +49,7 @@ const defaults = async (mockId = false) => {
       imgKey: seed.imgKey || channel.imgKey,
       articles: channel.articles,
       description: channel.description,
+      descriptionsHidden: seed.descriptionsHidden,
     };
     if (mockId) {
       sub._id = String(index);
@@ -101,11 +102,12 @@ const editImg = async (userId, subId, img) => {
   return user;
 };
 
-const editTitle = async (userId, subId, title) => {
+const edit = async (userId, subId, title, descriptionsHidden) => {
   const user = await User.findById(userId).select("-password");
   const sub = user.subscriptions.id(subId);
   if (sub) {
     sub.title = title;
+    sub.descriptionsHidden = descriptionsHidden;
     await user.save();
   }
   return user;
@@ -128,6 +130,6 @@ module.exports = {
   expand,
   move,
   editImg,
-  editTitle,
+  edit,
   unsubscribe,
 };
