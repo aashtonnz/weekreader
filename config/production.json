@@ -15,7 +15,8 @@
     ],
     "channels": [
       {
-        "rssUrl": "https://api.axios.com/feed/top"
+        "rssUrl": "https://api.axios.com/feed/top",
+        "imgKey": "public/axios.ico"
       },
       {
         "rssUrl": "https://www.reddit.com/r/worldnews/top/.rss?limit=5",
@@ -39,7 +40,8 @@
       },
       {
         "rssUrl": "http://feed.dilbert.com/dilbert/daily_strip",
-        "title": "Dilbert"
+        "title": "Dilbert",
+        "imgKey": "public/dilbert.ico"
       },
       {
         "rssUrl": "https://seekingalpha.com/listing/most-popular-articles.xml",
