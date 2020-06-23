@@ -1,16 +1,17 @@
 const mailgun = require("mailgun-js");
 const moment = require("moment");
+const html = require("./html");
 
 const apiKey = process.env.MAILGUN_API_KEY;
 const domain = process.env.MAILGUN_DOMAIN;
 const mail = mailgun({ apiKey, domain });
 const mailAddress = `new@${domain}`;
 
-const sendTo = async (html, address) => {
+const send = async (subject, html, address) => {
   const data = {
     from: `Weekreader <${mailAddress}>`,
     to: address,
-    subject: `Weekreader - ${moment().utc().format("MMMM D")}`,
+    subject: `Weekreader - ${subject}`,
     html,
   };
   const result = await new Promise((res, rej) =>
@@ -61,8 +62,22 @@ const isSubscribed = async (address) => {
   return result;
 };
 
+const sendInbox = async (user) => {
+  await send(
+    moment().utc().format("MMMM D"),
+    html.inbox(user.subscriptions),
+    user.email
+  );
+};
+
+const sendConfirm = async (user) => {
+  await send("Confirm", html.confirm(user._id, user.confirmId), user.email);
+};
+
 module.exports = {
-  sendTo,
+  send,
+  sendInbox,
+  sendConfirm,
   unsubscribe,
   resubscribe,
   isSubscribed,

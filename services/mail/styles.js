@@ -130,6 +130,27 @@ const viewAll = `
   float: left;
 `;
 
+const button = `
+  padding: 0 0.8rem;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0d60D1;
+  text-decoration: none;
+  width: max-content;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 3.6rem;
+`;
+
+const buttonText = `
+  padding: 0.25rem 0 0.25rem 0;
+`;
+
 module.exports = {
   subWrapper,
   subTitleWrapper,
@@ -149,4 +170,6 @@ module.exports = {
   unsub,
   viewAll,
   appImg,
+  button,
+  buttonText,
 };

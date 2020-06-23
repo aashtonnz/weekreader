@@ -24,6 +24,7 @@ const truncateDesc = (string) =>
 
 const filterSubs = (subs) => {
   const filteredSubs = subs
+    .filter((sub) => sub.isSubscribed)
     .map((sub) => {
       const articles = sub.articles.filter(
         (article) => !article.hidden && !article.archived
@@ -35,14 +36,14 @@ const filterSubs = (subs) => {
   return filteredSubs;
 };
 
-const subsToHtml = (subs) => `
+const inbox = (subs) => `
   <html>
     <body style="${styles.body}">
       <a style="${styles.appHeader}" href="${hostName}">
         <div>
-          <img src="${hostName}/logo128.png" style="${styles.appImg}">
+          <img src="${hostName}/logo64.png" style="${styles.appImg}">
         </div>
-        <div style="${styles.appTitle}">Open inbox</div>
+        <div style="${styles.appTitle}">Click to open inbox</div>
       </a>
       ${filterSubs(subs)
         .map(
@@ -101,6 +102,28 @@ const subsToHtml = (subs) => `
     </body>
   </html>`;
 
+const confirm = (userId, confirmId) => `
+    <html>
+      <body style="${styles.body}">
+        <a style="${styles.appHeader}" href="${hostName}">
+          <div>
+            <img src="${hostName}/logo64.png" style="${styles.appImg}">
+          </div>
+          <div style="${styles.appTitle}">Weekreader</div>
+        </a>
+        <a style="${
+          styles.button
+        }" href="${hostName}/confirm/${userId}/${confirmId}">
+          <div style="${styles.buttonText}">Click to confirm</div>
+        </a>
+        <a style="${styles.unsub}" href="%unsubscribe_url%">Unsubscribe</a>
+        <a style="${
+          styles.footer
+        }" href="">© Weekreader ${moment().year()}. Icon made by Freepik from www.flaticon.com.</a>
+      </body>
+    </html>`;
+
 module.exports = {
-  subsToHtml,
+  inbox,
+  confirm,
 };

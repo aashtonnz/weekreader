@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const config = require("config");
 const moment = require("moment");
+const uuid = require("uuid");
 const User = require("../models/User");
 const Channel = require("../models/Channel");
 const subscriptionService = require("./subscription");
@@ -37,15 +38,20 @@ const exists = async (filter = {}) => {
 const create = async (username, email, password) => {
   const salt = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(password, salt);
+  const confirmId = uuid.v4();
   const user = new User({
     username,
     email,
+    confirmId,
     password: passwordHash,
   });
   const subs = await subscriptionService.defaults();
   user.subscriptions = subs;
   await user.save();
   user.mailSubscribed = await mailService.isSubscribed(user.email);
+  if (email) {
+    await mailService.sendConfirm(user);
+  }
   return user;
 };
 
@@ -150,6 +156,18 @@ const remove = async (userId) => {
   return user;
 };
 
+const confirmEmail = async (userId, confirmId) => {
+  const user = await User.findById(userId).select("-password");
+  if (!user) {
+    return null;
+  }
+  if (user.confirmId === confirmId) {
+    user.confirmed = true;
+  }
+  user.save();
+  return user;
+};
+
 const seed = async () => {
   const { users } = seeds;
   await Promise.all(
@@ -171,4 +189,5 @@ module.exports = {
   remove,
   seed,
   updateArticles,
+  confirmEmail,
 };
