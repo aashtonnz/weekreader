@@ -1,7 +1,7 @@
 {
   "jwtTimeoutMs": 604800,
   "articleDurationDays": 7,
-  "addMaxArticles": 5,
+  "addMaxArticles": 3,
   "seeds": {
     "users": [
       {
