@@ -14,7 +14,6 @@ dbService.connect().then(async () => {
         `Channel articles updated - ${moment().diff(timeA, "seconds")}s`
       );
     }
-
     const timeB = moment();
     await userService.updateArticles();
     console.log(`User articles updated - ${moment().diff(timeB, "seconds")}s`);
