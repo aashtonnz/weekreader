@@ -11,7 +11,7 @@ const send = async (subject, html, address) => {
   const data = {
     from: `Weekreader <${mailAddress}>`,
     to: address,
-    subject: `Weekreader - ${subject}`,
+    subject,
     html,
   };
   const result = await new Promise((res, rej) =>
@@ -63,11 +63,7 @@ const isSubscribed = async (address) => {
 };
 
 const sendInbox = async (user) => {
-  await send(
-    moment().utc().format("MMMM D"),
-    html.inbox(user.subscriptions),
-    user.email
-  );
+  await send("Inbox", html.inbox(user.subscriptions), user.email);
 };
 
 const sendConfirm = async (user) => {
