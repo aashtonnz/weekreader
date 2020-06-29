@@ -161,9 +161,11 @@ const confirmEmail = async (userId, confirmId) => {
   if (!user) {
     return null;
   }
-  if (user.confirmId === confirmId) {
-    user.confirmed = true;
+  if (user.confirmId !== confirmId) {
+    return null;
   }
+  console.log("test");
+  user.confirmed = true;
   user.save();
   return user;
 };

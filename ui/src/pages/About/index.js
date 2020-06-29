@@ -25,32 +25,35 @@ const Landing = () => {
       <SubHeader>How does it work?</SubHeader>
       <Ol>
         <li>
+          <Link to="/user" target="_blank">
+            Set when
+          </Link>{" "}
+          your inbox will be updated
+        </li>
+        <li>
+          <Link to="/" target="_blank">
+            Add RSS feeds
+          </Link>{" "}
+          to your inbox
+        </li>
+        <li>Feeds fetch the top 3 articles, daily</li>
+        <li>Weekreader updates your inbox</li>
+        {/* <li>
           <Link to="/signup" target="_blank">
             Sign up
           </Link>{" "}
           - no email address required
-        </li>
-        <li>
-          Add{" "}
-          <A href="https://rss.com/blog/how-do-rss-feeds-work/" target="_blank">
-            RSS
-          </A>{" "}
-          feeds to your{" "}
-          <Link to="/" target="_blank">
-            inbox
-          </Link>
-        </li>
-        <li>
-          <Link to="/user" target="_blank">
-            Set days
-          </Link>{" "}
-          when your inbox will be updated
-        </li>
+        </li> */}
       </Ol>
       <Div />
       <SubHeader>RSS feeds</SubHeader>
       <Ul>
-        <li>Most news sites, blogs, and podcasts support RSS</li>
+        <li>
+          <A href="https://rss.com/blog/how-do-rss-feeds-work/" target="_blank">
+            RSS
+          </A>{" "}
+          is supported by most news sites, blogs, and podcasts
+        </li>
         <li>
           Look for the RSS icon <RssIcon icon={rssIcon} />
         </li>

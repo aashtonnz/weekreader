@@ -1,5 +1,4 @@
 const mailgun = require("mailgun-js");
-const moment = require("moment");
 const html = require("./html");
 
 const apiKey = process.env.MAILGUN_API_KEY;

@@ -233,3 +233,11 @@ export const moveUserSub = (oldIndex, newIndex) => async (dispatch) => {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
   }
 };
+
+export const confirmEmail = (userId, confirmId) => async (dispatch) => {
+  try {
+    await axios.post(`/users/${userId}/confirm/${confirmId}`);
+  } catch (error) {
+    dispatch(setAlert(reqErrorMsg(error), "danger"));
+  }
+};

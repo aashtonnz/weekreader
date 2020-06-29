@@ -121,4 +121,21 @@ router.delete("/", auth, async (req, res) => {
   }
 });
 
+// @route  POST api/users/:user_id/confirm/:confirm_id
+// @desc   Authenticate email
+// @access Public
+router.post("/:user_id/confirm/:confirm_id", async (req, res) => {
+  const { user_id: userId, confirm_id: confirmId } = req.params;
+  try {
+    const user = await userService.confirmEmail(userId, confirmId);
+    if (!user) {
+      return res.status(500).json(errorMsg("Invalid ID"));
+    }
+    res.json(successMsg("Email confirmed"));
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(errorMsg());
+  }
+});
+
 module.exports = router;
