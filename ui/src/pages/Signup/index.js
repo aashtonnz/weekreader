@@ -55,6 +55,7 @@ const Signup = ({ signup, setAlert, user }) => {
           type="email"
           placeholder="Email"
           ref={emailInput}
+          autoComplete="off"
         />
         <Input
           name="password"
@@ -62,6 +63,7 @@ const Signup = ({ signup, setAlert, user }) => {
           onChange={updateUser}
           type="password"
           placeholder="Password"
+          autoComplete="off"
         />
         <Input
           name="password2"
@@ -69,6 +71,7 @@ const Signup = ({ signup, setAlert, user }) => {
           onChange={updateUser}
           type="password"
           placeholder="Confirm Password"
+          autoComplete="off"
         />
         <Button onClick={onSubmit}>Submit</Button>
       </Form>

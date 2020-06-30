@@ -115,13 +115,15 @@ const User = ({ logout, editUser, setAlert, deleteUser, user }) => {
             onChange={updateUser}
             type="email"
             placeholder="Email"
+            autoComplete="off"
           />
           <Input
             name="password"
             value={userData.password}
             onChange={updateUser}
             type="password"
-            placeholder="Password"
+            placeholder="New password"
+            autoComplete="off"
           />
           <Input
             name="password2"
@@ -129,6 +131,7 @@ const User = ({ logout, editUser, setAlert, deleteUser, user }) => {
             onChange={updateUser}
             type="password"
             placeholder="Confirm password"
+            autoComplete="off"
           />
           <Button onClick={onSubmit}>Save Changes</Button>
           <Div />
