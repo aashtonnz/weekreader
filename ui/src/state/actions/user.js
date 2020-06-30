@@ -28,8 +28,8 @@ export const setUser = () => async (dispatch) => {
   }
 };
 
-export const signup = (username, email, password) => async (dispatch) => {
-  const body = JSON.stringify({ username, email, password });
+export const signup = (email, password) => async (dispatch) => {
+  const body = JSON.stringify({ email, password });
   const loadId = dispatch(setLoading());
   try {
     const res = await axios.post("/users", body);
@@ -47,8 +47,8 @@ export const logout = () => (dispatch) => {
   dispatch({ type: CLEAR_USER });
 };
 
-export const login = (username, password) => async (dispatch) => {
-  const body = JSON.stringify({ username, password });
+export const login = (email, password) => async (dispatch) => {
+  const body = JSON.stringify({ email, password });
   const loadId = dispatch(setLoading());
   try {
     const res = await axios.post("/users/login", body);

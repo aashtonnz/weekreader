@@ -35,12 +35,11 @@ const exists = async (filter = {}) => {
   return Boolean(user);
 };
 
-const create = async (username, email, password) => {
+const create = async (email, password) => {
   const salt = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(password, salt);
   const confirmId = uuid.v4();
   const user = new User({
-    username,
     email,
     confirmId,
     password: passwordHash,
@@ -134,8 +133,8 @@ const updateArticles = async () => {
   await Promise.all(users.map(async (user) => await user.save()));
 };
 
-const validate = async (username, password) => {
-  const user = await User.findOne({ username });
+const validate = async (email, password) => {
+  const user = await User.findOne({ email });
   if (!user) {
     return null;
   }
@@ -164,7 +163,6 @@ const confirmEmail = async (userId, confirmId) => {
   if (user.confirmId !== confirmId) {
     return null;
   }
-  console.log("test");
   user.confirmed = true;
   user.save();
   return user;
@@ -173,10 +171,7 @@ const confirmEmail = async (userId, confirmId) => {
 const seed = async () => {
   const { users } = seeds;
   await Promise.all(
-    users.map(
-      async ({ username, email, password }) =>
-        await create(username, email, password)
-    )
+    users.map(async ({ email, password }) => await create(email, password))
   );
 };
 

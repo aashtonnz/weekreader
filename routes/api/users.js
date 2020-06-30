@@ -28,17 +28,17 @@ router.get("/me", auth, async (req, res) => {
 // @desc   Sign up user and get token
 // @access Public
 router.post("/", async (req, res) => {
-  const { username, email, password } = req.body;
-  const invalidMsg = checkSignup(username, email, password);
+  const { email, password } = req.body;
+  const invalidMsg = checkSignup(email, password);
   if (invalidMsg) {
     return res.status(400).json(errorMsg(invalidMsg));
   }
   try {
-    const usernameTaken = await userService.exists({ username });
-    if (usernameTaken) {
-      return res.status(400).json(errorMsg("Username already taken"));
+    const emailTaken = await userService.exists({ email });
+    if (emailTaken) {
+      return res.status(400).json(errorMsg("Email already taken"));
     }
-    const user = await userService.create(username, email, password);
+    const user = await userService.create(email, password);
     const token = await tokenService.create(user._id);
     res.json({ token });
   } catch (error) {
@@ -51,13 +51,13 @@ router.post("/", async (req, res) => {
 // @desc   Login in and get token
 // @access Public
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
-  const invalidMsg = checkLogin(username, password);
+  const { email, password } = req.body;
+  const invalidMsg = checkLogin(email, password);
   if (invalidMsg) {
     return res.status(400).json(errorMsg(invalidMsg));
   }
   try {
-    const user = await userService.validate(username, password);
+    const user = await userService.validate(email, password);
     if (!user) {
       return res.status(400).json(errorMsg("Invalid credentials"));
     }

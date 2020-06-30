@@ -38,7 +38,7 @@ const NavLinks = ({ user, onClick }) => {
             About <NavIcon icon={aboutIcon} />
           </NavLink>
           <NavLink onClick={onClick} to="/user">
-            {user.username} <NavIcon icon={userIcon} />
+            {user.email} <NavIcon icon={userIcon} />
           </NavLink>
         </>
       )}

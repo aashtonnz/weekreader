@@ -1,26 +1,11 @@
 import { isEmail, isURL } from "validator";
 
-const USERNAME_REGEX = /^[0-9a-zA-Z_-]+$/g;
-const MIN_USERNAME_LEN = 3;
-const MAX_USERNAME_LEN = 20;
 const MIN_PASSWORD_LEN = 6;
 const MAX_TITLE_LEN = 100;
 const MAX_IMG_KB = 50;
 const MAX_SUBS = 60;
 
-export const checkSignup = (username, email, password, password2) => {
-  if (!username) {
-    return "Username is required";
-  }
-  if (!username.match(USERNAME_REGEX)) {
-    return "Username can contain letters, numbers, dashes, and underscores only";
-  }
-  if (
-    username.length < MIN_USERNAME_LEN ||
-    username.length > MAX_USERNAME_LEN
-  ) {
-    return `Username must be between ${MIN_USERNAME_LEN} and ${MAX_USERNAME_LEN} characters`;
-  }
+export const checkSignup = (email, password, password2) => {
   if (email && !isEmail(email)) {
     return "Invalid email address";
   }
@@ -46,14 +31,14 @@ export const checkUserEdit = (email, password, password2) => {
   return "";
 };
 
-export const checkLogin = (username, password) => {
-  if (!username) {
-    return "Username is required";
+export const checkLogin = (email, password) => {
+  if (!email) {
+    return "Email is required";
   }
   if (!password) {
     return "Password is required";
   }
-  if (password.length < MIN_PASSWORD_LEN) {
+  if (!isEmail(email) || password.length < MIN_PASSWORD_LEN) {
     return "Invalid credentials";
   }
   return "";

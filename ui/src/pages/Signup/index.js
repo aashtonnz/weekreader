@@ -12,33 +12,29 @@ const FOCUS_DELAY_MS = 50;
 
 const Signup = ({ signup, setAlert, user }) => {
   const [userData, setUserData] = useState({
-    username: "",
     email: "",
     password: "",
     password2: "",
   });
-  const usernameInput = useRef(null);
+  const emailInput = useRef(null);
 
   useEffect(() => {
-    const timer = setTimeout(
-      () => usernameInput.current.focus(),
-      FOCUS_DELAY_MS
-    );
+    const timer = setTimeout(() => emailInput.current.focus(), FOCUS_DELAY_MS);
     return () => clearTimeout(timer);
-  }, [usernameInput]);
+  }, [emailInput]);
 
   const updateUser = (event) =>
     setUserData({ ...userData, [event.target.name]: event.target.value });
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const { username, email, password, password2 } = trimValues(userData);
-    const invalidMsg = checkSignup(username, email, password, password2);
+    const { email, password, password2 } = trimValues(userData);
+    const invalidMsg = checkSignup(email, password, password2);
     if (invalidMsg) {
       setAlert(invalidMsg, "danger");
       return;
     }
-    signup(username, email, password);
+    signup(email, password);
   };
 
   if (user) {
@@ -53,19 +49,12 @@ const Signup = ({ signup, setAlert, user }) => {
       </div>
       <Form>
         <Input
-          name="username"
-          value={userData.username}
-          onChange={updateUser}
-          type="text"
-          placeholder="Username"
-          ref={usernameInput}
-        />
-        <Input
           name="email"
           value={userData.email}
           onChange={updateUser}
           type="text"
           placeholder="Email (optional)"
+          ref={emailInput}
         />
         <Input
           name="password"

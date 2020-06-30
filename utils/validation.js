@@ -1,25 +1,10 @@
 const { isEmail, isURL, isInt } = require("validator");
 
-const USERNAME_REGEX = /^[0-9a-zA-Z_-]+$/g;
-const MIN_USERNAME_LEN = 3;
-const MAX_USERNAME_LEN = 20;
 const MIN_PASSWORD_LEN = 6;
 const MAX_TITLE_LEN = 100;
 const MAX_IMG_KB = 50;
 
-const checkSignup = (username, email, password) => {
-  if (!username) {
-    return "Username is required";
-  }
-  if (!username.match(USERNAME_REGEX)) {
-    return "Username can contain letters, numbers, dashes, and underscores only";
-  }
-  if (
-    username.length < MIN_USERNAME_LEN ||
-    username.length > MAX_USERNAME_LEN
-  ) {
-    return `Username must be between ${MIN_USERNAME_LEN} and ${MAX_USERNAME_LEN} characters`;
-  }
+const checkSignup = (email, password) => {
   if (email && !isEmail(email)) {
     return "Invalid email address";
   }
@@ -65,14 +50,14 @@ const checkUserEdit = (
   return "";
 };
 
-const checkLogin = (username, password) => {
-  if (!username) {
-    return "Username is required";
+const checkLogin = (email, password) => {
+  if (!email) {
+    return "Email is required";
   }
   if (!password) {
     return "Password is required";
   }
-  if (password.length < MIN_PASSWORD_LEN) {
+  if (!isEmail(email) || password.length < MIN_PASSWORD_LEN) {
     return "Invalid credentials";
   }
   return "";

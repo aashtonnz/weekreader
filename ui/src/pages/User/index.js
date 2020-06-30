@@ -72,7 +72,7 @@ const User = ({ logout, editUser, setAlert, deleteUser, user }) => {
     <Page>
       {user && (
         <>
-          <Header>{user.username}</Header>
+          <Header>{user.email}</Header>
           <LogoutButton onClick={onLogout}>Logout</LogoutButton>
           <Div />
           <HourWrapper>
