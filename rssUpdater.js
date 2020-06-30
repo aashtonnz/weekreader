@@ -4,6 +4,7 @@ const dbService = require("./services/db");
 const channelService = require("./services/channel");
 const userService = require("./services/user");
 const mailService = require("./services/mail");
+const user = require("./services/user");
 
 dbService.connect().then(async () => {
   try {
@@ -26,7 +27,7 @@ dbService.connect().then(async () => {
         moment().diff(user.articleUpdate.updatedAt, "minutes") < 30;
       try {
         const isSubscribed = await mailService.isSubscribed(user.email);
-        if (articlesUpdated && isSubscribed) {
+        if (articlesUpdated && isSubscribed && user.confirmed) {
           await mailService.sendInbox(user);
         }
       } catch (error) {

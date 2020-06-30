@@ -6,7 +6,7 @@ export const LogoutButton = styled(Button)`
 `;
 
 export const HourWrapper = styled.div`
-  margin: 0.2rem 0 0.6rem 0;
+  margin: 0.5rem 0 0.6rem 0;
   width: 100%;
   max-width: 335px;
   display: flex;
