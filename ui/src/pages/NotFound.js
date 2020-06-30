@@ -6,7 +6,7 @@ const NotFound = () => (
   <Page>
     <Header>Page Not Found</Header>
     <p>
-      To return to inbox <Link to="/">click here</Link>
+      Return to <Link to="/">inbox</Link>
     </p>
   </Page>
 );

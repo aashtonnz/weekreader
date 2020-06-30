@@ -43,7 +43,7 @@ const inbox = (subs) => `
         <div>
           <img src="${hostName}/logo64.png" style="${styles.appImg}">
         </div>
-        <div style="${styles.appTitle}">Click to open inbox</div>
+        <div style="${styles.appTitle}">Open inbox</div>
       </a>
       ${filterSubs(subs)
         .map(
@@ -114,7 +114,7 @@ const confirm = (userId, confirmId) => `
         <a style="${
           styles.button
         }" href="${hostName}/confirm/${userId}/${confirmId}">
-          <div style="${styles.buttonText}">Click to confirm</div>
+          <div style="${styles.buttonText}">Confirm subscription</div>
         </a>
         <a style="${styles.unsub}" href="%unsubscribe_url%">Unsubscribe</a>
         <a style="${
