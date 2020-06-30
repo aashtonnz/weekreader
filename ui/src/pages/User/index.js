@@ -113,8 +113,8 @@ const User = ({ logout, editUser, setAlert, deleteUser, user }) => {
             name="email"
             value={userData.email}
             onChange={updateUser}
-            type="text"
-            placeholder="Email (optional)"
+            type="email"
+            placeholder="Email"
           />
           <Input
             name="password"

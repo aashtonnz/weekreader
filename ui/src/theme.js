@@ -1,7 +1,7 @@
 export default {
   color: {
     primary: "#0d60D1",
-    danger: "#c66",
+    danger: "#c45",
   },
   width: {
     minPx: 320,

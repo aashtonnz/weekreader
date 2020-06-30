@@ -52,8 +52,8 @@ const Signup = ({ signup, setAlert, user }) => {
           name="email"
           value={userData.email}
           onChange={updateUser}
-          type="text"
-          placeholder="Email (optional)"
+          type="email"
+          placeholder="Email"
           ref={emailInput}
         />
         <Input

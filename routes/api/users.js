@@ -90,6 +90,10 @@ router.put("/", auth, async (req, res) => {
     return res.status(400).json(errorMsg(invalidMsg));
   }
   try {
+    const existingUser = await userService.findOne({ email });
+    if (existingUser && existingUser._id.toString() !== req.user.id) {
+      return res.status(400).json(errorMsg("Email already taken"));
+    }
     const user = await userService.update(
       req.user.id,
       email,
