@@ -4,7 +4,6 @@ const dbService = require("./services/db");
 const channelService = require("./services/channel");
 const userService = require("./services/user");
 const mailService = require("./services/mail");
-const user = require("./services/user");
 
 dbService.connect().then(async () => {
   try {
