@@ -10,6 +10,7 @@ export const AddWrapper = styled.div`
 `;
 
 export const AddInput = styled(Input)`
+  margin-top: 0.9rem;
   max-width: 230px;
 `;
 

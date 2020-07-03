@@ -7,10 +7,8 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { Link, A, Page, Div } from "../../views/styled";
 import {
-  SubHeader,
-  AppDesc,
-  Ul,
-  Ol,
+  Header,
+  P,
   RssIcon,
   RedditIcon,
   YoutubeIcon,
@@ -20,93 +18,77 @@ import {
 const Landing = () => {
   return (
     <Page>
-      <AppDesc>The internet - delivered weekly</AppDesc>
+      <Header>What is Weekreader?</Header>
+      <P>
+        <Link to="/signup" target="_blank">
+          Sign up
+        </Link>{" "}
+        and{" "}
+        <Link to="/" target="_blank">
+          add RSS feeds
+        </Link>{" "}
+        to your inbox
+      </P>
+      <P>
+        <Link to="/user" target="_blank">
+          Set when
+        </Link>{" "}
+        your inbox is updated
+      </P>
+      <P>Receive the top articles from the week</P>
       <Div />
-      <SubHeader>How does it work?</SubHeader>
-      <Ol>
-        <li>
-          <Link to="/user" target="_blank">
-            Set when
-          </Link>{" "}
-          your inbox will be updated
-        </li>
-        <li>
-          <Link to="/" target="_blank">
-            Add RSS feeds
-          </Link>{" "}
-          to your inbox
-        </li>
-        <li>Feeds fetch the top 3 articles, daily</li>
-        <li>Weekreader updates your inbox</li>
-        {/* <li>
-          <Link to="/signup" target="_blank">
-            Sign up
-          </Link>{" "}
-          - no email address required
-        </li> */}
-      </Ol>
+      <P>
+        <A href="https://rss.com/blog/how-do-rss-feeds-work/" target="_blank">
+          RSS
+        </A>{" "}
+        is supported by most news sites, blogs, and podcasts
+      </P>
+      <P>
+        Look for the RSS icon <RssIcon icon={rssIcon} />
+      </P>
+      <P>Try example.com/feed or example.com/rss</P>
+      <P>
+        <RedditIcon icon={redditIcon} /> Reddit -{" "}
+        <A
+          href="https://reddit.com/r/technology/top/.rss?limit=5"
+          target="_blank"
+        >
+          reddit.com/r/technology/top/.rss?limit=5
+        </A>
+      </P>
+      <P>
+        <YoutubeIcon icon={youtubeIcon} /> YouTube -{" "}
+        <A href="https://www.youtube.com/subscription_manager?action_takeout=1">
+          download RSS feeds
+        </A>{" "}
+        for your subscriptions
+      </P>
+      <P>
+        <TwitterIcon icon={twitterIcon} /> Twitter, Instagram -{" "}
+        <A href="http://fetchrss.com/" target="_blank">
+          FetchRSS
+        </A>
+        ,{" "}
+        <A href="https://www.rss.app" target="_blank">
+          RSS.app
+        </A>
+      </P>
       <Div />
-      <SubHeader>RSS feeds</SubHeader>
-      <Ul>
-        <li>
-          <A href="https://rss.com/blog/how-do-rss-feeds-work/" target="_blank">
-            RSS
-          </A>{" "}
-          is supported by most news sites, blogs, and podcasts
-        </li>
-        <li>
-          Look for the RSS icon <RssIcon icon={rssIcon} />
-        </li>
-        <li>Try example.com/feed or example.com/rss</li>
-        <li>
-          <RedditIcon icon={redditIcon} /> Reddit -{" "}
-          <A
-            href="https://reddit.com/r/technology/top/.rss?limit=5"
-            target="_blank"
-          >
-            reddit.com/r/technology/top/.rss?limit=5
-          </A>
-        </li>
-        <li>
-          <YoutubeIcon icon={youtubeIcon} /> YouTube -{" "}
-          <A href="https://www.youtube.com/subscription_manager?action_takeout=1">
-            download RSS feeds
-          </A>{" "}
-          for your subscriptions
-        </li>
-        <li>
-          <TwitterIcon icon={twitterIcon} /> Twitter, Instagram, and more -{" "}
-          <A href="http://fetchrss.com/" target="_blank">
-            FetchRSS
-          </A>
-          ,{" "}
-          <A href="https://www.rss.app" target="_blank">
-            RSS.app
-          </A>
-        </li>
-      </Ul>
-      <Div />
-      <SubHeader>Contact</SubHeader>
-      <Ul>
-        <li>
-          Email -{" "}
-          <A href="mailto:contact@weekreader.com" target="_blank">
-            contact@mail.weekreader.com
-          </A>
-        </li>
-        <li>
-          Twitter -{" "}
-          <A href="https://twitter.com/weekreader" target="_blank">
-            @weekreader
-          </A>
-        </li>
-        <li>
-          This project is{" "}
-          <A href="https://github.com/aashtonnz/weekreader" target="_blank">
-            open source
-          </A>
-        </li>
-      </Ul>
+      <P>
+        <A href="mailto:contact@weekreader.com" target="_blank">
+          contact@mail.weekreader.com
+        </A>
+      </P>
+      <P>
+        <A href="https://twitter.com/weekreader" target="_blank">
+          @weekreader
+        </A>
+      </P>
+      <P>
+        <A href="https://github.com/aashtonnz/weekreader" target="_blank">
+          This project is open source
+        </A>
+      </P>
     </Page>
   );
 };

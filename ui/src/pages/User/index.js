@@ -1,17 +1,38 @@
 import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logout, editUser, deleteUser, setAlert } from "../../state/actions";
+import {
+  logout,
+  editInboxUpdate,
+  editEmail,
+  editPassword,
+  deleteUser,
+  setAlert,
+} from "../../state/actions";
 import { trimValues } from "../../utils";
 import { checkUserEdit } from "../../utils/validation";
 import Select from "../../views/Select";
 import Checkbox from "../../views/Checkbox";
 import { Option } from "../../views/Select/styled";
-import { Page, Button, Header, Input, Div } from "../../views/styled";
+import { Page, Button, Input, Div, Header } from "../../views/styled";
 import { hoursArray, daysArray } from "./utils";
-import { LogoutButton, HourWrapper, DayWrapper, Day } from "./styled";
+import {
+  SettingWrapper,
+  DayWrapper,
+  EmailWrapper,
+  Day,
+  EmailInput,
+} from "./styled";
 
-const User = ({ logout, editUser, setAlert, deleteUser, user }) => {
+const User = ({
+  logout,
+  editInboxUpdate,
+  editEmail,
+  editPassword,
+  setAlert,
+  deleteUser,
+  user,
+}) => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -33,6 +54,22 @@ const User = ({ logout, editUser, setAlert, deleteUser, user }) => {
   const updateUser = (event) =>
     setUserData({ ...userData, [event.target.name]: event.target.value });
 
+  const onEditInboxUpdate = () => {
+    const { email, password, password2 } = trimValues(userData);
+    const invalidMsg = checkUserEdit(email, password, password2);
+    if (invalidMsg) {
+      setAlert(invalidMsg, "danger");
+      return;
+    }
+    // editUser(
+    //   email,
+    //   password,
+    //   articleUpdateHour,
+    //   articleUpdateDays,
+    //   userData.mailSubscribed && email
+    // );
+  };
+
   const onSubmit = () => {
     const { email, password, password2 } = trimValues(userData);
     const invalidMsg = checkUserEdit(email, password, password2);
@@ -40,13 +77,13 @@ const User = ({ logout, editUser, setAlert, deleteUser, user }) => {
       setAlert(invalidMsg, "danger");
       return;
     }
-    editUser(
-      email,
-      password,
-      articleUpdateHour,
-      articleUpdateDays,
-      userData.mailSubscribed && email
-    );
+    // editUser(
+    //   email,
+    //   password,
+    //   articleUpdateHour,
+    //   articleUpdateDays,
+    //   userData.mailSubscribed && email
+    // );
   };
 
   const onLogout = () => logout();
@@ -73,9 +110,7 @@ const User = ({ logout, editUser, setAlert, deleteUser, user }) => {
       {user && (
         <>
           <Header>{user.email}</Header>
-          <LogoutButton onClick={onLogout}>Logout</LogoutButton>
-          <Div />
-          <HourWrapper>
+          <SettingWrapper>
             <div>Update inbox at UTC</div>
             <Select
               value={String(articleUpdateHour)}
@@ -89,7 +124,7 @@ const User = ({ logout, editUser, setAlert, deleteUser, user }) => {
               ))}
             </Select>
             <div>on</div>
-          </HourWrapper>
+          </SettingWrapper>
           <DayWrapper>
             {daysArray.map((day, index) => (
               <Fragment key={index}>
@@ -102,14 +137,15 @@ const User = ({ logout, editUser, setAlert, deleteUser, user }) => {
               </Fragment>
             ))}
           </DayWrapper>
-          <HourWrapper>
-            <div>Send me an email</div>
+          <EmailWrapper>
+            <div>Send an email</div>
             <Checkbox
               onChange={onToggleMailSub}
               checked={userData.mailSubscribed}
             />
-          </HourWrapper>
-          <Input
+          </EmailWrapper>
+          <Div />
+          <EmailInput
             name="email"
             value={userData.email}
             onChange={updateUser}
@@ -117,6 +153,8 @@ const User = ({ logout, editUser, setAlert, deleteUser, user }) => {
             placeholder="Email"
             autoComplete="off"
           />
+          <Button onClick={() => {}}>Update</Button>
+          <Div />
           <Input
             name="password"
             value={userData.password}
@@ -130,10 +168,12 @@ const User = ({ logout, editUser, setAlert, deleteUser, user }) => {
             value={userData.password2}
             onChange={updateUser}
             type="password"
-            placeholder="Confirm password"
+            placeholder="Confirm new password"
             autoComplete="off"
           />
-          <Button onClick={onSubmit}>Save Changes</Button>
+          <Button onClick={onSubmit}>Update</Button>
+          <Div />
+          <Button onClick={onLogout}>Logout</Button>
           <Div />
           {deleteConfirmed ? (
             <Button onClick={onDelete} className="danger">
@@ -152,7 +192,9 @@ const User = ({ logout, editUser, setAlert, deleteUser, user }) => {
 
 User.propTypes = {
   logout: PropTypes.func.isRequired,
-  editUser: PropTypes.func.isRequired,
+  editInboxUpdate: PropTypes.func.isRequired,
+  editEmail: PropTypes.func.isRequired,
+  editPassword: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
   user: PropTypes.object,
@@ -165,6 +207,8 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   logout,
   setAlert,
-  editUser,
+  editInboxUpdate,
+  editEmail,
+  editPassword,
   deleteUser,
 })(User);

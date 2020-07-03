@@ -5,15 +5,8 @@ import { connect } from "react-redux";
 import { setAlert, editSub, unsubscribe } from "../../state/actions";
 import { checkEditSub } from "../../utils/validation";
 import Checkbox from "../../views/Checkbox";
-import { Page, Input, Button, Div, A } from "../../views/styled";
-import {
-  FileInput,
-  FileWrapper,
-  UnsubButton,
-  Img,
-  Header,
-  CheckboxWrapper,
-} from "./styled";
+import { Page, Input, Button, Div, A, SubHeader } from "../../views/styled";
+import { FileInput, FileWrapper, Img, Header, CheckboxWrapper } from "./styled";
 
 const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
   const { id } = useParams();
@@ -77,9 +70,7 @@ const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
               {sub.rssUrl}
             </A>
           )}
-          <UnsubButton onClick={onUnsubscribe}>Unsubscribe</UnsubButton>
           <Div />
-          <div>Details</div>
           <Input
             name="title"
             value={title}
@@ -87,10 +78,14 @@ const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
             type="text"
             placeholder="Title"
           />
+          <Button onClick={onSubmit}>Update</Button>
+          <Div />
+          <SubHeader>Replace image</SubHeader>
           <FileWrapper>
-            <div>Replace image</div>
             <FileInput key={inputKey} type="file" onChange={onChangeImg} />
           </FileWrapper>
+          <Button onClick={onSubmit}>Update</Button>
+          <Div />
           <CheckboxWrapper>
             <div>Hide descriptions</div>
             <Checkbox
@@ -98,7 +93,8 @@ const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
               onChange={onDescriptionsHidden}
             />
           </CheckboxWrapper>
-          <Button onClick={onSubmit}>Save Changes</Button>
+          <Div />
+          <Button onClick={onUnsubscribe}>Unsubscribe</Button>
         </>
       )}
     </Page>

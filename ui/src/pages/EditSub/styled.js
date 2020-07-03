@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Button } from "../../views/styled";
 
 export const FileWrapper = styled.div`
   margin: 0 0 0.2rem 0;
@@ -19,10 +18,7 @@ export const FileInput = styled.input`
   color: #888;
   padding: 8px 10px;
   max-width: 200px;
-`;
-
-export const UnsubButton = styled(Button)`
-  margin-top: 0.6rem;
+  margin-bottom: 0.7rem;
 `;
 
 export const Img = styled.img`
@@ -40,10 +36,10 @@ export const Header = styled.a`
   margin-right: 1rem;
   font-weight: 700;
   margin-top: 2.2rem;
+  margin-bottom: 0.2rem;
 `;
 
 export const CheckboxWrapper = styled.div`
-  margin: 0.2rem 0 0.8rem 0;
   width: 100%;
   max-width: 335px;
   display: flex;

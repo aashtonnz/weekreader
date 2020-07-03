@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { Button } from "../../views/styled";
+import { Input, Header as ViewHeader } from "../../views/styled";
 
-export const LogoutButton = styled(Button)`
-  margin-top: 0.4rem;
+export const Header = styled(ViewHeader)`
+  overflow-x: hidden;
 `;
 
-export const HourWrapper = styled.div`
-  margin: 0.5rem 0 0.6rem 0;
+export const SettingWrapper = styled.div`
+  margin: 1.6rem 0 0.6rem 0;
   width: 100%;
   max-width: 335px;
   display: flex;
@@ -16,6 +16,10 @@ export const HourWrapper = styled.div`
   & > div {
     text-align: center;
   }
+`;
+
+export const EmailWrapper = styled(SettingWrapper)`
+  margin: 0.6rem 0 0 0;
 `;
 
 export const Day = styled.div`
@@ -24,15 +28,10 @@ export const Day = styled.div`
   color: ${(props) => props.theme.color.primary};
 `;
 
-export const DayWrapper = styled.div`
+export const DayWrapper = styled(SettingWrapper)`
   margin: 0.6rem 0 0.8rem 0;
-  width: 100%;
-  max-width: 335px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+`;
 
-  & > div {
-    text-align: center;
-  }
+export const EmailInput = styled(Input)`
+  margin-top: 0 !important;
 `;

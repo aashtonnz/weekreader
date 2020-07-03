@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { setAlert, login } from "../state/actions";
 import { trimValues } from "../utils";
 import { checkLogin } from "../utils/validation";
-import { Input, Button, Header, Link, Form } from "../views/styled";
+import { Input, Button, Header, Link, Form, SubHeader } from "../views/styled";
 import { Page } from "./Signup/styled";
 
 const FOCUS_DELAY_MS = 50;
@@ -44,9 +44,9 @@ const Login = ({ setAlert, login, user }) => {
   return (
     <Page>
       <Header>Log In</Header>
-      <div>
+      <SubHeader>
         or <Link to="/signup">sign up</Link>
-      </div>
+      </SubHeader>
       <Form>
         <Input
           name="email"

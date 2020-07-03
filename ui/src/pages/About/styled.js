@@ -1,30 +1,9 @@
 import styled from "styled-components";
+import { Header as ViewHeader } from "../../views/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const AppDesc = styled.h2`
-  margin: 2.6rem 0 0 0;
-  font-size: 1.2rem;
-`;
-
-export const SubHeader = styled.h2`
-  margin-bottom: 0.6rem;
-  font-size: 1.1rem;
-`;
-
-export const Ul = styled.ul`
-  margin: 0 1.6rem;
-
-  > li {
-    margin: 0.4rem 0;
-  }
-`;
-
-export const Ol = styled.ol`
-  margin: 0 1.6rem;
-
-  > li {
-    margin: 0.4rem 0;
-  }
+export const Header = styled(ViewHeader)`
+  margin-bottom: 1.8rem;
 `;
 
 export const RssIcon = styled(FontAwesomeIcon)`
@@ -45,4 +24,9 @@ export const YoutubeIcon = styled(FontAwesomeIcon)`
 export const TwitterIcon = styled(FontAwesomeIcon)`
   margin-right: 0.2rem;
   color: #1da1f2;
+`;
+
+export const P = styled.p`
+  margin-bottom: 0.9rem;
+  text-align: center;
 `;

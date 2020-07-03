@@ -40,10 +40,6 @@ export const Input = styled.input`
   display: flex;
   align-items: center;
 
-  &:first-of-type {
-    margin-top: 0.9rem;
-  }
-
   &:focus {
     outline: none;
     border-color: ${(props) => props.theme.color.primary};
@@ -51,12 +47,19 @@ export const Input = styled.input`
 `;
 
 export const Header = styled.h2`
-  font-size: 1.6rem;
-  margin-bottom: 0
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
   padding: 0;
   margin-top: 2.2rem;
   width: 100%;
   text-align: center;
+  overflow-x: hidden;
+  color: ${(props) => props.theme.color.primary};
+`;
+
+export const SubHeader = styled.div`
+  margin-bottom: 0.9rem;
 `;
 
 export const Page = styled.div`

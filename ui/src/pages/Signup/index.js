@@ -5,7 +5,14 @@ import { Redirect } from "react-router-dom";
 import { signup, setAlert } from "../../state/actions";
 import { trimValues } from "../../utils";
 import { checkSignup } from "../../utils/validation";
-import { Input, Button, Header, Link, Form } from "../../views/styled";
+import {
+  Input,
+  Button,
+  Header,
+  Link,
+  Form,
+  SubHeader,
+} from "../../views/styled";
 import { Page } from "./styled";
 
 const FOCUS_DELAY_MS = 50;
@@ -44,9 +51,9 @@ const Signup = ({ signup, setAlert, user }) => {
   return (
     <Page>
       <Header>Sign Up</Header>
-      <div>
+      <SubHeader>
         or <Link to="/login">log in</Link>
-      </div>
+      </SubHeader>
       <Form>
         <Input
           name="email"

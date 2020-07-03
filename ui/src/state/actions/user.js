@@ -62,19 +62,45 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const editUser = (
-  email,
-  password,
+export const editInboxUpdate = (
   articleUpdateHour,
   articleUpdateDays,
   mailSubscribed
 ) => async (dispatch) => {
   const body = JSON.stringify({
-    email,
-    password,
     articleUpdateHour,
     articleUpdateDays,
     mailSubscribed,
+  });
+  const loadId = dispatch(setLoading());
+  try {
+    const res = await axios.put("/users", body);
+    dispatch({ type: SET_USER, payload: res.data });
+  } catch (error) {
+    dispatch(setAlert(reqErrorMsg(error), "danger"));
+  } finally {
+    dispatch(clearLoading(loadId));
+  }
+};
+
+export const editEmail = (email) => async (dispatch) => {
+  const body = JSON.stringify({
+    email,
+  });
+  const loadId = dispatch(setLoading());
+  try {
+    const res = await axios.put("/users", body);
+    dispatch({ type: SET_USER, payload: res.data });
+  } catch (error) {
+    dispatch(setAlert(reqErrorMsg(error), "danger"));
+  } finally {
+    dispatch(clearLoading(loadId));
+  }
+};
+
+export const editPassword = (password) => async (dispatch) => {
+  const body = JSON.stringify({
+    password,
   });
   const loadId = dispatch(setLoading());
   try {
