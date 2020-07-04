@@ -18,8 +18,9 @@ import {
 const Landing = () => {
   return (
     <Page>
-      <Header>What is Weekreader?</Header>
+      <Header>The internet – delivered weekly</Header>
       <P>
+        1.{" "}
         <Link to="/signup" target="_blank">
           Sign up
         </Link>{" "}
@@ -30,12 +31,13 @@ const Landing = () => {
         to your inbox
       </P>
       <P>
+        2.{" "}
         <Link to="/user" target="_blank">
           Set when
         </Link>{" "}
         your inbox is updated
       </P>
-      <P>Receive the top articles from the week</P>
+      <P>3. Receive the top articles from the week</P>
       <Div />
       <P>
         <A href="https://rss.com/blog/how-do-rss-feeds-work/" target="_blank">
