@@ -22,8 +22,8 @@ dbService.connect().then(async () => {
     const users = await userService.find();
     for (user of users) {
       const articlesUpdated =
-        user.articleUpdate.updatedAt &&
-        moment().diff(user.articleUpdate.updatedAt, "minutes") < 30;
+        user.articlesUpdatedAt &&
+        moment().diff(user.articlesUpdatedAt, "minutes") < 30;
       try {
         const isSubscribed = await mailService.isSubscribed(user.email);
         if (articlesUpdated && isSubscribed && user.confirmed) {

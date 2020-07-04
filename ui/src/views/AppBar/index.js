@@ -38,7 +38,7 @@ const AppBar = ({ navOpen, setNavOpen, clearAlert, isLoading, user }) => {
           <>
             {user ? (
               <PrimaryLink onClick={closeNav} to="/user">
-                {moment(user.articleUpdate.updatedAt).format("MMMM D")}
+                {moment(user.articlesUpdatedAt).format("MMMM D")}
               </PrimaryLink>
             ) : (
               <PrimaryLink onClick={closeNav} to="/signup">

@@ -54,31 +54,39 @@ const create = async (email, password) => {
   return user;
 };
 
-const update = async (
+const updateEmail = async (userId, email) => {
+  const user = await User.findById(userId).select("-password");
+  user.email = email;
+  user.confirmId = uuid.v4();
+  user.confirmed = false;
+  await user.save();
+  await mailService.sendConfirm(user);
+  return user;
+};
+
+const updatePassword = async (userId, password) => {
+  const user = await User.findById(userId).select("-password");
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(password, salt);
+  await user.save();
+  return user;
+};
+
+const updateSettings = async (
   userId,
-  email,
-  password,
-  articleUpdateDays,
-  articleUpdateHour,
+  articlesUpdateDays,
+  articlesUpdateHour,
   mailSubscribed
 ) => {
-  const userData = {
-    email,
-    articleUpdate: { days: articleUpdateDays, hour: articleUpdateHour },
-  };
-  if (password) {
-    const salt = await bcrypt.genSalt(10);
-    userData.password = await bcrypt.hash(password, salt);
-  }
-  const user = await User.findOneAndUpdate({ _id: userId }, userData, {
-    new: true,
-    upsert: true,
-  }).select("-password");
+  const user = await User.findById(userId).select("-password");
+  user.articlesUpdateDays = articlesUpdateDays;
+  user.articlesUpdateHour = articlesUpdateHour;
   if (mailSubscribed) {
     await mailService.resubscribe(user.email);
   } else {
     await mailService.unsubscribe(user.email);
   }
+  await user.save();
   const userObj = user.toObject();
   userObj.mailSubscribed = await mailService.isSubscribed(user.email);
   return userObj;
@@ -89,8 +97,8 @@ const updateArticles = async () => {
   const channels = await Channel.find();
   users.forEach((user) => {
     if (
-      user.articleUpdate.days.includes(moment().utc().day()) &&
-      user.articleUpdate.hour === moment().utc().hour()
+      user.articlesUpdateDays.includes(moment().utc().day()) &&
+      user.articlesUpdateHour === moment().utc().hour()
     ) {
       user.subscriptions.forEach((sub) => {
         if (!sub.isSubscribed) {
@@ -127,7 +135,7 @@ const updateArticles = async () => {
             return article;
           });
       });
-      user.articleUpdate.updatedAt = new Date();
+      user.articlesUpdatedAt = new Date();
     }
   });
   await Promise.all(users.map(async (user) => await user.save()));
@@ -181,10 +189,12 @@ module.exports = {
   findOne,
   exists,
   create,
-  update,
   validate,
   remove,
   seed,
+  updateSettings,
   updateArticles,
+  updatePassword,
+  updateEmail,
   confirmEmail,
 };

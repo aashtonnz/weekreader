@@ -70,7 +70,7 @@ SubTitle.propTypes = {
   title: PropTypes.string.isRequired,
   filter: PropTypes.string.isRequired,
   numArticles: PropTypes.number.isRequired,
-  collapsed: PropTypes.bool.isRequired,
+  collapsed: PropTypes.bool,
   collapseArticles: PropTypes.func.isRequired,
   expandArticles: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,

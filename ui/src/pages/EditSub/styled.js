@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Input } from "../../views/styled";
 
 export const FileWrapper = styled.div`
   margin: 0 0 0.2rem 0;
@@ -18,7 +19,11 @@ export const FileInput = styled.input`
   color: #888;
   padding: 8px 10px;
   max-width: 200px;
-  margin-bottom: 0.7rem;
+  margin: 0.6rem 0 1rem 0;
+`;
+
+export const TitleInput = styled(Input)`
+  margin-top: 1rem;
 `;
 
 export const Img = styled.img`

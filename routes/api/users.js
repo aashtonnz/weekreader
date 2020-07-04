@@ -6,7 +6,9 @@ const { errorMsg, successMsg } = require("../../utils");
 const {
   checkSignup,
   checkLogin,
-  checkUserEdit,
+  checkEmail,
+  checkPassword,
+  checkSettings,
 } = require("../../utils/validation");
 
 const router = express.Router();
@@ -69,35 +71,58 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// @route  PUT api/users
-// @desc   Update user
+// @route  PUT api/users/email
+// @desc   Update email
 // @access Private
-router.put("/", auth, async (req, res) => {
-  const {
-    email,
-    password,
-    articleUpdateDays,
-    articleUpdateHour,
-    mailSubscribed,
-  } = req.body;
-  const invalidMsg = checkUserEdit(
-    email,
-    password,
-    articleUpdateDays,
-    articleUpdateHour
-  );
+router.put("/email", auth, async (req, res) => {
+  const { email } = req.body;
+  const invalidMsg = checkEmail(email);
   if (invalidMsg) {
     return res.status(400).json(errorMsg(invalidMsg));
   }
   try {
-    const existingUser = await userService.findOne({ email });
-    if (existingUser && existingUser._id.toString() !== req.user.id) {
+    const emailTaken = await userService.findOne({ email });
+    if (emailTaken) {
       return res.status(400).json(errorMsg("Email already taken"));
     }
-    const user = await userService.update(
+    const user = await userService.updateEmail(req.user.id, email);
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(errorMsg());
+  }
+});
+
+// @route  PUT api/users/password
+// @desc   Update password
+// @access Private
+router.put("/password", auth, async (req, res) => {
+  const { password } = req.body;
+  const invalidMsg = checkPassword(password);
+  if (invalidMsg) {
+    return res.status(400).json(errorMsg(invalidMsg));
+  }
+  try {
+    const user = await userService.updatePassword(req.user.id, password);
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(errorMsg());
+  }
+});
+
+// @route  PUT api/users/settings
+// @desc   Update settings
+// @access Private
+router.put("/settings", auth, async (req, res) => {
+  const { articleUpdateDays, articleUpdateHour, mailSubscribed } = req.body;
+  const invalidMsg = checkSettings(articleUpdateDays, articleUpdateHour);
+  if (invalidMsg) {
+    return res.status(400).json(errorMsg(invalidMsg));
+  }
+  try {
+    const user = await userService.updateSettings(
       req.user.id,
-      email,
-      password,
       articleUpdateDays,
       articleUpdateHour,
       mailSubscribed

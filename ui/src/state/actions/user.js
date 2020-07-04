@@ -62,7 +62,7 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const editInboxUpdate = (
+export const editSettings = (
   articleUpdateHour,
   articleUpdateDays,
   mailSubscribed
@@ -74,7 +74,7 @@ export const editInboxUpdate = (
   });
   const loadId = dispatch(setLoading());
   try {
-    const res = await axios.put("/users", body);
+    const res = await axios.put("/users/settings", body);
     dispatch({ type: SET_USER, payload: res.data });
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
@@ -89,7 +89,7 @@ export const editEmail = (email) => async (dispatch) => {
   });
   const loadId = dispatch(setLoading());
   try {
-    const res = await axios.put("/users", body);
+    const res = await axios.put("/users/email", body);
     dispatch({ type: SET_USER, payload: res.data });
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
@@ -104,7 +104,7 @@ export const editPassword = (password) => async (dispatch) => {
   });
   const loadId = dispatch(setLoading());
   try {
-    const res = await axios.put("/users", body);
+    const res = await axios.put("/users/password", body);
     dispatch({ type: SET_USER, payload: res.data });
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));

@@ -18,28 +18,34 @@ export const checkSignup = (email, password, password2) => {
   return "";
 };
 
-export const checkUserEdit = (email, password, password2) => {
-  if (email && !isEmail(email)) {
-    return "Invalid email address";
-  }
-  if (password && password.length < MIN_PASSWORD_LEN) {
-    return `Password must contain ${MIN_PASSWORD_LEN} or more characters`;
-  }
-  if (password && password !== password2) {
-    return "Passwords do not match";
-  }
-  return "";
-};
-
 export const checkLogin = (email, password) => {
   if (!email) {
-    return "Email is required";
+    return "Email address is required";
   }
   if (!password) {
     return "Password is required";
   }
   if (!isEmail(email) || password.length < MIN_PASSWORD_LEN) {
     return "Invalid credentials";
+  }
+  return "";
+};
+
+export const checkEmail = (email) => {
+  if (!email) {
+    return "Email address is required";
+  }
+  if (!isEmail(email)) {
+    return "Invalid email address";
+  }
+};
+
+export const checkPassword = (password, password2) => {
+  if (password && password.length < MIN_PASSWORD_LEN) {
+    return `Password must contain ${MIN_PASSWORD_LEN} or more characters`;
+  }
+  if (password && password !== password2) {
+    return "Passwords do not match";
   }
   return "";
 };

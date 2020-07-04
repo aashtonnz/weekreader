@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert, login } from "../state/actions";
-import { trimValues } from "../utils";
 import { checkLogin } from "../utils/validation";
 import { Input, Button, Header, Link, Form, SubHeader } from "../views/styled";
 import { Page } from "./Signup/styled";
@@ -27,13 +26,13 @@ const Login = ({ setAlert, login, user }) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const { email, password } = trimValues(userData);
-    const invalidMsg = checkLogin(email, password);
+    const email = userData.email.trim();
+    const invalidMsg = checkLogin(email, userData.password);
 
     if (invalidMsg) {
       setAlert(invalidMsg, "danger");
     } else {
-      login(email, password);
+      login(email, userData.password);
     }
   };
 

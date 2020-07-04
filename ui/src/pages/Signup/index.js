@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { signup, setAlert } from "../../state/actions";
-import { trimValues } from "../../utils";
 import { checkSignup } from "../../utils/validation";
 import {
   Input,
@@ -35,13 +34,17 @@ const Signup = ({ signup, setAlert, user }) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const { email, password, password2 } = trimValues(userData);
-    const invalidMsg = checkSignup(email, password, password2);
+    const email = userData.email.trim();
+    const invalidMsg = checkSignup(
+      email,
+      userData.password,
+      userData.password2
+    );
     if (invalidMsg) {
       setAlert(invalidMsg, "danger");
       return;
     }
-    signup(email, password);
+    signup(email, userData.password);
   };
 
   if (user) {

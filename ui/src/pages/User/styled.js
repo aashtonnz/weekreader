@@ -1,12 +1,8 @@
 import styled from "styled-components";
-import { Input, Header as ViewHeader } from "../../views/styled";
-
-export const Header = styled(ViewHeader)`
-  overflow-x: hidden;
-`;
+import { Input } from "../../views/styled";
 
 export const SettingWrapper = styled.div`
-  margin: 1.6rem 0 0.6rem 0;
+  margin: 3rem 0 0.6rem 0;
   width: 100%;
   max-width: 335px;
   display: flex;
@@ -19,7 +15,7 @@ export const SettingWrapper = styled.div`
 `;
 
 export const EmailWrapper = styled(SettingWrapper)`
-  margin: 0.6rem 0 0 0;
+  margin: 0.6rem 0 1.6rem 0;
 `;
 
 export const Day = styled.div`

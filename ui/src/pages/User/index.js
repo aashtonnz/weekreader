@@ -3,18 +3,17 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
   logout,
-  editInboxUpdate,
+  editSettings,
   editEmail,
   editPassword,
   deleteUser,
   setAlert,
 } from "../../state/actions";
-import { trimValues } from "../../utils";
-import { checkUserEdit } from "../../utils/validation";
+import { checkEmail, checkPassword } from "../../utils/validation";
 import Select from "../../views/Select";
 import Checkbox from "../../views/Checkbox";
 import { Option } from "../../views/Select/styled";
-import { Page, Button, Input, Div, Header } from "../../views/styled";
+import { Page, Button, Input, Div } from "../../views/styled";
 import { hoursArray, daysArray } from "./utils";
 import {
   SettingWrapper,
@@ -26,7 +25,7 @@ import {
 
 const User = ({
   logout,
-  editInboxUpdate,
+  editSettings,
   editEmail,
   editPassword,
   setAlert,
@@ -37,53 +36,46 @@ const User = ({
     email: "",
     password: "",
     password2: "",
+    articlesUpdateHour: 0,
+    articlesUpdateDays: [],
     mailSubscribed: false,
   });
   const [deleteConfirmed, setDeleteConfirmed] = useState(false);
-  const [articleUpdateHour, setArticleUpdateHour] = useState(0);
-  const [articleUpdateDays, setArticleUpdateDays] = useState([]);
 
   useEffect(() => {
     if (user) {
       setUserData({ ...user, password: "", password2: "" });
-      setArticleUpdateHour(user.articleUpdate.hour);
-      setArticleUpdateDays(user.articleUpdate.days);
     }
   }, [user]);
 
   const updateUser = (event) =>
     setUserData({ ...userData, [event.target.name]: event.target.value });
 
-  const onEditInboxUpdate = () => {
-    const { email, password, password2 } = trimValues(userData);
-    const invalidMsg = checkUserEdit(email, password, password2);
-    if (invalidMsg) {
-      setAlert(invalidMsg, "danger");
-      return;
-    }
-    // editUser(
-    //   email,
-    //   password,
-    //   articleUpdateHour,
-    //   articleUpdateDays,
-    //   userData.mailSubscribed && email
-    // );
+  const onSubmitSettings = () => {
+    editSettings(
+      userData.articlesUpdateHour,
+      userData.articlesUpdateDays,
+      userData.mailSubscribed
+    );
   };
 
-  const onSubmit = () => {
-    const { email, password, password2 } = trimValues(userData);
-    const invalidMsg = checkUserEdit(email, password, password2);
+  const onSubmitEmail = () => {
+    const email = userData.email.trim();
+    const invalidMsg = checkEmail(email);
     if (invalidMsg) {
       setAlert(invalidMsg, "danger");
       return;
     }
-    // editUser(
-    //   email,
-    //   password,
-    //   articleUpdateHour,
-    //   articleUpdateDays,
-    //   userData.mailSubscribed && email
-    // );
+    editEmail(email);
+  };
+
+  const onSubmitPassword = () => {
+    const invalidMsg = checkPassword(userData.password, userData.password2);
+    if (invalidMsg) {
+      setAlert(invalidMsg, "danger");
+      return;
+    }
+    editPassword(userData.password);
   };
 
   const onLogout = () => logout();
@@ -92,12 +84,14 @@ const User = ({
 
   const onToggleDay = (value) => {
     const toggledDay = Number(value);
-    if (!articleUpdateDays.includes(toggledDay)) {
-      setArticleUpdateDays([...articleUpdateDays, toggledDay]);
+    if (!userData.articlesUpdateDays.includes(toggledDay)) {
+      const newArticleUpdateDays = [...userData.articlesUpdateDays, toggledDay];
+      setUserData({ ...userData, articlesUpdateDays: newArticleUpdateDays });
     } else {
-      setArticleUpdateDays(
-        articleUpdateDays.filter((day) => day !== toggledDay)
+      const newArticleUpdateDays = userData.articlesUpdateDays.filter(
+        (day) => day !== toggledDay
       );
+      setUserData({ ...userData, articlesUpdateDays: newArticleUpdateDays });
     }
   };
 
@@ -105,17 +99,20 @@ const User = ({
     setUserData({ ...userData, mailSubscribed: !userData.mailSubscribed });
   };
 
+  const onChangeUpdateHour = (articlesUpdateHour) => {
+    setUserData({ ...userData, articlesUpdateHour });
+  };
+
   return (
     <Page>
       {user && (
         <>
-          <Header>{user.email}</Header>
           <SettingWrapper>
             <div>Update inbox at UTC</div>
             <Select
-              value={String(articleUpdateHour)}
+              value={String(userData.articlesUpdateHour)}
               showSelected
-              onChange={setArticleUpdateHour}
+              onChange={onChangeUpdateHour}
             >
               {hoursArray.map((hour, index) => (
                 <Option key={index} value={String(index)}>
@@ -131,7 +128,7 @@ const User = ({
                 <Checkbox
                   value={String(index)}
                   onChange={onToggleDay}
-                  checked={articleUpdateDays.includes(index)}
+                  checked={userData.articlesUpdateDays.includes(index)}
                 />{" "}
                 <Day>{day}</Day>
               </Fragment>
@@ -144,6 +141,7 @@ const User = ({
               checked={userData.mailSubscribed}
             />
           </EmailWrapper>
+          <Button onClick={onSubmitSettings}>Save Settings</Button>
           <Div />
           <EmailInput
             name="email"
@@ -153,7 +151,7 @@ const User = ({
             placeholder="Email"
             autoComplete="off"
           />
-          <Button onClick={() => {}}>Update</Button>
+          <Button onClick={onSubmitEmail}>Update</Button>
           <Div />
           <Input
             name="password"
@@ -171,7 +169,7 @@ const User = ({
             placeholder="Confirm new password"
             autoComplete="off"
           />
-          <Button onClick={onSubmit}>Update</Button>
+          <Button onClick={onSubmitPassword}>Update</Button>
           <Div />
           <Button onClick={onLogout}>Logout</Button>
           <Div />
@@ -192,7 +190,7 @@ const User = ({
 
 User.propTypes = {
   logout: PropTypes.func.isRequired,
-  editInboxUpdate: PropTypes.func.isRequired,
+  editSettings: PropTypes.func.isRequired,
   editEmail: PropTypes.func.isRequired,
   editPassword: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
@@ -207,7 +205,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   logout,
   setAlert,
-  editInboxUpdate,
+  editSettings,
   editEmail,
   editPassword,
   deleteUser,

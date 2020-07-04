@@ -21,12 +21,7 @@ const checkArticleUpdateDay = (day) => {
   return "";
 };
 
-const checkUserEdit = (
-  email,
-  password,
-  articleUpdateDays,
-  articleUpdateHour
-) => {
+const checkSettings = (articleUpdateDays, articleUpdateHour) => {
   if (
     !articleUpdateDays ||
     !articleUpdateDays.length ||
@@ -41,18 +36,12 @@ const checkUserEdit = (
   ) {
     return "Invalid article update hour";
   }
-  if (email && !isEmail(email)) {
-    return "Invalid email address";
-  }
-  if (password && password.length < MIN_PASSWORD_LEN) {
-    return `Password must contain ${MIN_PASSWORD_LEN} or more characters`;
-  }
   return "";
 };
 
 const checkLogin = (email, password) => {
   if (!email) {
-    return "Email is required";
+    return "Email address is required";
   }
   if (!password) {
     return "Password is required";
@@ -97,12 +86,31 @@ const checkTitle = (title) => {
   }
 };
 
+const checkPassword = (password) => {
+  if (password.length < MIN_PASSWORD_LEN) {
+    return `Password must contain ${MIN_PASSWORD_LEN} or more characters`;
+  }
+  return "";
+};
+
+const checkEmail = (email) => {
+  if (!email) {
+    return "Email address is required";
+  }
+  if (!isEmail(email)) {
+    return "Invalid email address";
+  }
+  return "";
+};
+
 module.exports = {
   checkSignup,
-  checkUserEdit,
   checkLogin,
   checkUrl,
   checkIndex,
   checkImg,
   checkTitle,
+  checkEmail,
+  checkPassword,
+  checkSettings,
 };
