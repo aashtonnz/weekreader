@@ -35,6 +35,7 @@ export const signup = (email, password) => async (dispatch) => {
     const res = await axios.post("/users", body);
     dispatch({ type: SET_TOKEN, payload: res.data.token });
     dispatch(setUser());
+    dispatch(setAlert("Confirmation email sent"));
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
     dispatch({ type: CLEAR_USER });
@@ -91,6 +92,7 @@ export const editEmail = (email) => async (dispatch) => {
   try {
     const res = await axios.put("/users/email", body);
     dispatch({ type: SET_USER, payload: res.data });
+    dispatch(setAlert("Confirmation email sent"));
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
   } finally {

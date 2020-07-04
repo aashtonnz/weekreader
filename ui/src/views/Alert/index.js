@@ -3,12 +3,15 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Wrapper } from "./styled";
 
-const Alert = ({ alert }) =>
-  alert ? (
+const Alert = ({ alert }) => {
+  console.log(alert && alert.status);
+
+  return alert ? (
     <Wrapper key={alert.id} className={alert.status}>
       {alert.msg}
     </Wrapper>
   ) : null;
+};
 
 Alert.propTypes = {
   alert: PropTypes.object,
