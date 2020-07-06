@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
+import moment from "moment";
 import { connect } from "react-redux";
 import {
   logout,
@@ -32,6 +33,8 @@ const User = ({
   deleteUser,
   user,
 }) => {
+  const hourOffset = moment().hour() - moment().utc().hour();
+  const dayOffset = moment().day() - moment().utc().day();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -44,17 +47,28 @@ const User = ({
 
   useEffect(() => {
     if (user) {
-      setUserData({ ...user, password: "", password2: "" });
+      const articlesUpdateHour =
+        (user.articlesUpdateHour + hourOffset + 24) % 24;
+      const articlesUpdateDays = user.articlesUpdateDays.map(
+        (day) => (day + dayOffset + 7) % 7
+      );
+      setUserData({
+        ...user,
+        articlesUpdateHour,
+        articlesUpdateDays,
+        password: "",
+        password2: "",
+      });
     }
-  }, [user]);
+  }, [user, hourOffset, dayOffset]);
 
   const updateUser = (event) =>
     setUserData({ ...userData, [event.target.name]: event.target.value });
 
   const onSubmitSettings = () => {
     editSettings(
-      userData.articlesUpdateHour,
-      userData.articlesUpdateDays,
+      (userData.articlesUpdateHour - hourOffset + 24) % 24,
+      userData.articlesUpdateDays.map((day) => (day - dayOffset + 7) % 7),
       userData.mailSubscribed
     );
   };
@@ -108,7 +122,7 @@ const User = ({
       {user && (
         <>
           <SettingWrapper>
-            <div>Update inbox at UTC</div>
+            <div>Update inbox at</div>
             <Select
               value={String(userData.articlesUpdateHour)}
               showSelected
