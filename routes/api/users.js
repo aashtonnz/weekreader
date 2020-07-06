@@ -200,9 +200,14 @@ router.post("/new-password", async (req, res) => {
   if (invalidMsg) {
     return res.status(400).json(errorMsg(invalidMsg));
   }
+  let email = null;
   try {
-    // TODO handle error decoding token
-    const { email } = tokenService.decode(token);
+    const decodedToken = tokenService.decode(token);
+    email = decodedToken.email;
+  } catch {
+    return res.status(400).json(errorMsg("Invalid reset token"));
+  }
+  try {
     const user = await userService.resetPassword(email, password);
     res.json(user);
   } catch (error) {
