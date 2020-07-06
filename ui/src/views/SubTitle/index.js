@@ -37,7 +37,7 @@ const SubTitle = ({
 
   const onEdit = () => {
     if (isAuthenticated) {
-      history.push(`/editsub/${_id}`);
+      history.push(`/edit-sub/${_id}`);
     } else {
       history.push("/signup");
     }

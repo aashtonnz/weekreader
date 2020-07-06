@@ -269,3 +269,7 @@ export const confirmEmail = (userId, confirmId) => async (dispatch) => {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
   }
 };
+
+export const sendPasswordEmail = (email) => async (dispatch) => {
+  console.log(email);
+};
