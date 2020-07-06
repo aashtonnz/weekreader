@@ -5,6 +5,10 @@ const jwtSecret = process.env.JWT_SECRET;
 const userTimeoutHours = config.get("userTimeoutHours");
 const passwordResetTimeoutMins = config.get("passwordResetTimeoutMins");
 
+const decode = (token) => {
+  return jwt.verify(token, jwtSecret);
+};
+
 const user = (token) => {
   const { user } = jwt.verify(token, jwtSecret);
   return user;
@@ -28,8 +32,8 @@ const createUserToken = async (userId) => {
   return token;
 };
 
-const createPasswordResetToken = async () => {
-  const payload = { test: "hi" };
+const createPasswordResetToken = async (email) => {
+  const payload = { email };
   const token = await new Promise((res, rej) =>
     jwt.sign(
       payload,
@@ -50,6 +54,7 @@ const getUserToken = (req) => req.header("x-auth-token");
 
 module.exports = {
   user,
+  decode,
   createUserToken,
   createPasswordResetToken,
   getUserToken,

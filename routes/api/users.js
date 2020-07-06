@@ -1,4 +1,5 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
 const auth = require("../../middleware/auth");
 const userService = require("../../services/user");
 const tokenService = require("../../services/token");
@@ -180,7 +181,7 @@ router.post("/password-reset-email", async (req, res) => {
   try {
     const user = await userService.findOne({ email });
     if (user) {
-      const token = await tokenService.createPasswordResetToken();
+      const token = await tokenService.createPasswordResetToken(email);
       await mailService.sendPasswordReset(email, token);
     }
     res.json(successMsg("Password reset sent"));
@@ -190,9 +191,24 @@ router.post("/password-reset-email", async (req, res) => {
   }
 });
 
-// // @route  POST /api/users/password-reset
-// // @desc   Reset password
-// // @access Public
-// router.post("password-reset", async (req, res) => {});
+// @route  POST /api/users/new-password
+// @desc   Reset password
+// @access Public
+router.post("/new-password", async (req, res) => {
+  const { token, password } = req.body;
+  const invalidMsg = checkPassword(password);
+  if (invalidMsg) {
+    return res.status(400).json(errorMsg(invalidMsg));
+  }
+  try {
+    // TODO handle error decoding token
+    const { email } = tokenService.decode(token);
+    const user = await userService.resetPassword(email, password);
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(errorMsg());
+  }
+});
 
 module.exports = router;

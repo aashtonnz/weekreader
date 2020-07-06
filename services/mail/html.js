@@ -123,7 +123,7 @@ const confirm = (userId, confirmId) => `
       </body>
     </html>`;
 
-const passwordReset = (userId, confirmId) => `
+const passwordReset = (token) => `
     <html>
       <body style="${styles.body}">
         <a style="${styles.appHeader}" href="${hostName}">
@@ -132,9 +132,7 @@ const passwordReset = (userId, confirmId) => `
           </div>
           <div style="${styles.appTitle}">Weekreader</div>
         </a>
-        <a style="${
-          styles.button
-        }" href="${hostName}/confirm/${userId}/${confirmId}">
+        <a style="${styles.button}" href="${hostName}/new-password/${token}">
           <div style="${styles.buttonText}">Reset password</div>
         </a>
         <a style="${styles.unsub}" href="%unsubscribe_url%">Unsubscribe</a>

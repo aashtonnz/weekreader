@@ -281,3 +281,15 @@ export const sendPasswordResetEmail = (email) => async (dispatch) => {
     dispatch(clearLoading(loadId));
   }
 };
+
+export const newPassword = (token, password) => async (dispatch) => {
+  const body = JSON.stringify({ token, password });
+  const loadId = dispatch(setLoading());
+  try {
+    await axios.post(`/users/new-password`, body);
+  } catch (error) {
+    dispatch(setAlert(reqErrorMsg(error), "danger"));
+  } finally {
+    dispatch(clearLoading(loadId));
+  }
+};

@@ -10,7 +10,7 @@ import { Header } from "./styled";
 
 const FOCUS_DELAY_MS = 50;
 
-const PasswordForgotten = ({ setAlert, sendPasswordResetEmail, user }) => {
+const PasswordReset = ({ setAlert, sendPasswordResetEmail, user }) => {
   const [email, setEmail] = useState("");
   const emailInput = useRef(null);
 
@@ -55,7 +55,7 @@ const PasswordForgotten = ({ setAlert, sendPasswordResetEmail, user }) => {
   );
 };
 
-PasswordForgotten.propTypes = {
+PasswordReset.propTypes = {
   setAlert: PropTypes.func.isRequired,
   sendPasswordResetEmail: PropTypes.func.isRequired,
   user: PropTypes.object,
@@ -66,5 +66,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { setAlert, sendPasswordResetEmail })(
-  PasswordForgotten
+  PasswordReset
 );

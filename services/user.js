@@ -176,6 +176,14 @@ const confirm = async (userId, confirmId) => {
   return user;
 };
 
+const resetPassword = async (email, password) => {
+  const user = await User.findOne({ email }).select("-password");
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(password, salt);
+  await user.save();
+  return user;
+};
+
 const seed = async () => {
   const { users } = seeds;
   await Promise.all(
@@ -197,4 +205,5 @@ module.exports = {
   updatePassword,
   updateEmail,
   confirm,
+  resetPassword,
 };

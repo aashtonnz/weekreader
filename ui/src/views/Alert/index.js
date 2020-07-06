@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import { Wrapper } from "./styled";
 
 const Alert = ({ alert }) => {
-  console.log(alert && alert.status);
-
   return alert ? (
     <Wrapper key={alert.id} className={alert.status}>
       {alert.msg}

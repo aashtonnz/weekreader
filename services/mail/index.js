@@ -70,7 +70,7 @@ const sendConfirm = async (user) => {
 };
 
 const sendPasswordReset = async (email, token) => {
-  await send("Password Reset", `<div>${token}</div>`, email);
+  await send("Password Reset", html.passwordReset(token), email);
 };
 
 module.exports = {
