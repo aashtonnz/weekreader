@@ -69,10 +69,15 @@ const sendConfirm = async (user) => {
   await send("Confirm", html.confirm(user._id, user.confirmId), user.email);
 };
 
+const sendPasswordReset = async (email, token) => {
+  await send("Password Reset", `<div>${token}</div>`, email);
+};
+
 module.exports = {
   send,
   sendInbox,
   sendConfirm,
+  sendPasswordReset,
   unsubscribe,
   resubscribe,
   isSubscribed,

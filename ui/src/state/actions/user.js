@@ -270,6 +270,14 @@ export const confirmEmail = (userId, confirmId) => async (dispatch) => {
   }
 };
 
-export const sendPasswordEmail = (email) => async (dispatch) => {
-  console.log(email);
+export const sendPasswordResetEmail = (email) => async (dispatch) => {
+  const body = JSON.stringify({ email });
+  const loadId = dispatch(setLoading());
+  try {
+    await axios.post(`/users/password-reset-email`, body);
+  } catch (error) {
+    dispatch(setAlert(reqErrorMsg(error), "danger"));
+  } finally {
+    dispatch(clearLoading(loadId));
+  }
 };

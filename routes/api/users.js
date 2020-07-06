@@ -2,6 +2,7 @@ const express = require("express");
 const auth = require("../../middleware/auth");
 const userService = require("../../services/user");
 const tokenService = require("../../services/token");
+const mailService = require("../../services/mail");
 const { errorMsg, successMsg } = require("../../utils");
 const {
   checkSignup,
@@ -41,7 +42,7 @@ router.post("/", async (req, res) => {
       return res.status(400).json(errorMsg("Email already taken"));
     }
     const user = await userService.create(email, password);
-    const token = await tokenService.create(user._id);
+    const token = await tokenService.createUserToken(user._id);
     res.json({ token });
   } catch (error) {
     console.error(error);
@@ -63,7 +64,7 @@ router.post("/login", async (req, res) => {
     if (!user) {
       return res.status(400).json(errorMsg("Invalid credentials"));
     }
-    const token = await tokenService.create(user.id);
+    const token = await tokenService.createUserToken(user.id);
     res.json({ token });
   } catch (error) {
     console.error(error);
@@ -156,7 +157,7 @@ router.delete("/", auth, async (req, res) => {
 router.post("/:user_id/confirm/:confirm_id", async (req, res) => {
   const { user_id: userId, confirm_id: confirmId } = req.params;
   try {
-    const user = await userService.confirmEmail(userId, confirmId);
+    const user = await userService.confirm(userId, confirmId);
     if (!user) {
       return res.status(500).json(errorMsg("Invalid ID"));
     }
@@ -166,5 +167,32 @@ router.post("/:user_id/confirm/:confirm_id", async (req, res) => {
     res.status(500).json(errorMsg());
   }
 });
+
+// @route  POST api/users/password-reset-email
+// @desc   Send password reset link
+// @access Public
+router.post("/password-reset-email", async (req, res) => {
+  const { email } = req.body;
+  const invalidMsg = checkEmail(email);
+  if (invalidMsg) {
+    return res.status(400).json(errorMsg(invalidMsg));
+  }
+  try {
+    const user = await userService.findOne({ email });
+    if (user) {
+      const token = await tokenService.createPasswordResetToken();
+      await mailService.sendPasswordReset(email, token);
+    }
+    res.json(successMsg("Password reset sent"));
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(errorMsg());
+  }
+});
+
+// // @route  POST /api/users/password-reset
+// // @desc   Reset password
+// // @access Public
+// router.post("password-reset", async (req, res) => {});
 
 module.exports = router;

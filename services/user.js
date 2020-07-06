@@ -163,7 +163,7 @@ const remove = async (userId) => {
   return user;
 };
 
-const confirmEmail = async (userId, confirmId) => {
+const confirm = async (userId, confirmId) => {
   const user = await User.findById(userId).select("-password");
   if (!user) {
     return null;
@@ -196,5 +196,5 @@ module.exports = {
   updateArticles,
   updatePassword,
   updateEmail,
-  confirmEmail,
+  confirm,
 };

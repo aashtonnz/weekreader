@@ -41,7 +41,7 @@ const inbox = (subs) => `
     <body style="${styles.body}">
       <a style="${styles.appHeader}" href="${hostName}">
         <div>
-          <img src="${hostName}/logo64.png" style="${styles.appImg}">
+          <img src="${hostName}/logo32.png" style="${styles.appImg}">
         </div>
         <div style="${styles.appTitle}">Open inbox</div>
       </a>
@@ -107,7 +107,7 @@ const confirm = (userId, confirmId) => `
       <body style="${styles.body}">
         <a style="${styles.appHeader}" href="${hostName}">
           <div>
-            <img src="${hostName}/logo64.png" style="${styles.appImg}">
+            <img src="${hostName}/logo32.png" style="${styles.appImg}">
           </div>
           <div style="${styles.appTitle}">Weekreader</div>
         </a>
@@ -123,7 +123,29 @@ const confirm = (userId, confirmId) => `
       </body>
     </html>`;
 
+const passwordReset = (userId, confirmId) => `
+    <html>
+      <body style="${styles.body}">
+        <a style="${styles.appHeader}" href="${hostName}">
+          <div>
+            <img src="${hostName}/logo32.png" style="${styles.appImg}">
+          </div>
+          <div style="${styles.appTitle}">Weekreader</div>
+        </a>
+        <a style="${
+          styles.button
+        }" href="${hostName}/confirm/${userId}/${confirmId}">
+          <div style="${styles.buttonText}">Reset password</div>
+        </a>
+        <a style="${styles.unsub}" href="%unsubscribe_url%">Unsubscribe</a>
+        <a style="${
+          styles.footer
+        }" href="">© Weekreader ${moment().year()}. Icon made by Freepik from www.flaticon.com.</a>
+      </body>
+    </html>`;
+
 module.exports = {
   inbox,
   confirm,
+  passwordReset,
 };

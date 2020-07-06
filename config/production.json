@@ -1,5 +1,6 @@
 {
-  "jwtTimeoutMs": 604800,
+  "userTimeoutHours": 604800,
+  "passwordResetTimeoutMins": 5,
   "articleDurationDays": 7,
   "addMaxArticles": 3,
   "seeds": {

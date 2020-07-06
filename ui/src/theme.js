@@ -1,6 +1,6 @@
 export default {
   color: {
-    primary: "#0d60D1",
+    primary: "#055FD2",
     danger: "#c45",
   },
   width: {
