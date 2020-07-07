@@ -7,7 +7,7 @@ export const Header = styled(ViewHeader)`
 `;
 
 export const RssIcon = styled(FontAwesomeIcon)`
-  margin-left: 0.2rem;
+  margin-right: 0.2rem;
   color: #f2890a;
 `;
 
@@ -27,6 +27,6 @@ export const TwitterIcon = styled(FontAwesomeIcon)`
 `;
 
 export const P = styled.p`
-  margin-bottom: 0.9rem;
   text-align: center;
+  margin-bottom: 0.9rem;
 `;

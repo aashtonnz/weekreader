@@ -18,7 +18,7 @@ import {
 const Landing = () => {
   return (
     <Page>
-      <Header>The internet – delivered weekly</Header>
+      <Header>The internet – delivered</Header>
       <P>
         1.{" "}
         <Link to="/signup" target="_blank">
@@ -35,22 +35,19 @@ const Landing = () => {
         <Link to="/user" target="_blank">
           Set when
         </Link>{" "}
-        your inbox is updated
+        your inbox will update
       </P>
-      <P>3. Receive the top articles from the week</P>
+      <P>3. Receive the top articles of the week</P>
+      <Div />
+      <p>
+        <RssIcon icon={rssIcon} />{" "}
+        <A href="https://rss.com/blog/how-do-rss-feeds-work/" target="_blank">
+          How does RSS work?
+        </A>
+      </p>
       <Div />
       <P>
-        <A href="https://rss.com/blog/how-do-rss-feeds-work/" target="_blank">
-          RSS
-        </A>{" "}
-        is supported by most news sites, blogs, and podcasts
-      </P>
-      <P>
-        Look for the RSS icon <RssIcon icon={rssIcon} />
-      </P>
-      <P>Try example.com/feed or example.com/rss</P>
-      <P>
-        <RedditIcon icon={redditIcon} /> Reddit -{" "}
+        <RedditIcon icon={redditIcon} /> Reddit –{" "}
         <A
           href="https://reddit.com/r/technology/top/.rss?limit=5"
           target="_blank"
@@ -59,14 +56,14 @@ const Landing = () => {
         </A>
       </P>
       <P>
-        <YoutubeIcon icon={youtubeIcon} /> YouTube -{" "}
+        <YoutubeIcon icon={youtubeIcon} /> YouTube –{" "}
         <A href="https://www.youtube.com/subscription_manager?action_takeout=1">
           download RSS feeds
         </A>{" "}
         for your subscriptions
       </P>
       <P>
-        <TwitterIcon icon={twitterIcon} /> Twitter, Instagram -{" "}
+        <TwitterIcon icon={twitterIcon} /> Twitter, Instagram –{" "}
         <A href="http://fetchrss.com/" target="_blank">
           FetchRSS
         </A>
@@ -78,7 +75,7 @@ const Landing = () => {
       <Div />
       <P>
         <A href="mailto:contact@weekreader.com" target="_blank">
-          contact@mail.weekreader.com
+          contact@weekreader.com
         </A>
       </P>
       <P>
@@ -86,11 +83,12 @@ const Landing = () => {
           @weekreader
         </A>
       </P>
-      <P>
+      <Div />
+      <p>
         <A href="https://github.com/aashtonnz/weekreader" target="_blank">
           This project is open source
         </A>
-      </P>
+      </p>
     </Page>
   );
 };
