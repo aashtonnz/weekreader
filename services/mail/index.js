@@ -24,43 +24,6 @@ const send = async (subject, html, address) => {
   return result;
 };
 
-const unsubscribe = async (address) => {
-  await new Promise((res, rej) =>
-    mail.post(`/${domain}/unsubscribes`, { address, tag: "*" }, (error) => {
-      if (error) {
-        rej(error);
-      }
-      res();
-    })
-  );
-};
-
-const resubscribe = async (address) => {
-  await new Promise((res, rej) =>
-    mail.delete(`/${domain}/unsubscribes`, { address, tag: "*" }, (error) => {
-      if (error) {
-        rej(error);
-      }
-      res();
-    })
-  );
-};
-
-const isSubscribed = async (address) => {
-  if (!address) {
-    return false;
-  }
-  const result = await new Promise((res) =>
-    mail.get(`/${domain}/unsubscribes/${address}`, {}, (error, _response) => {
-      if (error) {
-        res(true);
-      }
-      res(false);
-    })
-  );
-  return result;
-};
-
 const sendInbox = async (user, unsubToken) => {
   await send("Inbox", html.inbox(user.subscriptions, unsubToken), user.email);
 };
@@ -78,7 +41,4 @@ module.exports = {
   sendInbox,
   sendConfirm,
   sendPasswordReset,
-  unsubscribe,
-  resubscribe,
-  isSubscribed,
 };
