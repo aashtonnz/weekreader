@@ -61,8 +61,8 @@ const isSubscribed = async (address) => {
   return result;
 };
 
-const sendInbox = async (user) => {
-  await send("Inbox", html.inbox(user.subscriptions), user.email);
+const sendInbox = async (user, unsubToken) => {
+  await send("Inbox", html.inbox(user.subscriptions, unsubToken), user.email);
 };
 
 const sendConfirm = async (email, token) => {

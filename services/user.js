@@ -4,7 +4,6 @@ const moment = require("moment");
 const User = require("../models/User");
 const Channel = require("../models/Channel");
 const subscriptionService = require("./subscription");
-const mailService = require("./mail");
 
 const seeds = config.get("seeds");
 const articleDurationDays = config.get("articleDurationDays");
@@ -16,12 +15,7 @@ const find = async (filter) => {
 
 const findById = async (id) => {
   const user = await User.findById(id).select("-password");
-  if (!user) {
-    return null;
-  }
-  const userObj = user.toObject();
-  userObj.mailSubscribed = await mailService.isSubscribed(user.email);
-  return userObj;
+  return user;
 };
 
 const findOne = async (filter = {}) => {
@@ -43,7 +37,6 @@ const create = async (email, password) => {
   });
   user.subscriptions = await subscriptionService.defaults();
   await user.save();
-  user.mailSubscribed = await mailService.isSubscribed(user.email);
   return user;
 };
 
@@ -58,7 +51,8 @@ const updateEmail = async (userId, email) => {
 const updatePassword = async (userId, password) => {
   const user = await User.findById(userId).select("-password");
   const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(password, salt);
+  const passwordHash = await bcrypt.hash(password, salt);
+  user.password = passwordHash;
   await user.save();
   return user;
 };
@@ -72,15 +66,9 @@ const updateSettings = async (
   const user = await User.findById(userId).select("-password");
   user.articlesUpdateDays = articlesUpdateDays;
   user.articlesUpdateHour = articlesUpdateHour;
-  if (mailSubscribed) {
-    await mailService.resubscribe(user.email);
-  } else {
-    await mailService.unsubscribe(user.email);
-  }
+  user.mailSubscribed = mailSubscribed;
   await user.save();
-  const userObj = user.toObject();
-  userObj.mailSubscribed = await mailService.isSubscribed(user.email);
-  return userObj;
+  return user;
 };
 
 const updateArticles = async () => {

@@ -39,6 +39,7 @@ const UserSchema = new mongoose.Schema({
   articlesUpdatedAt: { type: Date, default: Date.now },
   subscriptions: [subscription],
   confirmed: { type: Boolean },
+  mailSubscribed: { type: Boolean, default: true },
   createdAt: { type: Date, default: Date.now },
 });
 

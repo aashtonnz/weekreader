@@ -35,7 +35,7 @@ const filterSubs = (subs) => {
   return filteredSubs;
 };
 
-const inbox = (subs) => `
+const inbox = (subs, unsubToken) => `
   <html>
     <body style="${styles.body}">
       <a style="${styles.appHeader}" href="${hostName}">
@@ -94,7 +94,9 @@ const inbox = (subs) => `
           `
         )
         .join("")}
-      <a style="${styles.unsub}" href="%unsubscribe_url%">Unsubscribe</a>
+        <a style="${
+          styles.unsub
+        }" href="${hostName}/unsubscribe/${unsubToken}">Unsubscribe</a>
       <a style="${
         styles.footer
       }" href="">© Weekreader ${moment().year()}. Icon made by Freepik from www.flaticon.com.</a>
@@ -113,7 +115,6 @@ const confirm = (token) => `
         <a style="${styles.button}" href="${hostName}/confirm/${token}">
           <div style="${styles.buttonText}">Confirm subscription</div>
         </a>
-        <a style="${styles.unsub}" href="%unsubscribe_url%">Unsubscribe</a>
         <a style="${
           styles.footer
         }" href="">© Weekreader ${moment().year()}. Icon made by Freepik from www.flaticon.com.</a>
@@ -132,7 +133,6 @@ const passwordReset = (token) => `
         <a style="${styles.button}" href="${hostName}/reset-password/${token}">
           <div style="${styles.buttonText}">Reset password</div>
         </a>
-        <a style="${styles.unsub}" href="%unsubscribe_url%">Unsubscribe</a>
         <a style="${
           styles.footer
         }" href="">© Weekreader ${moment().year()}. Icon made by Freepik from www.flaticon.com.</a>

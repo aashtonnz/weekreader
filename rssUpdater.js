@@ -4,6 +4,7 @@ const dbService = require("./services/db");
 const channelService = require("./services/channel");
 const userService = require("./services/user");
 const mailService = require("./services/mail");
+const tokenService = require("./services/token");
 
 dbService.connect().then(async () => {
   try {
@@ -25,10 +26,10 @@ dbService.connect().then(async () => {
         user.articlesUpdatedAt &&
         moment().diff(user.articlesUpdatedAt, "minutes") < 30;
       try {
-        const isSubscribed = await mailService.isSubscribed(user.email);
-        if (articlesUpdated && isSubscribed && user.confirmed) {
-          await mailService.sendInbox(user);
-        }
+        // if (articlesUpdated && user.mailSubscribed && user.confirmed) {
+        const unsubToken = await tokenService.create(user.email);
+        await mailService.sendInbox(user, unsubToken);
+        // }
       } catch (error) {
         console.error("Error sending email:", error);
       }
