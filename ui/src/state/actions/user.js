@@ -199,7 +199,7 @@ export const editSub = (id, title, img, descriptionsHidden, callback) => async (
     }
     const body = JSON.stringify({ title, descriptionsHidden });
     const res = await axios.put(`/subscriptions/${id}`, body);
-    // Ensure image cache is refreshed
+    // Ensuring image cache is refreshed
     if (img) {
       const sub = res.data.subscriptions.find((sub) => sub._id === id);
       sub.imgKey += `?t=${Date.now()}`;
@@ -262,19 +262,11 @@ export const moveUserSub = (oldIndex, newIndex) => async (dispatch) => {
   }
 };
 
-export const confirmEmail = (userId, confirmId) => async (dispatch) => {
-  try {
-    await axios.post(`/users/${userId}/confirm/${confirmId}`);
-  } catch (error) {
-    dispatch(setAlert(reqErrorMsg(error), "danger"));
-  }
-};
-
-export const sendPasswordResetEmail = (email) => async (dispatch) => {
-  const body = JSON.stringify({ email });
+export const confirm = (token) => async (dispatch) => {
+  const body = JSON.stringify({ token });
   const loadId = dispatch(setLoading());
   try {
-    await axios.post(`/users/password-reset-email`, body);
+    await axios.post(`/users/confirm/${token}`, body);
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
   } finally {
@@ -282,11 +274,23 @@ export const sendPasswordResetEmail = (email) => async (dispatch) => {
   }
 };
 
-export const newPassword = (token, password) => async (dispatch) => {
+export const resetPasswordEmail = (email) => async (dispatch) => {
+  const body = JSON.stringify({ email });
+  const loadId = dispatch(setLoading());
+  try {
+    await axios.post(`/users/reset-password-email`, body);
+  } catch (error) {
+    dispatch(setAlert(reqErrorMsg(error), "danger"));
+  } finally {
+    dispatch(clearLoading(loadId));
+  }
+};
+
+export const resetPassword = (token, password) => async (dispatch) => {
   const body = JSON.stringify({ token, password });
   const loadId = dispatch(setLoading());
   try {
-    await axios.post(`/users/new-password`, body);
+    await axios.post(`/users/reset-password`, body);
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
   } finally {

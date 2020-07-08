@@ -1,7 +1,6 @@
 const bcrypt = require("bcryptjs");
 const config = require("config");
 const moment = require("moment");
-const uuid = require("uuid");
 const User = require("../models/User");
 const Channel = require("../models/Channel");
 const subscriptionService = require("./subscription");
@@ -38,29 +37,21 @@ const exists = async (filter = {}) => {
 const create = async (email, password) => {
   const salt = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(password, salt);
-  const confirmId = uuid.v4();
   const user = new User({
     email,
-    confirmId,
     password: passwordHash,
   });
-  const subs = await subscriptionService.defaults();
-  user.subscriptions = subs;
+  user.subscriptions = await subscriptionService.defaults();
   await user.save();
   user.mailSubscribed = await mailService.isSubscribed(user.email);
-  if (email) {
-    await mailService.sendConfirm(user);
-  }
   return user;
 };
 
 const updateEmail = async (userId, email) => {
   const user = await User.findById(userId).select("-password");
   user.email = email;
-  user.confirmId = uuid.v4();
   user.confirmed = false;
   await user.save();
-  await mailService.sendConfirm(user);
   return user;
 };
 
@@ -163,16 +154,10 @@ const remove = async (userId) => {
   return user;
 };
 
-const confirm = async (userId, confirmId) => {
-  const user = await User.findById(userId).select("-password");
-  if (!user) {
-    return null;
-  }
-  if (user.confirmId !== confirmId) {
-    return null;
-  }
+const confirm = async (email) => {
+  const user = await User.findOne({ email }).select("-password");
   user.confirmed = true;
-  user.save();
+  await user.save();
   return user;
 };
 

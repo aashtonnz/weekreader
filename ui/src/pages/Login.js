@@ -63,7 +63,7 @@ const Login = ({ setAlert, login, user }) => {
           onChange={updateUser}
         />
         <SubHeader>
-          <Link to="/password-reset">Forgot password?</Link>
+          <Link to="/reset-password-email">Forgot password?</Link>
         </SubHeader>
         <Button onClick={onSubmit}>Submit</Button>
       </Form>

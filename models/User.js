@@ -34,7 +34,6 @@ const subscription = {
 const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  confirmId: { type: String, required: true },
   articlesUpdateHour: { type: Number, default: DEFAULT_UPDATE_HOUR },
   articlesUpdateDays: { type: [Number], default: DEFAULT_UPDATE_DAYS },
   articlesUpdatedAt: { type: Date, default: Date.now },

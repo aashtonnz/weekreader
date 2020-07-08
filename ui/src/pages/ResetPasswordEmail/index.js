@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { setAlert, sendPasswordResetEmail } from "../../state/actions";
+import { setAlert, resetPasswordEmail } from "../../state/actions";
 import { checkEmail } from "../../utils/validation";
 import { Input, Button, Form } from "../../views/styled";
 import { Page } from "../Signup/styled";
@@ -10,7 +10,7 @@ import { Header } from "./styled";
 
 const FOCUS_DELAY_MS = 50;
 
-const PasswordReset = ({ setAlert, sendPasswordResetEmail, user }) => {
+const ResetPasswordEmail = ({ setAlert, resetPasswordEmail, user }) => {
   const [email, setEmail] = useState("");
   const emailInput = useRef(null);
 
@@ -29,7 +29,7 @@ const PasswordReset = ({ setAlert, sendPasswordResetEmail, user }) => {
     if (invalidMsg) {
       setAlert(invalidMsg, "danger");
     } else {
-      sendPasswordResetEmail(trimEmail);
+      resetPasswordEmail(trimEmail);
     }
   };
 
@@ -55,9 +55,9 @@ const PasswordReset = ({ setAlert, sendPasswordResetEmail, user }) => {
   );
 };
 
-PasswordReset.propTypes = {
+ResetPasswordEmail.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  sendPasswordResetEmail: PropTypes.func.isRequired,
+  resetPasswordEmail: PropTypes.func.isRequired,
   user: PropTypes.object,
 };
 
@@ -65,6 +65,6 @@ const mapStateToProps = (state) => ({
   user: state.user.data,
 });
 
-export default connect(mapStateToProps, { setAlert, sendPasswordResetEmail })(
-  PasswordReset
+export default connect(mapStateToProps, { setAlert, resetPasswordEmail })(
+  ResetPasswordEmail
 );

@@ -65,8 +65,8 @@ const sendInbox = async (user) => {
   await send("Inbox", html.inbox(user.subscriptions), user.email);
 };
 
-const sendConfirm = async (user) => {
-  await send("Confirm", html.confirm(user._id, user.confirmId), user.email);
+const sendConfirm = async (email, token) => {
+  await send("Confirm", html.confirm(token), email);
 };
 
 const sendPasswordReset = async (email, token) => {

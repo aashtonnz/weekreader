@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { Redirect, useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { setAlert, newPassword } from "../../state/actions";
+import { setAlert, resetPassword } from "../../state/actions";
 import { checkPassword } from "../../utils/validation";
 import { Input, Button, Form } from "../../views/styled";
 import { Page } from "../Signup/styled";
@@ -10,7 +10,7 @@ import { Header } from "./styled";
 
 const FOCUS_DELAY_MS = 50;
 
-const NewPassword = ({ setAlert, user, newPassword }) => {
+const ResetPassword = ({ setAlert, user, resetPassword }) => {
   const [userData, setUserData] = useState({
     password: "",
     password2: "",
@@ -35,7 +35,7 @@ const NewPassword = ({ setAlert, user, newPassword }) => {
     if (invalidMsg) {
       setAlert(invalidMsg, "danger");
     } else {
-      newPassword(token, userData.password);
+      resetPassword(token, userData.password);
     }
   };
 
@@ -68,9 +68,9 @@ const NewPassword = ({ setAlert, user, newPassword }) => {
   );
 };
 
-NewPassword.propTypes = {
+ResetPassword.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  newPassword: PropTypes.func.isRequired,
+  resetPassword: PropTypes.func.isRequired,
   user: PropTypes.object,
 };
 
@@ -78,4 +78,6 @@ const mapStateToProps = (state) => ({
   user: state.user.data,
 });
 
-export default connect(mapStateToProps, { setAlert, newPassword })(NewPassword);
+export default connect(mapStateToProps, { setAlert, resetPassword })(
+  ResetPassword
+);

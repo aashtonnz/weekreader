@@ -3,10 +3,9 @@ const moment = require("moment");
 const styles = require("./styles");
 
 const FILE_URL = `https://${process.env.BUCKETEER_BUCKET_NAME}.s3.amazonaws.com/`;
-const hostName = process.env.HOST_URL;
-
 const MAX_NUM_ARTICLES = 3;
 const MAX_DESC_CHARS = 200;
+const hostName = process.env.HOST_URL;
 
 const escapeHtml = (unsafe) => {
   return unsafe
@@ -102,7 +101,7 @@ const inbox = (subs) => `
     </body>
   </html>`;
 
-const confirm = (userId, confirmId) => `
+const confirm = (token) => `
     <html>
       <body style="${styles.body}">
         <a style="${styles.appHeader}" href="${hostName}">
@@ -111,9 +110,7 @@ const confirm = (userId, confirmId) => `
           </div>
           <div style="${styles.appTitle}">Weekreader</div>
         </a>
-        <a style="${
-          styles.button
-        }" href="${hostName}/confirm/${userId}/${confirmId}">
+        <a style="${styles.button}" href="${hostName}/confirm/${token}">
           <div style="${styles.buttonText}">Confirm subscription</div>
         </a>
         <a style="${styles.unsub}" href="%unsubscribe_url%">Unsubscribe</a>
@@ -132,7 +129,7 @@ const passwordReset = (token) => `
           </div>
           <div style="${styles.appTitle}">Weekreader</div>
         </a>
-        <a style="${styles.button}" href="${hostName}/new-password/${token}">
+        <a style="${styles.button}" href="${hostName}/reset-password/${token}">
           <div style="${styles.buttonText}">Reset password</div>
         </a>
         <a style="${styles.unsub}" href="%unsubscribe_url%">Unsubscribe</a>

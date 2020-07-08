@@ -17,8 +17,8 @@ import User from "./pages/User";
 import EditSub from "./pages/EditSub";
 import NotFound from "./pages/NotFound";
 import Confirm from "./pages/Confirm";
-import PasswordReset from "./pages/PasswordReset";
-import NewPassword from "./pages/NewPassword";
+import ResetPasswordEmail from "./pages/ResetPasswordEmail";
+import ResetPassword from "./pages/ResetPassword";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -40,17 +40,17 @@ function App() {
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/about" component={About} />
-              <Route exact path="/password-reset" component={PasswordReset} />
               <Route
                 exact
-                path="/new-password/:token"
-                component={NewPassword}
+                path="/reset-password-email"
+                component={ResetPasswordEmail}
               />
               <Route
                 exact
-                path="/confirm/:user_id/:confirm_id"
-                component={Confirm}
+                path="/reset-password/:token"
+                component={ResetPassword}
               />
+              <Route exact path="/confirm/:token" component={Confirm} />
               <PrivateRoute exact path="/bookmarked" component={Bookmarked} />
               <PrivateRoute exact path="/hidden" component={Hidden} />
               <PrivateRoute exact path="/edit-sub/:id" component={EditSub} />
