@@ -266,7 +266,7 @@ export const confirm = (token) => async (dispatch) => {
   const body = JSON.stringify({ token });
   const loadId = dispatch(setLoading());
   try {
-    await axios.post(`/users/confirm/${token}`, body);
+    await axios.post("/users/confirm", body);
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
   } finally {
