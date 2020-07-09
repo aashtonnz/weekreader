@@ -291,6 +291,7 @@ export const resetPasswordEmail = (email) => async (dispatch) => {
   const loadId = dispatch(setLoading());
   try {
     await axios.post(`/users/reset-password-email`, body);
+    dispatch(setAlert("Password reset sent"));
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
   } finally {
