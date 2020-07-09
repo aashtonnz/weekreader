@@ -12,6 +12,8 @@ export const SHOW_LESS_DEFAULT_ARTICLES = "showLessDefaultArticles";
 export const COLLAPSE_DEFAULT_ARTICLES = "collapseDefaultArticles";
 export const EXPAND_DEFAULT_ARTICLES = "expandDefaultArticles";
 export const MOVE_DEFAULT_SUB = "moveDefaultSub";
+export const DEFAULT_SET_BOOKMARKED = "defaultSetBookmarked";
+export const DEFAULT_SET_HIDDEN = "defaultSetHidden";
 
 // User
 export const SET_TOKEN = "setToken";

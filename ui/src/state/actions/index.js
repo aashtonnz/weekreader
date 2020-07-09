@@ -4,6 +4,9 @@ import {
   showLessDefaultArticles,
   showMoreDefaultArticles,
   moveDefaultSub,
+  defaultArticleBookmarked,
+  defaultArticleUnbookmarked,
+  defaultArticleHidden,
 } from "./defaultSubs";
 import {
   collapseUserArticles,
@@ -11,6 +14,9 @@ import {
   showLessUserArticles,
   showMoreUserArticles,
   moveUserSub,
+  userArticleBookmarked,
+  userArticleUnbookmarked,
+  userArticleHidden,
 } from "./user";
 
 export * from "./app";
@@ -54,5 +60,29 @@ export const moveSub = (oldIndex, newIndex) => async (dispatch, getState) => {
     dispatch(moveUserSub(oldIndex, newIndex));
   } else {
     dispatch(moveDefaultSub(oldIndex, newIndex));
+  }
+};
+
+export const articleBookmarked = (id) => async (dispatch, getState) => {
+  if (getState().user.data) {
+    dispatch(userArticleBookmarked(id));
+  } else {
+    dispatch(defaultArticleBookmarked(id));
+  }
+};
+
+export const articleUnbookmarked = (id) => async (dispatch, getState) => {
+  if (getState().user.data) {
+    dispatch(userArticleUnbookmarked(id));
+  } else {
+    dispatch(defaultArticleUnbookmarked(id));
+  }
+};
+
+export const articleHidden = (id) => async (dispatch, getState) => {
+  if (getState().user.data) {
+    dispatch(userArticleHidden(id));
+  } else {
+    dispatch(defaultArticleHidden(id));
   }
 };

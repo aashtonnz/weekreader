@@ -149,7 +149,7 @@ export const articleVisited = (id) => async (dispatch) => {
   }
 };
 
-export const articleHidden = (id) => async (dispatch) => {
+export const userArticleHidden = (id) => async (dispatch) => {
   try {
     dispatch({ type: SET_HIDDEN, payload: { id, isHidden: true } });
     await axios.post(`/articles/${id}/hidden`);
@@ -167,7 +167,7 @@ export const articleUnhidden = (id) => async (dispatch) => {
   }
 };
 
-export const articleBookmarked = (id) => async (dispatch) => {
+export const userArticleBookmarked = (id) => async (dispatch) => {
   try {
     dispatch({ type: SET_BOOKMARKED, payload: { id, isBookmarked: true } });
     await axios.post(`/articles/${id}/bookmarked`);
@@ -176,7 +176,7 @@ export const articleBookmarked = (id) => async (dispatch) => {
   }
 };
 
-export const articleUnbookmarked = (id) => async (dispatch) => {
+export const userArticleUnbookmarked = (id) => async (dispatch) => {
   try {
     dispatch({ type: SET_BOOKMARKED, payload: { id, isBookmarked: false } });
     await axios.post(`/articles/${id}/unbookmarked`);

@@ -78,7 +78,7 @@ Inbox.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  defaultSubs: state.defaultSubs,
+  defaultSubs: state.defaultSubs.data,
   user: state.user.data,
 });
 

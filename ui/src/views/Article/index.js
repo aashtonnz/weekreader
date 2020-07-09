@@ -54,10 +54,6 @@ const Article = ({
   };
 
   const onHide = () => {
-    if (!isAuthenticated) {
-      history.push("/signup");
-      return;
-    }
     articleHidden(_id);
   };
 
@@ -70,10 +66,6 @@ const Article = ({
   };
 
   const onBookmark = () => {
-    if (!isAuthenticated) {
-      history.push("/signup");
-      return;
-    }
     bookmarked ? articleUnbookmarked(_id) : articleBookmarked(_id);
   };
   return (

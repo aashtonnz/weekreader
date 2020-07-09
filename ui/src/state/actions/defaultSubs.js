@@ -6,6 +6,8 @@ import {
   COLLAPSE_DEFAULT_ARTICLES,
   EXPAND_DEFAULT_ARTICLES,
   MOVE_DEFAULT_SUB,
+  DEFAULT_SET_BOOKMARKED,
+  DEFAULT_SET_HIDDEN,
 } from "../reducer/actionTypes";
 import { axios, reqErrorMsg } from "../../utils/requests";
 
@@ -29,17 +31,38 @@ export const showLessDefaultArticles = (subId) => (dispatch) => {
   dispatch({ type: SHOW_LESS_DEFAULT_ARTICLES, payload: subId });
 };
 
-export const collapseDefaultArticles = (subId) => async (dispatch) => {
+export const collapseDefaultArticles = (subId) => (dispatch) => {
   dispatch({ type: COLLAPSE_DEFAULT_ARTICLES, payload: subId });
 };
 
-export const expandDefaultArticles = (subId) => async (dispatch) => {
+export const expandDefaultArticles = (subId) => (dispatch) => {
   dispatch({ type: EXPAND_DEFAULT_ARTICLES, payload: subId });
 };
 
-export const moveDefaultSub = (oldIndex, newIndex) => async (dispatch) => {
+export const moveDefaultSub = (oldIndex, newIndex) => (dispatch) => {
   dispatch({
     type: MOVE_DEFAULT_SUB,
     payload: { oldIndex, newIndex },
+  });
+};
+
+export const defaultArticleBookmarked = (id) => (dispatch) => {
+  dispatch({
+    type: DEFAULT_SET_BOOKMARKED,
+    payload: { id, isBookmarked: true },
+  });
+};
+
+export const defaultArticleUnbookmarked = (id) => (dispatch) => {
+  dispatch({
+    type: DEFAULT_SET_BOOKMARKED,
+    payload: { id, isBookmarked: false },
+  });
+};
+
+export const defaultArticleHidden = (id) => (dispatch) => {
+  dispatch({
+    type: DEFAULT_SET_HIDDEN,
+    payload: id,
   });
 };
