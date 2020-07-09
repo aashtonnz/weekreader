@@ -17,6 +17,7 @@ import User from "./pages/User";
 import EditSub from "./pages/EditSub";
 import NotFound from "./pages/NotFound";
 import Confirm from "./pages/Confirm";
+import Unsubscribe from "./pages/Unsubscribe";
 import ResetPasswordEmail from "./pages/ResetPasswordEmail";
 import ResetPassword from "./pages/ResetPassword";
 
@@ -51,6 +52,7 @@ function App() {
                 component={ResetPassword}
               />
               <Route exact path="/confirm/:token" component={Confirm} />
+              <Route exact path="/unsubscribe/:token" component={Unsubscribe} />
               <PrivateRoute exact path="/bookmarked" component={Bookmarked} />
               <PrivateRoute exact path="/hidden" component={Hidden} />
               <PrivateRoute exact path="/edit-sub/:id" component={EditSub} />

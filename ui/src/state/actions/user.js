@@ -274,6 +274,18 @@ export const confirm = (token) => async (dispatch) => {
   }
 };
 
+export const mailUnsubscribe = (token) => async (dispatch) => {
+  const body = JSON.stringify({ token });
+  const loadId = dispatch(setLoading());
+  try {
+    await axios.post("/users/unsubscribe", body);
+  } catch (error) {
+    dispatch(setAlert(reqErrorMsg(error), "danger"));
+  } finally {
+    dispatch(clearLoading(loadId));
+  }
+};
+
 export const resetPasswordEmail = (email) => async (dispatch) => {
   const body = JSON.stringify({ email });
   const loadId = dispatch(setLoading());

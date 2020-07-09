@@ -184,6 +184,26 @@ router.post("/confirm", async (req, res) => {
   }
 });
 
+// @route  POST api/users/unsubscribe
+// @desc   Unsubscribe email
+// @access Public
+router.post("/unsubscribe", async (req, res) => {
+  const { token } = req.body;
+  let email = null;
+  try {
+    email = tokenService.decode(token);
+  } catch {
+    return res.status(400).json(errorMsg("Invalid token"));
+  }
+  try {
+    await userService.unsubscribe(email);
+    res.json(successMsg("User unsubscribed"));
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(errorMsg());
+  }
+});
+
 // @route  POST api/users/reset-password-email
 // @desc   Send password reset email
 // @access Public

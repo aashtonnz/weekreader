@@ -149,6 +149,13 @@ const confirm = async (email) => {
   return user;
 };
 
+const unsubscribe = async (email) => {
+  const user = await User.findOne({ email }).select("-password");
+  user.mailSubscribed = false;
+  await user.save();
+  return user;
+};
+
 const resetPassword = async (email, password) => {
   const user = await User.findOne({ email }).select("-password");
   const salt = await bcrypt.genSalt(10);
@@ -178,5 +185,6 @@ module.exports = {
   updatePassword,
   updateEmail,
   confirm,
+  unsubscribe,
   resetPassword,
 };

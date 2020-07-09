@@ -149,7 +149,7 @@ const User = ({
             ))}
           </DayWrapper>
           <EmailWrapper>
-            <div>Send an email</div>
+            <div>Send email</div>
             <Checkbox
               onChange={onToggleMailSub}
               checked={userData.mailSubscribed}
