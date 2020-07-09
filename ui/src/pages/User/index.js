@@ -34,7 +34,7 @@ const User = ({
   user,
 }) => {
   const hourOffset = moment().hour() - moment().utc().hour();
-  const dayOffset = moment().day() - moment().utc().day();
+  const dayOffset = Math.trunc(hourOffset / 24);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
