@@ -143,8 +143,7 @@ const button = `
   text-decoration: none;
   width: max-content;
   text-align: center;
-  margin: 0 auto;
-  margin-top: 3.6rem;
+  margin: 3.6rem auto;
 `;
 
 const buttonText = `
