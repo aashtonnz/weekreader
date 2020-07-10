@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
-const DEFAULT_UPDATE_HOUR = 8;
-const DEFAULT_UPDATE_DAYS = [0, 4]; // Sunday, Thursday
+const DEFAULT_UPDATE_DAYS = [0, 1, 2, 3, 4, 5, 6]; // Every day
 
 const article = {
   title: { type: String, required: true },
@@ -36,7 +35,7 @@ const subscription = {
 const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  articlesUpdateHour: { type: Number, default: DEFAULT_UPDATE_HOUR },
+  articlesUpdateHour: { type: Number, required: true },
   articlesUpdateDays: { type: [Number], default: DEFAULT_UPDATE_DAYS },
   articlesUpdatedAt: { type: Date, default: Date.now },
   subscriptions: [subscription],

@@ -5,6 +5,7 @@ const User = require("../models/User");
 const Channel = require("../models/Channel");
 const subscriptionService = require("./subscription");
 
+const DEFAULT_UPDATE_HOUR = 8;
 const seeds = config.get("seeds");
 const articleDurationDays = config.get("articleDurationDays");
 
@@ -28,11 +29,12 @@ const exists = async (filter = {}) => {
   return Boolean(user);
 };
 
-const create = async (email, password) => {
+const create = async (email, password, hourOffset) => {
   const salt = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(password, salt);
   const user = new User({
     email,
+    articlesUpdateHour: (DEFAULT_UPDATE_HOUR - hourOffset + 24) % 24,
     password: passwordHash,
   });
   user.subscriptions = await subscriptionService.defaults();

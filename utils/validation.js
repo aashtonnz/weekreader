@@ -6,12 +6,15 @@ const MAX_TITLE_LEN = 100;
 const MAX_IMG_KB = 50;
 const FILTERS = [];
 
-const checkSignup = (email, password) => {
+const checkSignup = (email, password, hourOffset) => {
   if (email && !isEmail(email)) {
     return "Invalid email address";
   }
   if (password.length < MIN_PASSWORD_LEN) {
     return `Password must contain ${MIN_PASSWORD_LEN} or more characters`;
+  }
+  if (!isInt(hourOffset.toString())) {
+    return "Hour offset must be an integer";
   }
   return "";
 };

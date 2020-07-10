@@ -34,8 +34,8 @@ router.get("/me", auth, async (req, res) => {
 // @desc   Sign up user and get token
 // @access Public
 router.post("/", async (req, res) => {
-  const { email, password } = req.body;
-  const invalidMsg = checkSignup(email, password);
+  const { email, password, hourOffset } = req.body;
+  const invalidMsg = checkSignup(email, password, hourOffset);
   if (invalidMsg) {
     return res.status(400).json(errorMsg(invalidMsg));
   }
@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
     if (emailTaken) {
       return res.status(400).json(errorMsg("Email already taken"));
     }
-    const user = await userService.create(email, password);
+    const user = await userService.create(email, password, hourOffset);
     const userToken = await tokenService.create(
       user._id,
       userTimeoutHours * 3600

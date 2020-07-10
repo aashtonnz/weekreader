@@ -12,6 +12,7 @@ import {
   COLLAPSE_ARTICLES,
   EXPAND_ARTICLES,
 } from "../reducer/actionTypes";
+import moment from "moment";
 import { axios, reqErrorMsg } from "../../utils/requests";
 import setAuthToken from "../../utils/setAuthToken";
 
@@ -29,7 +30,8 @@ export const setUser = () => async (dispatch) => {
 };
 
 export const signup = (email, password) => async (dispatch) => {
-  const body = JSON.stringify({ email, password });
+  const hourOffset = moment().hour() - moment().utc().hour();
+  const body = JSON.stringify({ email, password, hourOffset });
   const loadId = dispatch(setLoading());
   try {
     const res = await axios.post("/users", body);
