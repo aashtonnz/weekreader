@@ -170,7 +170,10 @@ const resetPassword = async (email, password) => {
 const seed = async () => {
   const { users } = seeds;
   await Promise.all(
-    users.map(async ({ email, password }) => await create(email, password))
+    users.map(
+      async ({ email, password, hourOffset }) =>
+        await create(email, password, hourOffset)
+    )
   );
 };
 
