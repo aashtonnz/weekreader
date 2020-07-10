@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
         sub.showArticles = prevSub ? prevSub.showArticles : INIT_SHOW_ARTICLES;
         const position = state.positions.findIndex((id) => id === sub._id);
         sub.index = position !== -1 ? position : index;
-        sub.collapsed = state.collapsed.includes(sub._id);
+        sub.inboxCollapsed = state.collapsed.includes(sub._id);
         sub.articles.forEach((article) => {
           article.bookmarked = state.bookmarked.includes(article._id);
           article.hidden = state.hidden.includes(article._id);
@@ -54,7 +54,7 @@ export default (state = initialState, action) => {
     case COLLAPSE_DEFAULT_ARTICLES: {
       const newData = [...state.data];
       const sub = newData.find((sub) => sub._id === payload);
-      sub.collapsed = true;
+      sub.inboxCollapsed = true;
       sub.showArticles = INIT_SHOW_ARTICLES;
       const newCollapsed = [...state.collapsed, sub._id];
       localStorage.setItem("collapsed", JSON.stringify(newCollapsed));
@@ -67,7 +67,7 @@ export default (state = initialState, action) => {
     case EXPAND_DEFAULT_ARTICLES: {
       const newData = [...state.data];
       const sub = newData.find((sub) => sub._id === payload);
-      sub.collapsed = false;
+      sub.inboxCollapsed = false;
       const newCollapsed = state.collapsed.filter((subId) => subId !== sub._id);
       localStorage.setItem("collapsed", JSON.stringify(newCollapsed));
       return {

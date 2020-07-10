@@ -59,21 +59,21 @@ const defaults = async (mockId = false) => {
   return subs;
 };
 
-const collapse = async (userId, subId) => {
+const collapse = async (userId, subId, filter) => {
   const user = await User.findById(userId).select("-password");
   const sub = user.subscriptions.id(subId);
   if (sub) {
-    sub.collapsed = true;
+    sub[`${filter}Collapsed`] = true;
     await user.save();
   }
   return user;
 };
 
-const expand = async (userId, subId) => {
+const expand = async (userId, subId, filter) => {
   const user = await User.findById(userId).select("-password");
   const sub = user.subscriptions.id(subId);
   if (sub) {
-    sub.collapsed = false;
+    sub[`${filter}Collapsed`] = false;
     await user.save();
   }
   return user;

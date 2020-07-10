@@ -13,8 +13,13 @@ const Subscription = SortableElement(
 
     return (
       <Wrapper key={sub._id} filter={filter}>
-        <SubTitle {...sub} filter={filter} numArticles={articles.length} />
-        {!sub.collapsed && (
+        <SubTitle
+          {...sub}
+          collapsed={sub[`${filter}Collapsed`]}
+          filter={filter}
+          numArticles={articles.length}
+        />
+        {!sub[`${filter}Collapsed`] && (
           <>
             {!articles.length ? (
               <NoArticles>—</NoArticles>

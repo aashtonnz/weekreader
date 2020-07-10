@@ -44,7 +44,7 @@ const SubTitle = ({
   };
 
   const toggleArticles = () =>
-    collapsed ? expandArticles(_id) : collapseArticles(_id);
+    collapsed ? expandArticles(_id, filter) : collapseArticles(_id, filter);
 
   return (
     <Wrapper>

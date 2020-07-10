@@ -97,16 +97,18 @@ export default (state = initialState, action) => {
       return { ...state, data: newData };
     }
     case COLLAPSE_ARTICLES: {
+      const { subId, filter } = payload;
       const newData = { ...state.data };
-      const sub = newData.subscriptions.find((sub) => sub._id === payload);
-      sub.collapsed = true;
+      const sub = newData.subscriptions.find((sub) => sub._id === subId);
+      sub[`${filter}Collapsed`] = true;
       sub.showArticles = INIT_SHOW_ARTICLES;
       return { ...state, data: newData };
     }
     case EXPAND_ARTICLES: {
+      const { subId, filter } = payload;
       const newData = { ...state.data };
-      const sub = newData.subscriptions.find((sub) => sub._id === payload);
-      sub.collapsed = false;
+      const sub = newData.subscriptions.find((sub) => sub._id === subId);
+      sub[`${filter}Collapsed`] = false;
       return { ...state, data: newData };
     }
     case MOVE_SUB: {

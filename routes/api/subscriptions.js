@@ -8,6 +8,7 @@ const {
   checkIndex,
   checkImg,
   checkTitle,
+  checkFilter,
 } = require("../../utils/validation");
 
 const router = express.Router();
@@ -58,8 +59,13 @@ router.get("/defaults", async (_req, res) => {
 // @access Private
 router.post("/:id/collapse", auth, async (req, res) => {
   const { id: subId } = req.params;
+  const { filter } = req.body;
+  const invalidMsg = checkFilter(filter);
+  if (invalidMsg) {
+    return res.status(400).json(errorMsg(invalidMsg));
+  }
   try {
-    const user = await subscriptionService.collapse(req.user.id, subId);
+    const user = await subscriptionService.collapse(req.user.id, subId, filter);
     res.json(user);
   } catch (error) {
     console.error(error);
@@ -72,8 +78,13 @@ router.post("/:id/collapse", auth, async (req, res) => {
 // @access Private
 router.post("/:id/expand", auth, async (req, res) => {
   const { id: subId } = req.params;
+  const { filter } = req.body;
+  const invalidMsg = checkFilter(filter);
+  if (invalidMsg) {
+    return res.status(400).json(errorMsg(invalidMsg));
+  }
   try {
-    const user = await subscriptionService.expand(req.user.id, subId);
+    const user = await subscriptionService.expand(req.user.id, subId, filter);
     res.json(user);
   } catch (error) {
     console.error(error);

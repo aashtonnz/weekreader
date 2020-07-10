@@ -1,8 +1,10 @@
 const { isEmail, isURL, isInt } = require("validator");
+const filters = require("./filters");
 
 const MIN_PASSWORD_LEN = 6;
 const MAX_TITLE_LEN = 100;
 const MAX_IMG_KB = 50;
+const FILTERS = [];
 
 const checkSignup = (email, password) => {
   if (email && !isEmail(email)) {
@@ -103,6 +105,13 @@ const checkEmail = (email) => {
   return "";
 };
 
+const checkFilter = (filter) => {
+  if (!Object.values(filters).includes(filter)) {
+    return "Invalid filter";
+  }
+  return "";
+};
+
 module.exports = {
   checkSignup,
   checkLogin,
@@ -113,4 +122,5 @@ module.exports = {
   checkEmail,
   checkPassword,
   checkSettings,
+  checkFilter,
 };

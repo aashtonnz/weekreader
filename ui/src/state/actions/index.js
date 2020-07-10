@@ -23,17 +23,20 @@ export * from "./app";
 export * from "./defaultSubs";
 export * from "./user";
 
-export const collapseArticles = (subId) => async (dispatch, getState) => {
+export const collapseArticles = (subId, filter) => async (
+  dispatch,
+  getState
+) => {
   if (getState().user.data) {
-    dispatch(collapseUserArticles(subId));
+    dispatch(collapseUserArticles(subId, filter));
   } else {
     dispatch(collapseDefaultArticles(subId));
   }
 };
 
-export const expandArticles = (subId) => async (dispatch, getState) => {
+export const expandArticles = (subId, filter) => async (dispatch, getState) => {
   if (getState().user.data) {
-    dispatch(expandUserArticles(subId));
+    dispatch(expandUserArticles(subId, filter));
   } else {
     dispatch(expandDefaultArticles(subId));
   }

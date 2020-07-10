@@ -234,19 +234,21 @@ export const showLessUserArticles = (subId) => (dispatch) => {
   dispatch({ type: SHOW_LESS_ARTICLES, payload: subId });
 };
 
-export const collapseUserArticles = (subId) => async (dispatch) => {
+export const collapseUserArticles = (subId, filter) => async (dispatch) => {
+  const body = JSON.stringify({ filter });
   try {
-    dispatch({ type: COLLAPSE_ARTICLES, payload: subId });
-    await axios.post(`/subscriptions/${subId}/collapse`);
+    dispatch({ type: COLLAPSE_ARTICLES, payload: { subId, filter } });
+    await axios.post(`/subscriptions/${subId}/collapse`, body);
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
   }
 };
 
-export const expandUserArticles = (subId) => async (dispatch) => {
+export const expandUserArticles = (subId, filter) => async (dispatch) => {
+  const body = JSON.stringify({ filter });
   try {
-    dispatch({ type: EXPAND_ARTICLES, payload: subId });
-    await axios.post(`/subscriptions/${subId}/expand`);
+    dispatch({ type: EXPAND_ARTICLES, payload: { subId, filter } });
+    await axios.post(`/subscriptions/${subId}/expand`, body);
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
   }
