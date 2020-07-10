@@ -116,6 +116,7 @@ const updateArticles = async () => {
             return article;
           });
       });
+      user.prevArticlesUpdatedAt = user.articlesUpdatedAt;
       user.articlesUpdatedAt = new Date();
     }
   });

@@ -26,10 +26,10 @@ dbService.connect().then(async () => {
         user.articlesUpdatedAt &&
         moment().diff(user.articlesUpdatedAt, "minutes") < 30;
       try {
-        // if (articlesUpdated && user.mailSubscribed && user.confirmed) {
-        const unsubToken = await tokenService.create(user.email);
-        await mailService.sendInbox(user, unsubToken);
-        // }
+        if (articlesUpdated && user.mailSubscribed && user.confirmed) {
+          const unsubToken = await tokenService.create(user.email);
+          await mailService.sendInbox(user, unsubToken);
+        }
       } catch (error) {
         console.error("Error sending email:", error);
       }

@@ -21,12 +21,16 @@ const truncateDesc = (string) =>
     ? string
     : string.substring(0, MAX_DESC_CHARS).trimEnd() + "...";
 
-const filterSubs = (subs) => {
+const filterSubs = (subs, prevArticlesUpdatedAt) => {
   const filteredSubs = subs
     .filter((sub) => sub.isSubscribed)
     .map((sub) => {
       const articles = sub.articles.filter(
-        (article) => !article.hidden && !article.archived
+        (article) =>
+          !article.hidden &&
+          !article.archived &&
+          (!prevArticlesUpdatedAt ||
+            moment(prevArticlesUpdatedAt).isBefore(article.publishedAt))
       );
       sub.articles = articles;
       return sub;
@@ -35,7 +39,7 @@ const filterSubs = (subs) => {
   return filteredSubs;
 };
 
-const inbox = (subs, unsubToken) => `
+const inbox = (subs, prevArticlesUpdatedAt, unsubToken) => `
   <html>
     <body style="${styles.body}">
       <a style="${styles.appHeader}" href="${hostName}">
@@ -44,7 +48,7 @@ const inbox = (subs, unsubToken) => `
         </div>
         <div style="${styles.appTitle}">Open inbox</div>
       </a>
-      ${filterSubs(subs)
+      ${filterSubs(subs, prevArticlesUpdatedAt)
         .map(
           (sub) => `
           <div style="${styles.subWrapper}">
@@ -84,12 +88,7 @@ const inbox = (subs, unsubToken) => `
                 )
                 .join("")}
             </div>
-            <a style="${styles.viewAll}" href="${hostName}">${
-            sub.articles.length <= MAX_NUM_ARTICLES
-              ? "View in app"
-              : "View all " + sub.articles.length
-          }
-            </a>
+            <a style="${styles.viewAll}" href="${hostName}">View in app</a>
           </div>
           `
         )

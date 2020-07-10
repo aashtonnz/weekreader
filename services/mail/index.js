@@ -25,7 +25,11 @@ const send = async (subject, html, address) => {
 };
 
 const sendInbox = async (user, unsubToken) => {
-  await send("Inbox", html.inbox(user.subscriptions, unsubToken), user.email);
+  await send(
+    "Inbox",
+    html.inbox(user.subscriptions, user.prevArticlesUpdatedAt, unsubToken),
+    user.email
+  );
 };
 
 const sendConfirm = async (email, token) => {
