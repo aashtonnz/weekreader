@@ -9,6 +9,7 @@ import { Link, A, Page, Div } from "../../views/styled";
 import {
   Header,
   P,
+  LastP,
   RssIcon,
   RedditIcon,
   YoutubeIcon,
@@ -37,14 +38,14 @@ const Landing = () => {
         </Link>{" "}
         your inbox will update
       </P>
-      <P>3. Receive the top articles of the week</P>
+      <LastP>3. Receive the top articles of the week</LastP>
       <Div />
-      <p>
+      <LastP>
         <RssIcon icon={rssIcon} />{" "}
         <A href="https://rss.com/blog/how-do-rss-feeds-work/" target="_blank">
           How does RSS work?
         </A>
-      </p>
+      </LastP>
       <Div />
       <P>
         <RedditIcon icon={redditIcon} /> Reddit –{" "}
@@ -62,7 +63,7 @@ const Landing = () => {
         </A>{" "}
         for your subscriptions
       </P>
-      <P>
+      <LastP>
         <TwitterIcon icon={twitterIcon} /> Twitter, Instagram –{" "}
         <A href="http://fetchrss.com/" target="_blank">
           FetchRSS
@@ -71,24 +72,24 @@ const Landing = () => {
         <A href="https://www.rss.app" target="_blank">
           RSS.app
         </A>
-      </P>
+      </LastP>
       <Div />
       <P>
         <A href="mailto:contact@weekreader.com" target="_blank">
           contact@weekreader.com
         </A>
       </P>
-      <P>
+      <LastP>
         <A href="https://twitter.com/weekreader" target="_blank">
           @weekreader
         </A>
-      </P>
+      </LastP>
       <Div />
-      <p>
+      <LastP>
         <A href="https://github.com/aashtonnz/weekreader" target="_blank">
           This project is open source
         </A>
-      </p>
+      </LastP>
     </Page>
   );
 };

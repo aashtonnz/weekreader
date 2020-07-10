@@ -30,3 +30,7 @@ export const P = styled.p`
   text-align: center;
   margin-bottom: 0.9rem;
 `;
+
+export const LastP = styled(P)`
+  margin-bottom: 0;
+`;
