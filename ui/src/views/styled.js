@@ -63,7 +63,7 @@ export const SubHeader = styled.div`
 `;
 
 export const Page = styled.div`
-  padding: 1rem;
+  padding: 2rem 1rem 1rem 1rem;
   display: flex;
   flex-direction: column;
   width: 100%;

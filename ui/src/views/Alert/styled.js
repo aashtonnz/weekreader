@@ -9,8 +9,8 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 1.8rem;
   background: ${(props) => props.theme.color.primary};
-  height: ${(props) => props.theme.appBar.heightPx}px;
 
   &.danger {
     background: ${(props) => props.theme.color.danger};

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Input } from "../../views/styled";
+import { Input, Button } from "../../views/styled";
 
 export const SettingWrapper = styled.div`
   margin: 3rem 0 0.6rem 0;
@@ -30,4 +30,8 @@ export const DayWrapper = styled(SettingWrapper)`
 
 export const EmailInput = styled(Input)`
   margin-top: 0 !important;
+`;
+
+export const DeleteButton = styled(Button)`
+  background: #bbb;
 `;

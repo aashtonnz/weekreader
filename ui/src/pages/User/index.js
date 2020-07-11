@@ -22,6 +22,7 @@ import {
   EmailWrapper,
   Day,
   EmailInput,
+  DeleteButton,
 } from "./styled";
 
 const User = ({
@@ -192,9 +193,9 @@ const User = ({
               Confirm Delete
             </Button>
           ) : (
-            <Button onClick={() => setDeleteConfirmed(true)}>
+            <DeleteButton onClick={() => setDeleteConfirmed(true)}>
               Delete Account
-            </Button>
+            </DeleteButton>
           )}
         </>
       )}

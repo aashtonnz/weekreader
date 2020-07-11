@@ -41,10 +41,10 @@ export const checkEmail = (email) => {
 };
 
 export const checkPassword = (password, password2) => {
-  if (password && password.length < MIN_PASSWORD_LEN) {
+  if (password.length < MIN_PASSWORD_LEN) {
     return `Password must contain ${MIN_PASSWORD_LEN} or more characters`;
   }
-  if (password && password !== password2) {
+  if (password !== password2) {
     return "Passwords do not match";
   }
   return "";

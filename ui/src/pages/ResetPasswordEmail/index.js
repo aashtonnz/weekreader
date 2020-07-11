@@ -39,7 +39,7 @@ const ResetPasswordEmail = ({ setAlert, resetPasswordEmail, user }) => {
 
   return (
     <Page>
-      <Header>Password Reset</Header>
+      <Header>Reset Password</Header>
       <Form>
         <Input
           name="email"
