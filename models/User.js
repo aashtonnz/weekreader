@@ -37,7 +37,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   articlesUpdateHour: { type: Number, required: true },
   articlesUpdateDays: { type: [Number], default: DEFAULT_UPDATE_DAYS },
-  articlesUpdatedAt: { type: Date, default: Date.now },
+  articlesUpdatedAt: { type: Date },
   prevArticlesUpdatedAt: { type: Date },
   subscriptions: [subscription],
   confirmed: { type: Boolean },
