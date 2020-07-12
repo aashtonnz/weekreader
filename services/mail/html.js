@@ -44,7 +44,7 @@ const inbox = (subs, prevArticlesUpdatedAt, unsubToken) => `
     <body style="${styles.body}">
       <a style="${styles.appHeader}" href="${hostName}">
         <div>
-          <img src="${hostName}/logo32.png" style="${styles.appImg}">
+          <img src="${hostName}/logo64.png" style="${styles.appImg}">
         </div>
         <div style="${styles.appTitle}">Open inbox</div>
       </a>
@@ -107,7 +107,7 @@ const confirm = (token) => `
       <body style="${styles.body}">
         <a style="${styles.appHeader}" href="${hostName}">
           <div>
-            <img src="${hostName}/logo32.png" style="${styles.appImg}">
+            <img src="${hostName}/logo64.png" style="${styles.appImg}">
           </div>
           <div style="${styles.appTitle}">Weekreader</div>
         </a>
@@ -125,7 +125,7 @@ const passwordReset = (token) => `
       <body style="${styles.body}">
         <a style="${styles.appHeader}" href="${hostName}">
           <div>
-            <img src="${hostName}/logo32.png" style="${styles.appImg}">
+            <img src="${hostName}/logo64.png" style="${styles.appImg}">
           </div>
           <div style="${styles.appTitle}">Weekreader</div>
         </a>
