@@ -22,7 +22,7 @@
         "descriptionsHidden": true
       },
       {
-        "rssUrl": "https://hnrss.org/newest?points=500",
+        "rssUrl": "https://hnrss.org/frontpage",
         "title": "Hacker News"
       },
       {
@@ -36,8 +36,8 @@
         "descriptionsHidden": true
       },
       {
-        "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCzWQYUVCpZqtN93H8RR44Qw",
-        "title": "Seeker"
+        "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCAuUUnT6oDeKwE6v1NGQxug",
+        "title": "TED"
       },
       {
         "rssUrl": "http://rss.art19.com/the-daily",

@@ -29,6 +29,7 @@ export const TwitterIcon = styled(FontAwesomeIcon)`
 export const P = styled.p`
   text-align: center;
   margin-bottom: 0.9rem;
+  width: 100%;
 `;
 
 export const LastP = styled(P)`
