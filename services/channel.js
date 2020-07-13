@@ -9,7 +9,7 @@ const Channel = require("../models/Channel");
 const fileService = require("./file");
 const { name, version } = require("../package.json");
 
-const DEFAULT_IMG_HEIGHT = 36;
+const DEFAULT_IMG_HEIGHT = 24;
 const seeds = config.get("seeds");
 const channelArticleDurationDays = config.get("channelArticleDurationDays");
 const addMaxArticles = config.get("addMaxArticles");
