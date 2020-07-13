@@ -9,7 +9,7 @@ const fileService = require("./file");
 const { name, version } = require("../package.json");
 
 const seeds = config.get("seeds");
-const articleDurationDays = config.get("articleDurationDays");
+const channelArticleDurationDays = config.get("channelArticleDurationDays");
 const addMaxArticles = config.get("addMaxArticles");
 
 const rssParser = new RssParser({
@@ -124,7 +124,7 @@ const updateArticles = async () => {
       .slice(0, addMaxArticles);
     channel.articles = [...addArticles, ...channel.articles].filter((article) =>
       moment(article.publishedAt).isAfter(
-        moment().subtract(articleDurationDays, "days")
+        moment().subtract(channelArticleDurationDays, "days")
       )
     );
   });
