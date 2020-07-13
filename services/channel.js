@@ -3,11 +3,13 @@ const config = require("config");
 const axios = require("axios");
 const crypto = require("crypto");
 const moment = require("moment");
+const sharp = require("sharp");
 const { sortBy, uniqBy } = require("lodash");
 const Channel = require("../models/Channel");
 const fileService = require("./file");
 const { name, version } = require("../package.json");
 
+const DEFAULT_IMG_HEIGHT = 36;
 const seeds = config.get("seeds");
 const channelArticleDurationDays = config.get("channelArticleDurationDays");
 const addMaxArticles = config.get("addMaxArticles");
@@ -48,7 +50,10 @@ const uploadImg = async (imageUrl, rssUrl) => {
       contentType === "image/x-icon" ? "ico" : contentType.split("/")[1];
     const imgName = crypto.createHash("md5").update(rssUrl).digest("hex");
     const imgKey = `channel/${imgName}.${imgExt}`;
-    await fileService.upload(res.data, imgKey, contentType);
+    const resizedImg = await sharp(res.data).resize({
+      height: DEFAULT_IMG_HEIGHT,
+    });
+    await fileService.upload(resizedImg, imgKey, contentType);
     return imgKey;
   } catch (error) {
     console.error(`No image for ${rssUrl}`);
