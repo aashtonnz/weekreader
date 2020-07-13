@@ -7,6 +7,7 @@ const fileService = require("./file");
 
 const MAX_SUBS = 60;
 const seeds = config.get("seeds");
+const addMaxArticles = config.get("addMaxArticles");
 
 const subscribe = async (userId, channel) => {
   const user = await User.findById(userId).select("-password");
@@ -26,7 +27,7 @@ const subscribe = async (userId, channel) => {
       title: channel.title,
       link: channel.link,
       imgKey: channel.imgKey,
-      articles: channel.articles,
+      articles: channel.articles.slice(0, addMaxArticles),
       description: channel.description,
     };
     user.subscriptions.unshift(newSub);
@@ -47,7 +48,7 @@ const defaults = async (mockId = false) => {
       title: seed.title || channel.title,
       link: channel.link,
       imgKey: seed.imgKey || channel.imgKey,
-      articles: channel.articles,
+      articles: channel.articles.slice(0, addMaxArticles),
       description: channel.description,
       descriptionsHidden: seed.descriptionsHidden,
     };

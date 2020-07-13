@@ -8,13 +8,11 @@ const tokenService = require("./services/token");
 
 dbService.connect().then(async () => {
   try {
-    if (moment().utc().hour() === 0) {
-      const timeA = moment();
-      await channelService.updateArticles();
-      console.log(
-        `Channel articles updated - ${moment().diff(timeA, "seconds")}s`
-      );
-    }
+    const timeA = moment();
+    await channelService.updateArticles();
+    console.log(
+      `Channel articles updated - ${moment().diff(timeA, "seconds")}s`
+    );
     const timeB = moment();
     await userService.updateArticles();
     console.log(`User articles updated - ${moment().diff(timeB, "seconds")}s`);
