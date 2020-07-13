@@ -23,7 +23,6 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "sharp": "^0.25.4",
     "styled-components": "^5.0.1",
     "validator": "^13.0.0"
   },
