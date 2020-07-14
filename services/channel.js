@@ -52,9 +52,11 @@ const uploadImg = async (imageUrl, rssUrl) => {
     const imgKey = `channel/${imgName}.${imgExt}`;
     let resizedImg = res.data;
     if (imgExt !== "ico") {
-      resizedImg = await sharp(res.data).resize({
-        height: DEFAULT_IMG_HEIGHT,
-      });
+      resizedImg = await sharp(res.data)
+        .resize({
+          height: DEFAULT_IMG_HEIGHT,
+        })
+        .toBuffer();
     }
     await fileService.upload(resizedImg, imgKey, contentType);
     return imgKey;
