@@ -7,7 +7,8 @@ const subscriptionService = require("./subscription");
 
 const DEFAULT_UPDATE_HOUR = 8;
 const seeds = config.get("seeds");
-const userArticleDurationDays = config.get("userArticleDurationDays");
+const articleDurationDays = config.get("articleDurationDays");
+const addMaxArticles = config.get("addMaxArticles");
 
 const find = async (filter) => {
   const user = await User.find(filter).select("-password");
@@ -93,21 +94,21 @@ const updateArticles = async () => {
           return;
         }
         const titles = sub.articles.map((article) => article.title);
-        const addArticles = channel.articles.filter(
-          (article) => !titles.includes(article.title)
-        );
+        const addArticles = channel.articles
+          .filter((article) => !titles.includes(article.title))
+          .slice(0, addMaxArticles);
         sub.articles = [...addArticles, ...sub.articles]
           .filter(
             (article) =>
               moment(article.publishedAt).isAfter(
-                moment().subtract(userArticleDurationDays, "days")
+                moment().subtract(articleDurationDays, "days")
               ) ||
               (article.bookmarked && !article.hidden)
           )
           .map((article) => {
             if (
               moment(article.publishedAt).isAfter(
-                moment().subtract(userArticleDurationDays, "days")
+                moment().subtract(articleDurationDays, "days")
               ) &&
               article.bookmarked
             ) {

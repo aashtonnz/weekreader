@@ -11,8 +11,6 @@ const { name, version } = require("../package.json");
 
 const DEFAULT_IMG_HEIGHT = 24;
 const seeds = config.get("seeds");
-const channelArticleDurationDays = config.get("channelArticleDurationDays");
-const addMaxArticles = config.get("addMaxArticles");
 
 const rssParser = new RssParser({
   headers: { "User-Agent": `${name} v${version}` },
@@ -102,8 +100,7 @@ const create = async (rssUrl) => {
     description,
     imgKey,
   });
-  const newArticles = await fetchArticles(channel);
-  channel.articles = newArticles.slice(0, addMaxArticles);
+  channel.articles = await fetchArticles(channel);
   await channel.save();
   return channel;
 };
@@ -127,16 +124,7 @@ const updateArticles = async () => {
     })
   );
   channels.forEach((channel, index) => {
-    const titles = channel.articles.map((article) => article.title);
-    const newArticles = fetchResults[index];
-    const addArticles = newArticles
-      .filter((article) => !titles.includes(article.title))
-      .slice(0, addMaxArticles);
-    channel.articles = [...addArticles, ...channel.articles].filter((article) =>
-      moment(article.publishedAt).isAfter(
-        moment().subtract(channelArticleDurationDays, "days")
-      )
-    );
+    channel.articles = fetchResults[index];
   });
   await Promise.all(channels.map(async (channel) => await channel.save()));
 };
