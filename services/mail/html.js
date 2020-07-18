@@ -27,6 +27,7 @@ const filterSubs = (subs, prevArticlesUpdatedAt) => {
     .map((sub) => {
       const articles = sub.articles.filter(
         (article) =>
+          !article.pending &&
           !article.hidden &&
           !article.archived &&
           (!prevArticlesUpdatedAt ||

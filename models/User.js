@@ -11,6 +11,7 @@ const article = {
   bookmarked: { type: Boolean },
   hidden: { type: Boolean },
   archived: { type: Boolean },
+  pending: { type: Boolean },
 };
 
 const subscription = {

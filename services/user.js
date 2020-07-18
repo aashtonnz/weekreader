@@ -78,10 +78,7 @@ const updateArticles = async () => {
   const users = await User.find();
   const channels = await Channel.find();
   users.forEach((user) => {
-    if (
-      user.articlesUpdateDays.includes(moment().utc().day()) &&
-      user.articlesUpdateHour === moment().utc().hour()
-    ) {
+    if (user.articlesUpdateHour === moment().utc().hour()) {
       user.subscriptions.forEach((sub) => {
         if (!sub.isSubscribed) {
           return;
@@ -96,7 +93,8 @@ const updateArticles = async () => {
         const titles = sub.articles.map((article) => article.title);
         const addArticles = channel.articles
           .filter((article) => !titles.includes(article.title))
-          .slice(0, addMaxArticles);
+          .slice(0, addMaxArticles)
+          .map((article) => ({ ...article, pending: true }));
         sub.articles = [...addArticles, ...sub.articles]
           .filter(
             (article) =>
@@ -119,6 +117,11 @@ const updateArticles = async () => {
       });
       user.prevArticlesUpdatedAt = user.articlesUpdatedAt;
       user.articlesUpdatedAt = new Date();
+    }
+    if (user.articlesUpdateDays.includes(moment().utc().day())) {
+      user.subscriptions.forEach((sub) =>
+        sub.articles.forEach((article) => (article.pending = false))
+      );
     }
   });
   await Promise.all(users.map(async (user) => await user.save()));

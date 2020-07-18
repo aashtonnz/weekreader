@@ -25,13 +25,16 @@ const Subscription = SortableElement(
               <NoArticles>—</NoArticles>
             ) : (
               <Articles>
-                {articles.slice(0, sub.showArticles).map((article) => (
-                  <Article
-                    key={article._id}
-                    {...article}
-                    descriptionHidden={sub.descriptionsHidden}
-                  />
-                ))}
+                {articles
+                  .filter((article) => !article.pending)
+                  .slice(0, sub.showArticles)
+                  .map((article) => (
+                    <Article
+                      key={article._id}
+                      {...article}
+                      descriptionHidden={sub.descriptionsHidden}
+                    />
+                  ))}
               </Articles>
             )}
             {sub.showArticles < articles.length && (
