@@ -48,15 +48,15 @@ const uploadImg = async (imageUrl, rssUrl) => {
       contentType === "image/x-icon" ? "ico" : contentType.split("/")[1];
     const imgName = crypto.createHash("md5").update(rssUrl).digest("hex");
     const imgKey = `channel/${imgName}.${imgExt}`;
-    let resizedImg = res.data;
-    if (imgExt !== "ico") {
-      resizedImg = await sharp(res.data)
+    let img = res.data;
+    if (img && imgExt !== "ico") {
+      img = await sharp(res.data)
         .resize({
           height: DEFAULT_IMG_HEIGHT,
         })
         .toBuffer();
     }
-    await fileService.upload(resizedImg, imgKey, contentType);
+    await fileService.upload(img, imgKey, contentType);
     return imgKey;
   } catch (error) {
     console.error(`No image for ${rssUrl}`);

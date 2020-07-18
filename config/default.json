@@ -52,10 +52,6 @@
       {
         "rssUrl": "https://seekingalpha.com/listing/most-popular-articles.xml",
         "title": "Seeking Alpha"
-      },
-      {
-        "rssUrl": "https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss",
-        "title": "NASA"
       }
     ]
   }
