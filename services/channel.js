@@ -77,11 +77,11 @@ const fetchArticles = async (channel) => {
         moment().add(1, "day").isAfter(isoDate) &&
         moment().subtract(1, "day").isBefore(isoDate)
     )
-    .map(({ title, link, contentSnippet, enclosure }) => ({
+    .map(({ title, link, contentSnippet, enclosure, isoDate }) => ({
       title: title.trim(),
       link: link || (enclosure && enclosure.url) || channel.link,
       description: contentSnippet,
-      publishedAt: new Date(),
+      publishedAt: isoDate,
     }));
   const uniqueArticles = uniqBy(articles, (article) => article.title);
   return sortBy(
