@@ -1,6 +1,7 @@
 const express = require("express");
 const auth = require("../../middleware/auth");
 const channelService = require("../../services/channel");
+const mockUserService = require("../../services/mockUser");
 const subscriptionService = require("../../services/subscription");
 const { errorMsg } = require("../../utils");
 const {
@@ -46,8 +47,8 @@ router.post("/", auth, async (req, res) => {
 // @access Public
 router.get("/defaults", async (_req, res) => {
   try {
-    const subs = await subscriptionService.defaults(true);
-    res.json(subs);
+    const mockUser = await mockUserService.find();
+    res.json(mockUser.subscriptions);
   } catch (error) {
     console.error(error);
     res.status(500).json(errorMsg());

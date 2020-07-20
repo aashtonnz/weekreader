@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const userService = require("./user");
+const mockUserService = require("./mockUser");
 const channelService = require("./channel");
 
 const mongoUri = process.env.MONGO_URI;
@@ -23,6 +24,7 @@ const seed = async () => {
   try {
     await channelService.seed();
     await userService.seed();
+    await mockUserService.create();
     console.log("Database seeded");
   } catch (error) {
     console.error(error);
