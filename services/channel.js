@@ -49,7 +49,7 @@ const uploadImg = async (imageUrl, rssUrl) => {
     const imgName = crypto.createHash("md5").update(rssUrl).digest("hex");
     const imgKey = `channel/${imgName}.${imgExt}`;
     let img = res.data;
-    if (img && imgExt !== "ico") {
+    if (img && ["png", "jpg", "jpeg", "gif"].includes(imgExt)) {
       img = await sharp(res.data)
         .resize({
           height: DEFAULT_IMG_HEIGHT,

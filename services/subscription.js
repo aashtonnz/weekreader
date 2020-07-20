@@ -1,10 +1,12 @@
 const config = require("config");
 const arrayMove = require("array-move");
 const crypto = require("crypto");
+const sharp = require("sharp");
 const User = require("../models/User");
 const Channel = require("../models/Channel");
 const fileService = require("./file");
 
+const DEFAULT_IMG_HEIGHT = 24;
 const MAX_SUBS = 60;
 const seeds = config.get("seeds");
 const maxDailyArticles = config.get("maxDailyArticles");
@@ -27,7 +29,7 @@ const subscribe = async (userId, channel) => {
       title: channel.title,
       link: channel.link,
       imgKey: channel.imgKey,
-      articles: channel.articles,
+      articles: channel.articles.slice(0, maxDailyArticles),
       description: channel.description,
     };
     user.subscriptions.unshift(newSub);
@@ -96,7 +98,17 @@ const editImg = async (userId, subId, img) => {
       .update(userId + subId)
       .digest("hex");
     const imgKey = `subscription/${imgName}.${img.mimetype.split("/")[1]}`;
-    await fileService.upload(img.data, imgKey, img.mimetype);
+    const imgExt =
+      img.mimetype === "image/x-icon" ? "ico" : img.mimetype.split("/")[1];
+    let resizedImg = img.data;
+    if (["png", "jpg", "jpeg", "gif"].includes(imgExt)) {
+      resizedImg = await sharp(resizedImg)
+        .resize({
+          height: DEFAULT_IMG_HEIGHT,
+        })
+        .toBuffer();
+    }
+    await fileService.upload(resizedImg, imgKey, img.mimetype);
     sub.imgKey = imgKey;
     await user.save();
   }
