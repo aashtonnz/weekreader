@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { setAlert, editSub, unsubscribe } from "../../state/actions";
 import { checkEditSub } from "../../utils/validation";
 import Checkbox from "../../views/Checkbox";
+import Select from "../../views/Select";
+import { Option } from "../../views/Select/styled";
 import { Page, Button, Div, A, SubHeader } from "../../views/styled";
 import {
   FileInput,
@@ -13,7 +15,10 @@ import {
   Header,
   CheckboxWrapper,
   TitleInput,
+  MaxArticlesWrapper,
 } from "./styled";
+
+const MAX_DAILY_ARTICLES_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
   const { id } = useParams();
@@ -21,6 +26,7 @@ const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
   const [sub, setSub] = useState(null);
   const [title, setTitle] = useState("");
   const [img, setImg] = useState("");
+  const [maxDailyArticles, setMaxDailyArticles] = useState(3);
   const [inputKey, setInputKey] = useState("");
   const [descriptionsHidden, setDescHidden] = useState(false);
 
@@ -29,6 +35,7 @@ const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
     if (sub) {
       setTitle(sub.title);
       setDescHidden(sub.descriptionsHidden);
+      setMaxDailyArticles(sub.maxDailyArticles);
       setSub(sub);
     }
     if (user && !sub) {
@@ -38,6 +45,10 @@ const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
 
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
+  };
+
+  const onChangeMaxDailyArticles = (value) => {
+    setMaxDailyArticles(Number(value));
   };
 
   const onChangeImg = (event) => {
@@ -53,7 +64,9 @@ const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
     if (invalidMsg) {
       setAlert(invalidMsg, "danger");
     } else {
-      editSub(id, title, img, descriptionsHidden, () => history.push("/"));
+      editSub(id, title, img, descriptionsHidden, maxDailyArticles, () =>
+        history.push("/")
+      );
       setInputKey(Date.now());
     }
   };
@@ -91,6 +104,20 @@ const EditSub = ({ setAlert, editSub, unsubscribe, config, user }) => {
               onChange={onDescriptionsHidden}
             />
           </CheckboxWrapper>
+          <MaxArticlesWrapper>
+            <div>Max articles per day</div>
+            <Select
+              value={String(maxDailyArticles)}
+              showSelected
+              onChange={onChangeMaxDailyArticles}
+            >
+              {MAX_DAILY_ARTICLES_OPTIONS.map((num) => (
+                <Option key={num} value={String(num)}>
+                  {num}
+                </Option>
+              ))}
+            </Select>
+          </MaxArticlesWrapper>
           <FileWrapper>
             <SubHeader>Replace image</SubHeader>
             <FileInput key={inputKey} type="file" onChange={onChangeImg} />

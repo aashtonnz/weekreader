@@ -5,7 +5,7 @@ const Channel = require("../models/Channel");
 const subscriptionService = require("./subscription");
 
 const articleDurationDays = config.get("articleDurationDays");
-const addMaxArticles = config.get("addMaxArticles");
+const maxDailyArticles = config.get("maxDailyArticles");
 
 const find = async () => {
   const mockUser = await MockUser.findOne();
@@ -31,7 +31,7 @@ const updateArticles = async () => {
     const titles = sub.articles.map((article) => article.title);
     const addArticles = channel.articles
       .filter((article) => !titles.includes(article.title))
-      .slice(0, addMaxArticles);
+      .slice(0, maxDailyArticles);
     sub.articles = [...addArticles, ...sub.articles]
       .filter(
         (article) =>

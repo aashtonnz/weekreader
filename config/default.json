@@ -2,7 +2,7 @@
   "userTimeoutHours": 99999999999999999,
   "passwordResetTimeoutMins": 5,
   "articleDurationDays": 7,
-  "addMaxArticles": 3,
+  "maxDailyArticles": 3,
   "seeds": {
     "users": [
       {

@@ -4,7 +4,7 @@ const filters = require("./filters");
 const MIN_PASSWORD_LEN = 6;
 const MAX_TITLE_LEN = 100;
 const MAX_IMG_KB = 50;
-const FILTERS = [];
+const MAX_MAX_DAILY_ARTICLES = 10;
 
 const checkSignup = (email, password, hourOffset) => {
   if (email && !isEmail(email)) {
@@ -82,13 +82,21 @@ const checkImg = (file) => {
   return "";
 };
 
-const checkTitle = (title) => {
+const checkSubEdit = (title, maxDailyArticles) => {
   if (!title) {
     return "Title is required";
   }
   if (title.length > MAX_TITLE_LEN) {
     return `Title must contain less than ${MAX_TITLE_LEN} characters`;
   }
+  if (
+    !isInt(maxDailyArticles.toString()) ||
+    maxDailyArticles < 1 ||
+    MAX_MAX_DAILY_ARTICLES < maxDailyArticles
+  ) {
+    return "Invalid max daily articles";
+  }
+  return "";
 };
 
 const checkPassword = (password) => {
@@ -121,7 +129,7 @@ module.exports = {
   checkUrl,
   checkIndex,
   checkImg,
-  checkTitle,
+  checkSubEdit,
   checkEmail,
   checkPassword,
   checkSettings,

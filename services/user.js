@@ -8,7 +8,6 @@ const subscriptionService = require("./subscription");
 const DEFAULT_UPDATE_HOUR = 8;
 const seeds = config.get("seeds");
 const articleDurationDays = config.get("articleDurationDays");
-const addMaxArticles = config.get("addMaxArticles");
 
 const find = async (filter) => {
   const user = await User.find(filter).select("-password");
@@ -93,7 +92,7 @@ const updateArticles = async () => {
         const titles = sub.articles.map((article) => article.title);
         const addArticles = channel.articles
           .filter((article) => !titles.includes(article.title))
-          .slice(0, addMaxArticles)
+          .slice(0, sub.maxDailyArticles)
           .map((article) => {
             article.pending = true;
             return article;

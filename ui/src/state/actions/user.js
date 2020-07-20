@@ -187,9 +187,14 @@ export const userArticleUnbookmarked = (id) => async (dispatch) => {
   }
 };
 
-export const editSub = (id, title, img, descriptionsHidden, callback) => async (
-  dispatch
-) => {
+export const editSub = (
+  id,
+  title,
+  img,
+  descriptionsHidden,
+  maxDailyArticles,
+  callback
+) => async (dispatch) => {
   const loadId = dispatch(setLoading());
   try {
     if (img) {
@@ -199,7 +204,11 @@ export const editSub = (id, title, img, descriptionsHidden, callback) => async (
         headers: { "Content-Type": "multipart/form-data" },
       });
     }
-    const body = JSON.stringify({ title, descriptionsHidden });
+    const body = JSON.stringify({
+      title,
+      descriptionsHidden,
+      maxDailyArticles,
+    });
     const res = await axios.put(`/subscriptions/${id}`, body);
     // Ensuring image cache is refreshed
     if (img) {

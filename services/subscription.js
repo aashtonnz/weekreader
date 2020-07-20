@@ -7,7 +7,7 @@ const fileService = require("./file");
 
 const MAX_SUBS = 60;
 const seeds = config.get("seeds");
-const addMaxArticles = config.get("addMaxArticles");
+const maxDailyArticles = config.get("maxDailyArticles");
 
 const subscribe = async (userId, channel) => {
   const user = await User.findById(userId).select("-password");
@@ -48,7 +48,7 @@ const defaults = async (mockId = false) => {
       title: seed.title || channel.title,
       link: channel.link,
       imgKey: seed.imgKey || channel.imgKey,
-      articles: channel.articles.slice(0, addMaxArticles),
+      articles: channel.articles.slice(0, maxDailyArticles),
       description: channel.description,
       descriptionsHidden: seed.descriptionsHidden,
     };
@@ -103,12 +103,19 @@ const editImg = async (userId, subId, img) => {
   return user;
 };
 
-const edit = async (userId, subId, title, descriptionsHidden) => {
+const edit = async (
+  userId,
+  subId,
+  title,
+  descriptionsHidden,
+  maxDailyArticles
+) => {
   const user = await User.findById(userId).select("-password");
   const sub = user.subscriptions.id(subId);
   if (sub) {
     sub.title = title;
     sub.descriptionsHidden = descriptionsHidden;
+    sub.maxDailyArticles = maxDailyArticles;
     await user.save();
   }
   return user;

@@ -55,3 +55,16 @@ export const CheckboxWrapper = styled.div`
     text-align: center;
   }
 `;
+
+export const MaxArticlesWrapper = styled.div`
+  margin: 0.8rem 0 0.2rem 0;
+  width: 100%;
+  max-width: 335px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > div {
+    text-align: center;
+  }
+`;

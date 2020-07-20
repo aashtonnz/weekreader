@@ -8,7 +8,7 @@ const {
   checkUrl,
   checkIndex,
   checkImg,
-  checkTitle,
+  checkSubEdit,
   checkFilter,
 } = require("../../utils/validation");
 
@@ -139,8 +139,8 @@ router.put("/:id/img", auth, async (req, res) => {
 // @access Private
 router.put("/:id", auth, async (req, res) => {
   const { id: subId } = req.params;
-  const { title, descriptionsHidden } = req.body;
-  const invalidMsg = checkTitle(title);
+  const { title, descriptionsHidden, maxDailyArticles } = req.body;
+  const invalidMsg = checkSubEdit(title, maxDailyArticles);
   if (invalidMsg) {
     return res.status(400).json(errorMsg(invalidMsg));
   }
@@ -149,7 +149,8 @@ router.put("/:id", auth, async (req, res) => {
       req.user.id,
       subId,
       title,
-      descriptionsHidden
+      descriptionsHidden,
+      maxDailyArticles
     );
     res.json(user);
   } catch (error) {
