@@ -20,11 +20,13 @@ dbService.connect().then(async () => {
     const timeC = moment();
     const users = await userService.find();
     for (user of users) {
-      const articlesUpdated =
-        user.articlesUpdatedAt &&
-        moment().diff(user.articlesUpdatedAt, "minutes") < 30;
       try {
-        if (articlesUpdated && user.mailSubscribed && user.confirmed) {
+        if (
+          user.articlesUpdateHour === moment().utc().hour() &&
+          user.articlesUpdateDays.includes(moment().utc().day()) &&
+          user.mailSubscribed &&
+          user.confirmed
+        ) {
           const unsubToken = await tokenService.create(user.email);
           await mailService.sendInbox(user, unsubToken);
         }

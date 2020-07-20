@@ -94,7 +94,10 @@ const updateArticles = async () => {
         const addArticles = channel.articles
           .filter((article) => !titles.includes(article.title))
           .slice(0, addMaxArticles)
-          .map((article) => ({ ...article, pending: true }));
+          .map((article) => {
+            article.pending = true;
+            return article;
+          });
         sub.articles = [...addArticles, ...sub.articles]
           .filter(
             (article) =>
@@ -112,16 +115,14 @@ const updateArticles = async () => {
             ) {
               article.archived = true;
             }
+            if (user.articlesUpdateDays.includes(moment().utc().day())) {
+              article.pending = false;
+            }
             return article;
           });
       });
       user.prevArticlesUpdatedAt = user.articlesUpdatedAt;
       user.articlesUpdatedAt = new Date();
-    }
-    if (user.articlesUpdateDays.includes(moment().utc().day())) {
-      user.subscriptions.forEach((sub) =>
-        sub.articles.forEach((article) => (article.pending = false))
-      );
     }
   });
   await Promise.all(users.map(async (user) => await user.save()));
