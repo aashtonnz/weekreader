@@ -35,14 +35,14 @@ const updateArticles = async () => {
     sub.articles = [...addArticles, ...sub.articles]
       .filter(
         (article) =>
-          moment(article.publishedAt).isAfter(
+          moment(article.createdAt).isAfter(
             moment().subtract(articleDurationDays, "days")
           ) ||
           (article.bookmarked && !article.hidden)
       )
       .map((article) => {
         if (
-          moment(article.publishedAt).isAfter(
+          moment(article.createdAt).isAfter(
             moment().subtract(articleDurationDays, "days")
           ) &&
           article.bookmarked

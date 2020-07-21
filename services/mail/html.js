@@ -31,7 +31,7 @@ const filterSubs = (subs, prevArticlesUpdatedAt) => {
           !article.hidden &&
           !article.archived &&
           (!prevArticlesUpdatedAt ||
-            moment(prevArticlesUpdatedAt).isBefore(article.publishedAt))
+            moment(prevArticlesUpdatedAt).isBefore(article.createdAt))
       );
       sub.articles = articles;
       return sub;
