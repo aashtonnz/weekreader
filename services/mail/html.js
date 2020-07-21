@@ -3,7 +3,6 @@ const moment = require("moment");
 const styles = require("./styles");
 
 const FILE_URL = `https://${process.env.BUCKETEER_BUCKET_NAME}.s3.amazonaws.com/`;
-const MAX_NUM_ARTICLES = 3;
 const MAX_DESC_CHARS = 200;
 const hostName = process.env.HOST_URL;
 
@@ -64,7 +63,7 @@ const inbox = (subs, prevArticlesUpdatedAt, unsubToken) => `
             </div>
             <div style="${styles.articles}">
               ${sub.articles
-                .slice(0, MAX_NUM_ARTICLES)
+                .slice(0, sub.maxDailyArticles)
                 .map(
                   (article) => `
                   <a style="${styles.articleWrapper}" href="${

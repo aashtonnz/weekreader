@@ -14,11 +14,13 @@ dbService.connect().then(async () => {
     console.log(
       `Channel articles updated - ${moment().diff(timeA, "seconds")}s`
     );
-    const timeB = moment();
-    await mockUserService.updateArticles();
-    console.log(
-      `Mock user articles updated - ${moment().diff(timeB, "seconds")}s`
-    );
+    if (moment().utc().hour() === 0) {
+      const timeB = moment();
+      await mockUserService.updateArticles();
+      console.log(
+        `Mock user articles updated - ${moment().diff(timeB, "seconds")}s`
+      );
+    }
     const timeC = moment();
     await userService.updateArticles();
     console.log(`User articles updated - ${moment().diff(timeC, "seconds")}s`);

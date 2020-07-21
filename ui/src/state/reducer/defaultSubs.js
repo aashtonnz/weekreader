@@ -10,7 +10,6 @@ import {
   DEFAULT_SET_HIDDEN,
 } from "./actionTypes";
 
-const INIT_SHOW_ARTICLES = 3;
 const INC_SHOW_ARTICLES = 3;
 
 const initialState = {
@@ -28,7 +27,9 @@ export default (state = initialState, action) => {
       payload.forEach((sub, index) => {
         const prevSub =
           state.data && state.data.find((prevSub) => prevSub._id === sub._id);
-        sub.showArticles = prevSub ? prevSub.showArticles : INIT_SHOW_ARTICLES;
+        sub.showArticles = prevSub
+          ? prevSub.showArticles
+          : sub.maxDailyArticles;
         const position = state.positions.findIndex((id) => id === sub._id);
         sub.index = position !== -1 ? position : index;
         sub.inboxCollapsed = state.collapsed.includes(sub._id);
@@ -48,14 +49,14 @@ export default (state = initialState, action) => {
     case SHOW_LESS_DEFAULT_ARTICLES: {
       const newData = [...state.data];
       const sub = newData.find((sub) => sub._id === payload);
-      sub.showArticles = INIT_SHOW_ARTICLES;
+      sub.showArticles = sub.maxDailyArticles;
       return { ...state, data: newData };
     }
     case COLLAPSE_DEFAULT_ARTICLES: {
       const newData = [...state.data];
       const sub = newData.find((sub) => sub._id === payload);
       sub.inboxCollapsed = true;
-      sub.showArticles = INIT_SHOW_ARTICLES;
+      sub.showArticles = sub.maxDailyArticles;
       const newCollapsed = [...state.collapsed, sub._id];
       localStorage.setItem("collapsed", JSON.stringify(newCollapsed));
       return {

@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const config = require("config");
+const maxDailyArticles = config.get("maxDailyArticles");
 
 const article = {
   title: { type: String, required: true },
@@ -14,6 +16,7 @@ const subscription = {
     required: true,
   },
   isSubscribed: { type: Boolean, default: true },
+  maxDailyArticles: { type: Number, default: maxDailyArticles },
   rssUrl: { type: String, required: true },
   title: { type: String, required: true },
   link: { type: String, required: true },

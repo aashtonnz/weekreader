@@ -13,7 +13,6 @@ import {
   MOVE_SUB,
 } from "./actionTypes";
 
-const INIT_SHOW_ARTICLES = 3;
 const INC_SHOW_ARTICLES = 3;
 
 const initialState = {
@@ -38,7 +37,9 @@ export default (state = initialState, action) => {
         const prevSub =
           state.data &&
           state.data.subscriptions.find((prevSub) => prevSub._id === sub._id);
-        sub.showArticles = prevSub ? prevSub.showArticles : INIT_SHOW_ARTICLES;
+        sub.showArticles = prevSub
+          ? prevSub.showArticles
+          : sub.maxDailyArticles;
         sub.index = index;
       });
       return { ...state, data: payload, isAuthenticated: true };
@@ -93,7 +94,7 @@ export default (state = initialState, action) => {
     case SHOW_LESS_ARTICLES: {
       const newData = { ...state.data };
       const sub = newData.subscriptions.find((sub) => sub._id === payload);
-      sub.showArticles = INIT_SHOW_ARTICLES;
+      sub.showArticles = sub.maxDailyArticles;
       return { ...state, data: newData };
     }
     case COLLAPSE_ARTICLES: {
@@ -101,7 +102,7 @@ export default (state = initialState, action) => {
       const newData = { ...state.data };
       const sub = newData.subscriptions.find((sub) => sub._id === subId);
       sub[`${filter}Collapsed`] = true;
-      sub.showArticles = INIT_SHOW_ARTICLES;
+      sub.showArticles = sub.maxDailyArticles;
       return { ...state, data: newData };
     }
     case EXPAND_ARTICLES: {

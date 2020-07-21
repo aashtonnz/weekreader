@@ -5,8 +5,6 @@ import Article from "../Article";
 import { filterArticles, calcArticlesLeft } from "./utils";
 import { Wrapper, NoArticles, ShowButton, Articles } from "./styled";
 
-const INIT_SHOW_ARTICLES = 3;
-
 const Subscription = SortableElement(
   ({ sub, filter, showMoreArticles, showLessArticles }) => {
     const articles = filterArticles(sub.articles, filter);
@@ -42,8 +40,8 @@ const Subscription = SortableElement(
                 Show {calcArticlesLeft(sub, articles)} of {articles.length}
               </ShowButton>
             )}
-            {sub.showArticles > INIT_SHOW_ARTICLES &&
-              INIT_SHOW_ARTICLES < articles.length && (
+            {sub.showArticles > sub.maxDailyArticles &&
+              sub.maxDailyArticles < articles.length && (
                 <ShowButton onClick={() => showLessArticles(sub._id)}>
                   Show less
                 </ShowButton>
