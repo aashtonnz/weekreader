@@ -36,6 +36,7 @@ const create = async (email, password, hourOffset) => {
     email,
     articlesUpdateHour: (DEFAULT_UPDATE_HOUR - hourOffset + 24) % 24,
     password: passwordHash,
+    hourOffset,
   });
   user.subscriptions = await subscriptionService.defaults();
   await user.save();

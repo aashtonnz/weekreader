@@ -1,5 +1,6 @@
 const mailgun = require("mailgun-js");
 const html = require("./html");
+const moment = require("moment");
 
 const apiKey = process.env.MAILGUN_API_KEY;
 const domain = process.env.MAILGUN_DOMAIN;
@@ -26,7 +27,10 @@ const send = async (subject, html, address) => {
 
 const sendInbox = async (user, unsubToken) => {
   await send(
-    "Inbox",
+    `Inbox – ${moment(user.articlesUpdatedAt)
+      .utc()
+      .add(user.hourOffset, "hour")
+      .format("MMMM D")}`,
     html.inbox(user.subscriptions, user.prevArticlesUpdatedAt, unsubToken),
     user.email
   );
