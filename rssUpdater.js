@@ -27,21 +27,23 @@ dbService.connect().then(async () => {
 
     const timeD = moment();
     const users = await userService.find();
-    for (user of users) {
-      try {
-        if (
-          user.articlesUpdateHour === moment().utc().hour() &&
-          user.articlesUpdateDays.includes(moment().utc().day()) &&
-          user.mailSubscribed &&
-          user.confirmed
-        ) {
-          const unsubToken = await tokenService.create(user.email);
-          await mailService.sendInbox(user, unsubToken);
+    await Promise.all(
+      users.map(async (user) => {
+        try {
+          if (
+            user.articlesUpdateHour === moment().utc().hour() &&
+            user.articlesUpdateDays.includes(moment().utc().day()) &&
+            user.mailSubscribed &&
+            user.confirmed
+          ) {
+            const unsubToken = await tokenService.create(user.email);
+            await mailService.sendInbox(user, unsubToken);
+          }
+        } catch (error) {
+          console.error("Error sending email:", error);
         }
-      } catch (error) {
-        console.error("Error sending email:", error);
-      }
-    }
+      })
+    );
     console.log(`Emails sent - ${moment().diff(timeD, "seconds")}s`);
     process.exit(0);
   } catch (error) {
