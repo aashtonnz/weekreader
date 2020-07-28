@@ -9,6 +9,11 @@
         "email": "aashtonnz@gmail.com",
         "password": "123123",
         "hourOffset": 12
+      },
+      {
+        "email": "aashton.dev@gmail.com",
+        "password": "123123",
+        "hourOffset": 12
       }
     ],
     "channels": [
