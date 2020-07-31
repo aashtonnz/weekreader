@@ -6,6 +6,7 @@ const article = {
   title: { type: String, required: true },
   link: { type: String, required: true },
   publishedAt: { type: Date, required: true },
+  createdAt: { type: Date, default: Date.now },
   description: { type: String },
 };
 
