@@ -11,6 +11,7 @@ const { name, version } = require("../package.json");
 
 const DEFAULT_IMG_HEIGHT = 24;
 const seeds = config.get("seeds");
+const articleDurationDays = config.get("articleDurationDays");
 
 const rssParser = new RssParser({
   headers: { "User-Agent": `${name} v${version}` },
@@ -64,7 +65,7 @@ const uploadImg = async (imageUrl, rssUrl) => {
   }
 };
 
-const fetchArticles = async (channel) => {
+const fetchArticles = async (channel, isInitial = false) => {
   const { items } = await rssParser.parseURL(channel.rssUrl);
   if (!items) {
     return [];
@@ -75,7 +76,9 @@ const fetchArticles = async (channel) => {
         title &&
         isoDate &&
         moment().add(1, "day").isAfter(isoDate) &&
-        moment().subtract(1, "day").isBefore(isoDate)
+        moment()
+          .subtract(isInitial ? articleDurationDays : 1, "day")
+          .isBefore(isoDate)
     )
     .map(({ title, link, contentSnippet, enclosure, isoDate }) => ({
       title: title.trim(),
@@ -100,7 +103,7 @@ const create = async (rssUrl) => {
     description,
     imgKey,
   });
-  channel.articles = await fetchArticles(channel);
+  channel.articles = await fetchArticles(channel, true);
   await channel.save();
   return channel;
 };
