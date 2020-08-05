@@ -22,23 +22,29 @@ const Landing = () => {
       <Header>The internet – delivered</Header>
       <P>
         1.{" "}
+        <A href="https://contacts.google.com/" target="_blank">
+          Add contact
+        </A>{" "}
+        new@mail.weekreader.com
+      </P>
+      <P>
+        2.{" "}
         <Link to="/signup" target="_blank">
           Sign up
         </Link>{" "}
         and{" "}
         <Link to="/" target="_blank">
-          add RSS feeds
+          add feeds
         </Link>{" "}
         to your inbox
       </P>
-      <P>
-        2.{" "}
+      <LastP>
+        3.{" "}
         <Link to="/user" target="_blank">
           Set when
         </Link>{" "}
         your inbox will update
-      </P>
-      <LastP>3. Receive the top articles of the week</LastP>
+      </LastP>
       <Div />
       <LastP>
         <RssIcon icon={rssIcon} />{" "}
