@@ -26,6 +26,10 @@ export const TwitterIcon = styled(FontAwesomeIcon)`
   color: #1da1f2;
 `;
 
+export const MailIcon = styled(FontAwesomeIcon)`
+  margin-left: 0.3rem;
+`;
+
 export const P = styled.p`
   text-align: center;
   margin-bottom: 0.9rem;

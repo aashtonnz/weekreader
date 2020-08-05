@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import arrayMove from "array-move";
+import { faEnvelopeOpenText as mailIcon } from "@fortawesome/free-solid-svg-icons";
 import {
   setDefaultSubs,
   showMoreArticles,
@@ -11,6 +12,7 @@ import {
 import Subscriptions from "../../views/Subscriptions";
 import { INBOX } from "../../views/Subscription/filters";
 import { Page } from "../../views/styled";
+import { MailIcon, Header } from "./styled";
 import Add from "./Add";
 
 const SHOW_DELAY_MS = 400;
@@ -53,6 +55,11 @@ const Inbox = ({
 
   return (
     <Page>
+      {!user && (
+        <Header>
+          RSS – emailed to you <MailIcon icon={mailIcon} />
+        </Header>
+      )}
       <Add />
       {show && (
         <Subscriptions

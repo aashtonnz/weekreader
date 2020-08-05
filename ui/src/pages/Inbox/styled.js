@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { Button, Input } from "../../views/styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, Input, Header as ViewHeader } from "../../views/styled";
 
 export const AddWrapper = styled.div`
   display: flex;
@@ -20,4 +21,12 @@ export const AddButton = styled(Button)`
   border-radius: 14px;
   margin-left: 0.5rem;
   padding: 0;
+`;
+
+export const MailIcon = styled(FontAwesomeIcon)`
+  margin-left: 0.3rem;
+`;
+
+export const Header = styled(ViewHeader)`
+  margin-bottom: 2.6rem;
 `;

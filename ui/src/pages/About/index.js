@@ -1,5 +1,8 @@
 import React from "react";
-import { faRss as rssIcon } from "@fortawesome/free-solid-svg-icons";
+import {
+  faRss as rssIcon,
+  faEnvelopeOpenText as mailIcon,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faReddit as redditIcon,
   faYoutube as youtubeIcon,
@@ -14,12 +17,15 @@ import {
   RedditIcon,
   YoutubeIcon,
   TwitterIcon,
+  MailIcon,
 } from "./styled";
 
 const Landing = () => {
   return (
     <Page>
-      <Header>The internet – delivered</Header>
+      <Header>
+        RSS – emailed to you <MailIcon icon={mailIcon} />
+      </Header>
       <P>
         1.{" "}
         <A href="https://contacts.google.com/" target="_blank">
