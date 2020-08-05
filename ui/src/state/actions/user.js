@@ -30,7 +30,7 @@ export const setUser = () => async (dispatch) => {
 };
 
 export const signup = (email, password) => async (dispatch) => {
-  const hourOffset = moment().hour() - moment().utc().hour();
+  const hourOffset = Math.floor(moment().hourOffset() / 60);
   const body = JSON.stringify({ email, password, hourOffset });
   const loadId = dispatch(setLoading());
   try {
