@@ -51,6 +51,7 @@ export const defaultArticleBookmarked = (id) => (dispatch) => {
     type: DEFAULT_SET_BOOKMARKED,
     payload: { id, isBookmarked: true },
   });
+  dispatch(setAlert("Bookmarked", null, 1500));
 };
 
 export const defaultArticleUnbookmarked = (id) => (dispatch) => {

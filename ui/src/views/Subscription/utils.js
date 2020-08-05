@@ -5,7 +5,9 @@ const INC_SHOW_ARTICLES = 3;
 export const filterArticles = (articles, filter) => {
   switch (filter) {
     case INBOX: {
-      return articles.filter((article) => !article.hidden && !article.archived);
+      return articles.filter(
+        (article) => !article.hidden && !article.archived && !article.bookmarked
+      );
     }
     case BOOKMARKED: {
       return articles.filter(

@@ -172,6 +172,7 @@ export const articleUnhidden = (id) => async (dispatch) => {
 export const userArticleBookmarked = (id) => async (dispatch) => {
   try {
     dispatch({ type: SET_BOOKMARKED, payload: { id, isBookmarked: true } });
+    dispatch(setAlert("Bookmarked", null, 1500));
     await axios.post(`/articles/${id}/bookmarked`);
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
