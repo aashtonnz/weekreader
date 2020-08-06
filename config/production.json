@@ -18,13 +18,13 @@
     ],
     "channels": [
       {
-        "rssUrl": "https://api.axios.com/feed/top",
-        "imgKey": "public/axios.ico"
-      },
-      {
         "rssUrl": "https://www.reddit.com/r/worldnews/top/.rss?limit=5",
         "title": "Reddit",
         "descriptionsHidden": true
+      },
+      {
+        "rssUrl": "https://api.axios.com/feed/top",
+        "imgKey": "public/axios.ico"
       },
       {
         "rssUrl": "https://hnrss.org/frontpage",
@@ -36,11 +36,6 @@
         "descriptionsHidden": true
       },
       {
-        "rssUrl": "http://fetchrss.com/rss/5f06a2598a93f804538b45675f06a2b98a93f85f558b4567.xml",
-        "title": "Naval",
-        "descriptionsHidden": true
-      },
-      {
         "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCAuUUnT6oDeKwE6v1NGQxug",
         "title": "TED"
       },
@@ -49,14 +44,14 @@
         "title": "The Daily"
       },
       {
+        "rssUrl": "https://seekingalpha.com/listing/most-popular-articles.xml",
+        "title": "Seeking Alpha"
+      },
+      {
         "rssUrl": "http://feed.dilbert.com/dilbert/daily_strip",
         "title": "Dilbert",
         "imgKey": "public/dilbert.ico",
         "descriptionsHidden": true
-      },
-      {
-        "rssUrl": "https://seekingalpha.com/listing/most-popular-articles.xml",
-        "title": "Seeking Alpha"
       }
     ]
   }

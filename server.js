@@ -4,6 +4,7 @@ const path = require("path");
 const sslRedirect = require("heroku-ssl-redirect");
 const fileUpload = require("express-fileupload");
 const dbService = require("./services/db");
+const mockUserService = require("./services/mockUser");
 const channelService = require("./services/channel");
 
 const port = process.env.PORT || 5000;
@@ -15,6 +16,11 @@ dbService.connect().then(async () => {
     const hasChannels = await channelService.exists();
     if (!hasChannels) {
       await dbService.seed();
+    }
+    const hasMockUser = await mockUserService.find();
+    if (!hasMockUser) {
+      await mockUserService.create();
+      console.log("Mock user created");
     }
   } catch (error) {
     console.error(error);
