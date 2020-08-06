@@ -17,7 +17,11 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case CLEAR_ALERT: {
-      return { ...state, alert: null };
+      if (payload && state.alert && payload !== state.alert.id) {
+        return state;
+      } else {
+        return { ...state, alert: null };
+      }
     }
     case CLEAR_LOADING: {
       const loadingItems = state.loadingItems.filter(

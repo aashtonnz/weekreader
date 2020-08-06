@@ -13,13 +13,14 @@ const ALERT_TIMEOUT_MS = 5000;
 export const setAlert = (msg, status, timeout = ALERT_TIMEOUT_MS) => (
   dispatch
 ) => {
-  dispatch({ type: SET_ALERT, payload: { msg, status } });
-  setTimeout(() => dispatch(clearAlert()), timeout);
+  const id = uuid.v4();
+  dispatch({ type: SET_ALERT, payload: { msg, status, id } });
+  setTimeout(() => dispatch(clearAlert(id)), timeout);
 };
 
-export const clearAlert = () => (dispatch, getState) => {
+export const clearAlert = (id = null) => (dispatch, getState) => {
   if (getState().app.alert) {
-    dispatch({ type: CLEAR_ALERT });
+    dispatch({ type: CLEAR_ALERT, payload: id });
   }
 };
 
