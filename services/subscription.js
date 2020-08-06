@@ -22,6 +22,7 @@ const subscribe = async (userId, channel) => {
   );
   if (sub) {
     sub.isSubscribed = true;
+    sub.articles = channel.articles.slice(0, sub.maxDailyArticles);
   } else {
     const newSub = {
       channel,
