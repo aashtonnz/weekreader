@@ -3,7 +3,7 @@ import { Header as ViewHeader } from "../../views/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Header = styled(ViewHeader)`
-  margin-bottom: 1.8rem;
+  margin-bottom: 3rem;
 `;
 
 export const RssIcon = styled(FontAwesomeIcon)`

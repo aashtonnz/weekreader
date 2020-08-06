@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Input, Header as ViewHeader } from "../../views/styled";
+import { Link } from "react-router-dom";
+import { Button, Input } from "../../views/styled";
 
 export const AddWrapper = styled.div`
   display: flex;
@@ -27,6 +28,15 @@ export const MailIcon = styled(FontAwesomeIcon)`
   margin-left: 0.3rem;
 `;
 
-export const Header = styled(ViewHeader)`
+export const Header = styled(Link)`
+  font-size: 1.4rem;
+  font-weight: 700;
   margin-bottom: 2.6rem;
+  padding: 0;
+  margin-top: 2.2rem;
+  width: 100%;
+  text-align: center;
+  overflow-x: hidden;
+  text-decoration: none;
+  color: ${(props) => props.theme.color.primary};
 `;
