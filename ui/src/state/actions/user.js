@@ -172,8 +172,8 @@ export const articleUnhidden = (id) => async (dispatch) => {
 export const userArticleBookmarked = (id) => async (dispatch) => {
   try {
     dispatch({ type: SET_BOOKMARKED, payload: { id, isBookmarked: true } });
-    dispatch(setAlert("Bookmarked", null, 1500));
     await axios.post(`/articles/${id}/bookmarked`);
+    dispatch(setAlert("Bookmarked", null, 1500));
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
   }
@@ -183,6 +183,7 @@ export const userArticleUnbookmarked = (id) => async (dispatch) => {
   try {
     dispatch({ type: SET_BOOKMARKED, payload: { id, isBookmarked: false } });
     await axios.post(`/articles/${id}/unbookmarked`);
+    dispatch(setAlert("Unbookmarked", null, 1500));
   } catch (error) {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
   }
