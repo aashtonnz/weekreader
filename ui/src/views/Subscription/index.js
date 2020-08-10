@@ -2,7 +2,7 @@ import React from "react";
 import { SortableElement } from "react-sortable-hoc";
 import SubTitle from "../SubTitle";
 import Article from "../Article";
-import { filterArticles, calcArticlesLeft } from "./utils";
+import { filterArticles } from "./utils";
 import { Wrapper, NoArticles, ShowButton, Articles } from "./styled";
 
 const Subscription = SortableElement(
@@ -37,7 +37,7 @@ const Subscription = SortableElement(
             )}
             {sub.showArticles < articles.length && (
               <ShowButton onClick={() => showMoreArticles(sub._id)}>
-                Show {calcArticlesLeft(sub, articles)} of {articles.length}
+                Show more
               </ShowButton>
             )}
             {sub.showArticles > sub.maxDailyArticles &&
