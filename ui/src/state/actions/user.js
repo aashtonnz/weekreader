@@ -5,7 +5,6 @@ import {
   SET_USER,
   SET_BOOKMARKED,
   SET_HIDDEN,
-  SET_VISITED,
   SHOW_MORE_ARTICLES,
   SHOW_LESS_ARTICLES,
   MOVE_SUB,
@@ -139,15 +138,6 @@ export const subscribe = (rssUrl) => async (dispatch) => {
     dispatch(setAlert(reqErrorMsg(error), "danger"));
   } finally {
     dispatch(clearLoading(loadId));
-  }
-};
-
-export const articleVisited = (id) => async (dispatch) => {
-  try {
-    dispatch({ type: SET_VISITED, payload: id });
-    await axios.post(`/articles/${id}/visited`);
-  } catch (error) {
-    dispatch(setAlert(reqErrorMsg(error), "danger"));
   }
 };
 

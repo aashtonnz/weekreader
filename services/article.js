@@ -1,17 +1,5 @@
 const User = require("../models/User");
 
-const visited = async (userId, articleId) => {
-  const user = await User.findById(userId).select("-password");
-  for (sub of user.subscriptions) {
-    const article = sub.articles.id(articleId);
-    if (article) {
-      article.visited = true;
-      await user.save();
-    }
-  }
-  return user;
-};
-
 const hidden = async (userId, articleId) => {
   const user = await User.findById(userId).select("-password");
   for (sub of user.subscriptions) {
@@ -61,7 +49,6 @@ const unbookmarked = async (userId, articleId) => {
 };
 
 module.exports = {
-  visited,
   hidden,
   unhidden,
   bookmarked,

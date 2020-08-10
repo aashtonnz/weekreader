@@ -10,7 +10,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark as unbookmarkedIcon } from "@fortawesome/free-regular-svg-icons";
 import {
-  articleVisited,
   articleHidden,
   articleUnhidden,
   articleBookmarked,
@@ -32,26 +31,17 @@ const Article = ({
   link,
   title,
   publishedAt,
-  articleVisited,
   articleHidden,
   articleUnhidden,
   articleBookmarked,
   articleUnbookmarked,
   description,
-  visited,
   bookmarked,
   hidden,
   isAuthenticated,
   descriptionHidden,
 }) => {
   const history = useHistory();
-
-  const onClick = () => {
-    window.open(link, "_blank");
-    if (isAuthenticated) {
-      articleVisited(_id);
-    }
-  };
 
   const onHide = () => {
     articleHidden(_id);
@@ -69,9 +59,9 @@ const Article = ({
     bookmarked ? articleUnbookmarked(_id) : articleBookmarked(_id);
   };
   return (
-    <Wrapper visited={visited}>
+    <Wrapper>
       <TitleWrapper>
-        <Title onClick={onClick}>
+        <Title href={link} target="_blank">
           {title}
           <PublishedAt>{moment(publishedAt).format("MMM D")}</PublishedAt>
         </Title>
@@ -89,7 +79,7 @@ const Article = ({
         </IconWrapper>
       </TitleWrapper>
       {description && !descriptionHidden && (
-        <Description onClick={onClick} visited={visited}>
+        <Description href={link} target="_blank">
           {truncateDesc(description)}
         </Description>
       )}
@@ -102,13 +92,11 @@ Article.propTypes = {
   link: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   publishedAt: PropTypes.string.isRequired,
-  articleVisited: PropTypes.func.isRequired,
   articleHidden: PropTypes.func.isRequired,
   articleUnhidden: PropTypes.func.isRequired,
   articleBookmarked: PropTypes.func.isRequired,
   articleUnbookmarked: PropTypes.func.isRequired,
   description: PropTypes.string,
-  visited: PropTypes.bool,
   bookmarked: PropTypes.bool,
   hidden: PropTypes.bool,
   isAuthenticated: PropTypes.bool,
@@ -120,7 +108,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  articleVisited,
   articleHidden,
   articleUnhidden,
   articleBookmarked,

@@ -10,7 +10,6 @@ const article = {
   publishedAt: { type: Date, required: true },
   createdAt: { type: Date, default: Date.now },
   description: { type: String },
-  visited: { type: Boolean },
   bookmarked: { type: Boolean },
   hidden: { type: Boolean },
   archived: { type: Boolean },

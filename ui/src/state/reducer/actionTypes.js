@@ -21,7 +21,6 @@ export const SET_USER = "setUser";
 export const CLEAR_USER = "clearUser";
 export const SET_BOOKMARKED = "setBookmarked";
 export const SET_HIDDEN = "setHidden";
-export const SET_VISITED = "setVisited";
 export const SHOW_MORE_ARTICLES = "showMoreArticles";
 export const SHOW_LESS_ARTICLES = "showLessArticles";
 export const COLLAPSE_ARTICLES = "collapseArticles";

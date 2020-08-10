@@ -5,20 +5,6 @@ const { errorMsg } = require("../../utils");
 
 const router = express.Router();
 
-// @route  POST api/articles/:id/visited
-// @desc   Mark visited
-// @access Private
-router.post("/:id/visited", auth, async (req, res) => {
-  const { id: articleId } = req.params;
-  try {
-    const user = await articleService.visited(req.user.id, articleId);
-    res.json(user);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json(errorMsg());
-  }
-});
-
 // @route  POST api/articles/:id/hidden
 // @desc   Mark hidden
 // @access Private

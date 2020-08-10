@@ -5,7 +5,6 @@ import {
   SET_TOKEN,
   SET_BOOKMARKED,
   SET_HIDDEN,
-  SET_VISITED,
   SHOW_MORE_ARTICLES,
   SHOW_LESS_ARTICLES,
   COLLAPSE_ARTICLES,
@@ -65,19 +64,6 @@ export default (state = initialState, action) => {
         const article = sub.articles.find((article) => article._id === id);
         if (article) {
           article.hidden = isHidden;
-        }
-      }
-      return {
-        ...state,
-        data: newData,
-      };
-    }
-    case SET_VISITED: {
-      const newData = { ...state.data };
-      for (const sub of newData.subscriptions) {
-        const article = sub.articles.find((article) => article._id === payload);
-        if (article) {
-          article.visited = true;
         }
       }
       return {

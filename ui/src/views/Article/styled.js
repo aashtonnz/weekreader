@@ -26,7 +26,6 @@ export const Wrapper = styled.div`
   padding: 0.6rem 0;
   background: #fff;
   padding-left: 0.3rem;
-  color: ${(props) => (props.visited ? "#aaa" : "#333")};
 
   &:hover {
     cursor: pointer;
@@ -37,17 +36,28 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Title = styled.div`
+export const Title = styled.a`
   display: block;
   text-decoration: none;
   flex-grow: 1;
+  color: #333;
+
+  &:visited {
+    color: #aaa;
+  }
 `;
 
-export const Description = styled.div`
+export const Description = styled.a`
   margin: 0.3rem 1.2rem 0 1.2rem;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: ${(props) => (props.visited ? "#aaa" : "#666")};
+  color: #666;
+  display: block;
+  text-decoration: none;
+
+  &:visited {
+    color: #aaa;
+  }
 `;
 
 export const ShowButton = styled.button`
