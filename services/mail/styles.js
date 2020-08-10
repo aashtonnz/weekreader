@@ -84,7 +84,7 @@ const description = `
 const appTitle = `
   text-decoration: none;
   align-items: center;
-  color: #0d60D1;
+  color: #055FD2;
   font-weight: 700;
 `;
 
@@ -106,15 +106,15 @@ const body = `
 
 const footer = `
   color: #aaa;
-  padding: 0.5rem;
+  padding: 0.2rem;
   text-align: center;
   text-decoration: none;
   display: block;
 `;
 
-const unsub = `
-  color: #aaa;
-  padding: 0.5rem;
+const contact = `
+  color: #055FD2;
+  padding: 0.2rem;
   text-align: center;
   text-decoration: none;
   display: block;
@@ -123,10 +123,20 @@ const unsub = `
   margin-top: 3.6rem;
 `;
 
+const unsub = `
+  color: #aaa;
+  padding: 0.2rem;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  max-width: min-content;
+  margin: 0 auto;
+`;
+
 const viewAll = `
   text-decoration: none;
   padding: 0rem 1rem 1.4rem 0.6rem;
-  color: #0d60D1;
+  color: #055FD2;
   float: left;
 `;
 
@@ -139,7 +149,7 @@ const button = `
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0d60D1;
+  background: #055FD2;
   text-decoration: none;
   width: max-content;
   text-align: center;
@@ -171,4 +181,5 @@ module.exports = {
   appImg,
   button,
   buttonText,
+  contact,
 };

@@ -94,6 +94,9 @@ const inbox = (subs, prevArticlesUpdatedAt, unsubToken) => `
         )
         .join("")}
         <a style="${
+          styles.contact
+        }" href="mailto:contact@weekreader.com">contact@weekreader.com</a>
+        <a style="${
           styles.unsub
         }" href="${hostName}/unsubscribe/${unsubToken}">Unsubscribe</a>
       <a style="${
