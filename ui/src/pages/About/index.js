@@ -24,7 +24,7 @@ const Landing = () => {
   return (
     <Page>
       <Header>
-        RSS – emailed to you <MailIcon icon={mailIcon} />
+        RSS – mailed to you <MailIcon icon={mailIcon} />
       </Header>
       <P>
         1.{" "}

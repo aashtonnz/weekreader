@@ -57,7 +57,7 @@ const Inbox = ({
     <Page>
       {!user && (
         <Header to="/about">
-          RSS – emailed to you <MailIcon icon={mailIcon} />
+          RSS – mailed to you <MailIcon icon={mailIcon} />
         </Header>
       )}
       <Add />
