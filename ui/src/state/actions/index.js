@@ -5,7 +5,6 @@ import {
   showMoreDefaultArticles,
   moveDefaultSub,
   defaultArticleBookmarked,
-  defaultArticleUnbookmarked,
   defaultArticleHidden,
 } from "./defaultSubs";
 import {
@@ -77,8 +76,6 @@ export const articleBookmarked = (id) => async (dispatch, getState) => {
 export const articleUnbookmarked = (id) => async (dispatch, getState) => {
   if (getState().user.data) {
     dispatch(userArticleUnbookmarked(id));
-  } else {
-    dispatch(defaultArticleUnbookmarked(id));
   }
 };
 
