@@ -84,7 +84,7 @@ const description = `
 const appTitle = `
   text-decoration: none;
   align-items: center;
-  color: #055FD2;
+  color: #0069E2;
   font-weight: 700;
 `;
 
@@ -113,7 +113,7 @@ const footer = `
 `;
 
 const contact = `
-  color: #055FD2;
+  color: #0069E2;
   padding: 0.2rem;
   text-align: center;
   text-decoration: none;
@@ -136,7 +136,7 @@ const unsub = `
 const viewAll = `
   text-decoration: none;
   padding: 0rem 1rem 1.4rem 0.6rem;
-  color: #055FD2;
+  color: #0069E2;
   float: left;
 `;
 
@@ -149,7 +149,7 @@ const button = `
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #055FD2;
+  background: #0069E2;
   text-decoration: none;
   width: max-content;
   text-align: center;
