@@ -24,11 +24,14 @@
       },
       {
         "rssUrl": "https://api.axios.com/feed/top",
-        "imgKey": "public/axios.ico"
+        "imgKey": "public/axios.ico",
+        "title": "Axios",
+        "descriptionsHidden": true
       },
       {
         "rssUrl": "https://hnrss.org/frontpage",
-        "title": "Hacker News"
+        "title": "Hacker News",
+        "descriptionsHidden": true
       },
       {
         "rssUrl": "http://fetchrss.com/rss/5f06a2598a93f804538b45675f06a26f8a93f82b518b4567.xml",
@@ -36,16 +39,19 @@
         "descriptionsHidden": true
       },
       {
-        "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCAuUUnT6oDeKwE6v1NGQxug",
-        "title": "TED"
+        "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCvQECJukTDE2i6aCoMnS-Vg",
+        "title": "Big Think",
+        "descriptionsHidden": true
       },
       {
         "rssUrl": "http://rss.art19.com/the-daily",
-        "title": "The Daily"
+        "title": "The Daily",
+        "descriptionsHidden": true
       },
       {
         "rssUrl": "https://seekingalpha.com/listing/most-popular-articles.xml",
-        "title": "Seeking Alpha"
+        "title": "Seeking Alpha",
+        "descriptionsHidden": true
       },
       {
         "rssUrl": "http://feed.dilbert.com/dilbert/daily_strip",
