@@ -78,7 +78,10 @@ const updateArticles = async () => {
   const users = await User.find();
   const channels = await Channel.find();
   users.forEach((user) => {
-    if (user.articlesUpdateHour === moment().utc().hour()) {
+    if (
+      user.articlesUpdateHour === moment().utc().hour() &&
+      user.articlesUpdateDays.includes(moment().utc().day())
+    ) {
       user.subscriptions.forEach((sub) => {
         if (!sub.isSubscribed) {
           return;
