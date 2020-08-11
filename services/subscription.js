@@ -5,20 +5,22 @@ const sharp = require("sharp");
 const User = require("../models/User");
 const Channel = require("../models/Channel");
 const fileService = require("./file");
+const channel = require("./channel");
 
 const DEFAULT_IMG_HEIGHT = 24;
 const MAX_SUBS = 60;
 const seeds = config.get("seeds");
 const maxDailyArticles = config.get("maxDailyArticles");
 
-const subscribe = async (userId, channel) => {
+const subscribe = async (userId, channelId) => {
   const user = await User.findById(userId).select("-password");
+  const channel = await Channel.findById(channelId);
   const numSubs = user.subscriptions.filter((sub) => sub.isSubscribed).length;
   if (numSubs === MAX_SUBS) {
     return user;
   }
   const sub = user.subscriptions.find(
-    (sub) => sub.channel.toString() === channel._id.toString()
+    (sub) => sub.channel.toString() === channelId
   );
   if (sub) {
     sub.isSubscribed = true;
@@ -35,7 +37,9 @@ const subscribe = async (userId, channel) => {
     };
     user.subscriptions.unshift(newSub);
   }
+  channel.numSubscribers++;
   await user.save();
+  await channel.save();
   return user;
 };
 
@@ -138,8 +142,14 @@ const unsubscribe = async (userId, subId) => {
   const user = await User.findById(userId).select("-password");
   const sub = user.subscriptions.id(subId);
   if (sub) {
+    const channel = await Channel.findById(sub.channel);
     sub.isSubscribed = false;
+    // Ensure number of subscribers cannot be negative
+    if (channel.numSubscribers > 0) {
+      channel.numSubscribers--;
+    }
     await user.save();
+    await channel.save();
   }
   return user;
 };

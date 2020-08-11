@@ -34,7 +34,11 @@ router.post("/", auth, async (req, res) => {
     return res.status(500).json(errorMsg("Error parsing RSS"));
   }
   try {
-    const user = await subscriptionService.subscribe(req.user.id, channel);
+    await channelService.updateArticles(channel._id.toString());
+    const user = await subscriptionService.subscribe(
+      req.user.id,
+      channel._id.toString()
+    );
     res.json(user);
   } catch (error) {
     console.error(error);

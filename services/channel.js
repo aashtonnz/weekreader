@@ -93,7 +93,7 @@ const fetchArticles = async (channel, isInitial = false) => {
   );
 };
 
-const create = async (rssUrl) => {
+const create = async (rssUrl, numSubscribers = 0) => {
   const { title, link, description, image } = await rssParser.parseURL(rssUrl);
   const imgKey = await uploadImg(image && image.url, rssUrl);
   const channel = new Channel({
@@ -102,14 +102,17 @@ const create = async (rssUrl) => {
     title,
     description,
     imgKey,
+    numSubscribers,
   });
   channel.articles = await fetchArticles(channel, true);
   await channel.save();
   return channel;
 };
 
-const updateArticles = async () => {
-  const channels = await Channel.find();
+const updateArticles = async (channelId = null) => {
+  const channels = channelId
+    ? await Channel.find({ _id: channelId })
+    : await Channel.find({ numSubscribers: { $gt: 0 } });
   const fetchResults = await Promise.all(
     channels.map(async (channel) => {
       try {
@@ -134,7 +137,7 @@ const updateArticles = async () => {
 
 const seed = async () => {
   await Promise.all(
-    seeds.channels.map(async ({ rssUrl }) => await create(rssUrl))
+    seeds.channels.map(async ({ rssUrl }) => await create(rssUrl, 1))
   );
 };
 

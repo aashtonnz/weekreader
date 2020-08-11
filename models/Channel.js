@@ -12,6 +12,7 @@ const Channel = new mongoose.Schema({
   rssUrl: { type: String, required: true, unique: true, index: true },
   title: { type: String, required: true },
   link: { type: String, required: true },
+  numSubscribers: { type: Number, default: 0 },
   imgKey: { type: String },
   description: { type: String },
   articles: [article],
