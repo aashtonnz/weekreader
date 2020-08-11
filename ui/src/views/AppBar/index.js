@@ -31,7 +31,9 @@ const AppBar = ({ navOpen, setNavOpen, clearAlert, isLoading, user }) => {
         <Header>
           <AppLink to="/">
             <Logo src={logo} alt="logo" />
-            <div>Weekreader</div>
+            <div>
+              Weekreader <sup>beta</sup>
+            </div>
           </AppLink>
         </Header>
         {!isLoading && (
