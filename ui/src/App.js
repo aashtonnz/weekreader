@@ -20,6 +20,7 @@ import Confirm from "./pages/Confirm";
 import Unsubscribe from "./pages/Unsubscribe";
 import ResetPasswordEmail from "./pages/ResetPasswordEmail";
 import ResetPassword from "./pages/ResetPassword";
+import Privacy from "./pages/Privacy";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -53,6 +54,7 @@ function App() {
               />
               <Route exact path="/confirm/:token" component={Confirm} />
               <Route exact path="/unsubscribe/:token" component={Unsubscribe} />
+              <Route exact path="/privacy" component={Privacy} />
               <PrivateRoute exact path="/bookmarked" component={Bookmarked} />
               <PrivateRoute exact path="/hidden" component={Hidden} />
               <PrivateRoute exact path="/edit-sub/:id" component={EditSub} />
