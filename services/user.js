@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const config = require("config");
 const moment = require("moment");
+const { isUpdateTime } = require("../utils");
 const User = require("../models/User");
 const Channel = require("../models/Channel");
 const subscriptionService = require("./subscription");
@@ -78,10 +79,7 @@ const updateArticles = async () => {
   const users = await User.find();
   const channels = await Channel.find();
   users.forEach((user) => {
-    if (
-      user.articlesUpdateHour === moment().utc().hour() &&
-      user.articlesUpdateDays.includes(moment().utc().day())
-    ) {
+    if (isUpdateTime(user.articlesUpdateHour, user.articlesUpdateDays)) {
       user.subscriptions.forEach((sub) => {
         if (!sub.isSubscribed) {
           return;

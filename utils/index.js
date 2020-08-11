@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 const DEFAULT_ERROR_MSG = "Internal server error";
 
 const errorMsg = (msg) => {
@@ -6,4 +8,13 @@ const errorMsg = (msg) => {
 
 const successMsg = (msg) => ({ success: msg });
 
-module.exports = { errorMsg, successMsg };
+const isUpdateTime = (updateHour, updateDays) => {
+  const minDiff = moment()
+    .utc()
+    .diff(moment().utc().hour(updateHour).minute(0), "minute");
+  return (
+    -30 < minDiff && minDiff < 30 && updateDays.includes(moment().utc().day())
+  );
+};
+
+module.exports = { errorMsg, successMsg, isUpdateTime };

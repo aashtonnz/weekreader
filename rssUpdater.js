@@ -1,5 +1,6 @@
 require("dotenv").config();
 const moment = require("moment");
+const { isUpdateTime } = require("./utils");
 const dbService = require("./services/db");
 const channelService = require("./services/channel");
 const userService = require("./services/user");
@@ -31,8 +32,7 @@ dbService.connect().then(async () => {
       users
         .filter(
           (user) =>
-            user.articlesUpdateHour === moment().utc().hour() &&
-            user.articlesUpdateDays.includes(moment().utc().day()) &&
+            isUpdateTime(user.articlesUpdateHour, user.articlesUpdateDays) &&
             user.mailSubscribed &&
             user.confirmed
         )
