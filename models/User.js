@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const config = require("config");
-const maxDailyArticles = config.get("maxDailyArticles");
+const maxArticles = config.get("maxArticles");
 
 const DEFAULT_UPDATE_DAYS = [0, 1, 2, 3, 4, 5, 6]; // Every day
 
@@ -26,7 +26,7 @@ const subscription = {
   rssUrl: { type: String, required: true },
   title: { type: String, required: true },
   link: { type: String, required: true },
-  maxDailyArticles: { type: Number, default: maxDailyArticles },
+  maxArticles: { type: Number, default: maxArticles },
   inboxCollapsed: { type: Boolean },
   bookmarkedCollapsed: { type: Boolean },
   hiddenCollapsed: { type: Boolean },

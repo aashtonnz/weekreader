@@ -36,9 +36,7 @@ export default (state = initialState, action) => {
         const prevSub =
           state.data &&
           state.data.subscriptions.find((prevSub) => prevSub._id === sub._id);
-        sub.showArticles = prevSub
-          ? prevSub.showArticles
-          : sub.maxDailyArticles;
+        sub.showArticles = prevSub ? prevSub.showArticles : sub.maxArticles;
         sub.index = index;
       });
       return { ...state, data: payload, isAuthenticated: true };
@@ -80,7 +78,7 @@ export default (state = initialState, action) => {
     case SHOW_LESS_ARTICLES: {
       const newData = { ...state.data };
       const sub = newData.subscriptions.find((sub) => sub._id === payload);
-      sub.showArticles = sub.maxDailyArticles;
+      sub.showArticles = sub.maxArticles;
       return { ...state, data: newData };
     }
     case COLLAPSE_ARTICLES: {
@@ -88,7 +86,7 @@ export default (state = initialState, action) => {
       const newData = { ...state.data };
       const sub = newData.subscriptions.find((sub) => sub._id === subId);
       sub[`${filter}Collapsed`] = true;
-      sub.showArticles = sub.maxDailyArticles;
+      sub.showArticles = sub.maxArticles;
       return { ...state, data: newData };
     }
     case EXPAND_ARTICLES: {

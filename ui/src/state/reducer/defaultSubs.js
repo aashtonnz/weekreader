@@ -27,9 +27,7 @@ export default (state = initialState, action) => {
       payload.forEach((sub, index) => {
         const prevSub =
           state.data && state.data.find((prevSub) => prevSub._id === sub._id);
-        sub.showArticles = prevSub
-          ? prevSub.showArticles
-          : sub.maxDailyArticles;
+        sub.showArticles = prevSub ? prevSub.showArticles : sub.maxArticles;
         const position = state.positions.findIndex((id) => id === sub._id);
         sub.index = position !== -1 ? position : index;
         sub.inboxCollapsed = state.collapsed.includes(sub._id);
@@ -49,14 +47,14 @@ export default (state = initialState, action) => {
     case SHOW_LESS_DEFAULT_ARTICLES: {
       const newData = [...state.data];
       const sub = newData.find((sub) => sub._id === payload);
-      sub.showArticles = sub.maxDailyArticles;
+      sub.showArticles = sub.maxArticles;
       return { ...state, data: newData };
     }
     case COLLAPSE_DEFAULT_ARTICLES: {
       const newData = [...state.data];
       const sub = newData.find((sub) => sub._id === payload);
       sub.inboxCollapsed = true;
-      sub.showArticles = sub.maxDailyArticles;
+      sub.showArticles = sub.maxArticles;
       const newCollapsed = [...state.collapsed, sub._id];
       localStorage.setItem("collapsed", JSON.stringify(newCollapsed));
       return {

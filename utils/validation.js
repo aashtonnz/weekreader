@@ -82,7 +82,7 @@ const checkImg = (file) => {
   return "";
 };
 
-const checkSubEdit = (title, maxDailyArticles) => {
+const checkSubEdit = (title, maxArticles) => {
   if (!title) {
     return "Title is required";
   }
@@ -90,9 +90,9 @@ const checkSubEdit = (title, maxDailyArticles) => {
     return `Title must contain less than ${MAX_TITLE_LEN} characters`;
   }
   if (
-    !isInt(maxDailyArticles.toString()) ||
-    maxDailyArticles < 1 ||
-    MAX_MAX_DAILY_ARTICLES < maxDailyArticles
+    !isInt(maxArticles.toString()) ||
+    maxArticles < 1 ||
+    MAX_MAX_DAILY_ARTICLES < maxArticles
   ) {
     return "Invalid max daily articles";
   }

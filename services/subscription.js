@@ -10,7 +10,7 @@ const channel = require("./channel");
 const DEFAULT_IMG_HEIGHT = 24;
 const MAX_SUBS = 60;
 const seeds = config.get("seeds");
-const maxDailyArticles = config.get("maxDailyArticles");
+const maxArticles = config.get("maxArticles");
 
 const subscribe = async (userId, channelId) => {
   const user = await User.findById(userId).select("-password");
@@ -24,7 +24,7 @@ const subscribe = async (userId, channelId) => {
   );
   if (sub) {
     sub.isSubscribed = true;
-    sub.articles = channel.articles.slice(0, sub.maxDailyArticles);
+    sub.articles = channel.articles.slice(0, sub.maxArticles);
   } else {
     const newSub = {
       channel,
@@ -32,7 +32,7 @@ const subscribe = async (userId, channelId) => {
       title: channel.title,
       link: channel.link,
       imgKey: channel.imgKey,
-      articles: channel.articles.slice(0, maxDailyArticles),
+      articles: channel.articles.slice(0, maxArticles),
       description: channel.description,
     };
     user.subscriptions.unshift(newSub);
@@ -55,7 +55,7 @@ const defaults = async (mockId = false) => {
       title: seed.title || channel.title,
       link: channel.link,
       imgKey: seed.imgKey || channel.imgKey,
-      articles: channel.articles.slice(0, maxDailyArticles),
+      articles: channel.articles.slice(0, maxArticles),
       description: channel.description,
       descriptionsHidden: seed.descriptionsHidden,
     };
@@ -120,19 +120,13 @@ const editImg = async (userId, subId, img) => {
   return user;
 };
 
-const edit = async (
-  userId,
-  subId,
-  title,
-  descriptionsHidden,
-  maxDailyArticles
-) => {
+const edit = async (userId, subId, title, descriptionsHidden, maxArticles) => {
   const user = await User.findById(userId).select("-password");
   const sub = user.subscriptions.id(subId);
   if (sub) {
     sub.title = title;
     sub.descriptionsHidden = descriptionsHidden;
-    sub.maxDailyArticles = maxDailyArticles;
+    sub.maxArticles = maxArticles;
     await user.save();
   }
   return user;

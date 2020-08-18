@@ -143,8 +143,8 @@ router.put("/:id/img", auth, async (req, res) => {
 // @access Private
 router.put("/:id", auth, async (req, res) => {
   const { id: subId } = req.params;
-  const { title, descriptionsHidden, maxDailyArticles } = req.body;
-  const invalidMsg = checkSubEdit(title, maxDailyArticles);
+  const { title, descriptionsHidden, maxArticles } = req.body;
+  const invalidMsg = checkSubEdit(title, maxArticles);
   if (invalidMsg) {
     return res.status(400).json(errorMsg(invalidMsg));
   }
@@ -154,7 +154,7 @@ router.put("/:id", auth, async (req, res) => {
       subId,
       title,
       descriptionsHidden,
-      maxDailyArticles
+      maxArticles
     );
     res.json(user);
   } catch (error) {

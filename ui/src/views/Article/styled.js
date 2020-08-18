@@ -34,6 +34,10 @@ export const Wrapper = styled.div`
   &:not(:first-of-type) {
     border-top: 1px solid #f3f3f3;
   }
+
+  &:last-of-type {
+    padding-bottom: 0rem;
+  }
 `;
 
 export const Title = styled.a`

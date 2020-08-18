@@ -6,17 +6,12 @@ export const Wrapper = styled.div`
   background: #fff;
 `;
 
-export const NoArticles = styled.div`
-  color: #ddd;
-  margin-top: 0.4rem;
-  margin-left: 1.2rem;
-`;
-
 export const ShowButton = styled.button`
   border: none;
   background: none;
-  margin-left: 0.6rem;
+  margin-left: 1rem;
   margin-right: 1rem;
+  margin-top: 0.6rem;
   color: ${(props) => props.theme.color.primary};
 
   &:hover {

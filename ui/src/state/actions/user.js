@@ -184,7 +184,7 @@ export const editSub = (
   title,
   img,
   descriptionsHidden,
-  maxDailyArticles,
+  maxArticles,
   callback
 ) => async (dispatch) => {
   const loadId = dispatch(setLoading());
@@ -199,7 +199,7 @@ export const editSub = (
     const body = JSON.stringify({
       title,
       descriptionsHidden,
-      maxDailyArticles,
+      maxArticles,
     });
     const res = await axios.put(`/subscriptions/${id}`, body);
     // Ensuring image cache is refreshed

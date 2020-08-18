@@ -58,12 +58,11 @@ const inbox = (subs, prevArticlesUpdatedAt, unsubToken) => `
             FILE_URL + sub.imgKey
           }" alt="" />
                 ${sub.title}
-                <div style="${styles.numArticles}">${sub.articles.length}</div>
               </a>
             </div>
             <div style="${styles.articles}">
               ${sub.articles
-                .slice(0, sub.maxDailyArticles)
+                .slice(0, sub.maxArticles)
                 .map(
                   (article) => `
                   <a style="${styles.articleWrapper}" href="${
@@ -88,7 +87,6 @@ const inbox = (subs, prevArticlesUpdatedAt, unsubToken) => `
                 )
                 .join("")}
             </div>
-            <a style="${styles.viewAll}" href="${hostName}">View in app</a>
           </div>
           `
         )

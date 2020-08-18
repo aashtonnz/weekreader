@@ -94,7 +94,7 @@ const updateArticles = async () => {
         const titles = sub.articles.map((article) => article.title);
         const addArticles = channel.articles
           .filter((article) => !titles.includes(article.title))
-          .slice(0, sub.maxDailyArticles)
+          .slice(0, sub.maxArticles)
           .map((article) => {
             article.pending = true;
             return article;

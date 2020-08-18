@@ -28,12 +28,6 @@ const subImg = `
   max-width: 75px;
 `;
 
-const numArticles = `
-  margin-left: 0.4rem;
-  font-weight: 400;
-  color: #aaa;
-`;
-
 const appImg = `
   height: 2rem;
 `;
@@ -133,13 +127,6 @@ const unsub = `
   margin: 0 auto;
 `;
 
-const viewAll = `
-  text-decoration: none;
-  padding: 0rem 1rem 1.4rem 0.6rem;
-  color: #0069E2;
-  float: left;
-`;
-
 const button = `
   padding: 0 0.8rem;
   color: #fff;
@@ -165,7 +152,6 @@ module.exports = {
   subTitleWrapper,
   header,
   subImg,
-  numArticles,
   noArticles,
   articles,
   articleWrapper,
@@ -177,7 +163,6 @@ module.exports = {
   body,
   footer,
   unsub,
-  viewAll,
   appImg,
   button,
   buttonText,
