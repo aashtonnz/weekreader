@@ -65,12 +65,14 @@ const updateSettings = async (
   userId,
   articlesUpdateDays,
   articlesUpdateHour,
+  hourOffset,
   mailSubscribed
 ) => {
   const user = await User.findById(userId).select("-password");
   user.articlesUpdateDays = articlesUpdateDays;
   user.articlesUpdateHour = articlesUpdateHour;
   user.mailSubscribed = mailSubscribed;
+  user.hourOffset = hourOffset;
   await user.save();
   return user;
 };

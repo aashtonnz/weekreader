@@ -69,7 +69,9 @@ export const editSettings = (
   articleUpdateDays,
   mailSubscribed
 ) => async (dispatch) => {
+  const hourOffset = Math.floor(moment().utcOffset() / 60);
   const body = JSON.stringify({
+    hourOffset,
     articleUpdateHour,
     articleUpdateDays,
     mailSubscribed,

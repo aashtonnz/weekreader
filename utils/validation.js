@@ -26,7 +26,7 @@ const checkArticleUpdateDay = (day) => {
   return "";
 };
 
-const checkSettings = (articleUpdateDays, articleUpdateHour) => {
+const checkSettings = (articleUpdateDays, articleUpdateHour, hourOffset) => {
   if (
     !articleUpdateDays ||
     !articleUpdateDays.length ||
@@ -40,6 +40,9 @@ const checkSettings = (articleUpdateDays, articleUpdateHour) => {
     23 < articleUpdateHour
   ) {
     return "Invalid article update hour";
+  }
+  if (!isInt(hourOffset.toString())) {
+    return "Hour offset must be an integer";
   }
   return "";
 };

@@ -129,8 +129,17 @@ router.put("/password", auth, async (req, res) => {
 // @desc   Update settings
 // @access Private
 router.put("/settings", auth, async (req, res) => {
-  const { articleUpdateDays, articleUpdateHour, mailSubscribed } = req.body;
-  const invalidMsg = checkSettings(articleUpdateDays, articleUpdateHour);
+  const {
+    articleUpdateDays,
+    articleUpdateHour,
+    mailSubscribed,
+    hourOffset,
+  } = req.body;
+  const invalidMsg = checkSettings(
+    articleUpdateDays,
+    articleUpdateHour,
+    hourOffset
+  );
   if (invalidMsg) {
     return res.status(400).json(errorMsg(invalidMsg));
   }
@@ -139,6 +148,7 @@ router.put("/settings", auth, async (req, res) => {
       req.user.id,
       articleUpdateDays,
       articleUpdateHour,
+      hourOffset,
       mailSubscribed
     );
     res.json(user);
