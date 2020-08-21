@@ -1,7 +1,7 @@
 {
   "name": "weekreader",
   "version": "0.1.0",
-  "description": "Weekreader is an RSS reader which updates on a weekly basis",
+  "description": "RSS – mailed to you",
   "main": "server.js",
   "scripts": {
     "ui": "npm start --prefix ui",

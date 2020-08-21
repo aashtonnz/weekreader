@@ -1,6 +1,6 @@
 # Weekreader
 
-Weekreader is an RSS reader which updates on a weekly basis.
+RSS – mailed to you
 
 Weekreader is configured to run on [Heroku](https://heroku.com/) and uses:
 
